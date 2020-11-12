@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/10 11:36:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/12 18:54:37 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,6 @@ int		create_good_size_map(t_index *m)
 int		create_map(t_index *m)
 {
 	printf("in");
-	/*int i;
-
-	i = 0;
-	while(m->parse.map_string[i] != '\0')
-	{
-		if(!ft_isdigit(m->parse.map_string[i]))
-			error_map(m);
-	}*/
 	if (!(m->parse.map = ft_split(m->parse.map_string, '\n')))
 		return (-1);
 	if (get_position(m) < 0)

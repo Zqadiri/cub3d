@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:43:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/10 11:44:57 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/12 18:06:36 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		get_position(t_index *m)
 
 int		check_borders_columns(t_index *m)
 {
+	printf("lines ; %d\n", m->parse.line_nbr);
 	int i;
 	int j;
 
@@ -66,7 +67,7 @@ int		check_borders_columns(t_index *m)
 		j = 0;
 		while (m->parse.map[i][j] != '\0')
 			j++;
-		//printf("borders columns 1 ; %s\n",m->parse.map[i]);
+		printf("borders columns 1 ; %s\n",m->parse.map[i]);
 		if (m->parse.map[i][j - 1] != '1')
 			return_error_exit(m);
 		i++;
@@ -74,7 +75,7 @@ int		check_borders_columns(t_index *m)
 	i = 0;
 	while (m->parse.map[i] != NULL)
 	{
-		//printf("borders columns 2 ; %s\n",m->parse.map[0]);
+		printf("borders columns 2 ; %s\n",m->parse.map[0]);
 		if (m->parse.map[i][0] != '1' && m->parse.map[i][0] != ' ')
 			return_error_exit(m);
 		i++;
@@ -84,7 +85,7 @@ int		check_borders_columns(t_index *m)
 
 int		check_borders_lines(t_index *m)
 {
-	//printf("lines ; %d\n", m->parse.line_nbr);
+	
 	int j;
 
 	j = 0;

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/11 17:13:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/12 17:27:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		parse_map(int fd, t_index *m)
 	m->parse.map_string = ft_strjoin(m->parse.map_string, "\0");
 	free(line);
 	line = NULL;
-	printf("-%s-\n", m->parse.map_string);
+	printf("%s\n", m->parse.map_string);
 	printf("out 5\n");
 	return (1);
 }
