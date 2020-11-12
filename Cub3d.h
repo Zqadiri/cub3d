@@ -37,165 +37,160 @@
 # define MLXK_DOWN 125
 # define MLXK_TD 14
 # define MLXK_TG 12
-# define PI 3.14
-# define FOV 60 * (PI / 180)
-# define TWO_PI 2 * PI
-# define FALSE 0
-# define TRUE 1
-# define SQUARE_SIZE 64
+
 
 
 typedef struct		s_win
 {
-	void	*mlx_ptr;
-	void	*mlx_win;
-}									t_win;
+	void			*mlx_ptr;
+	void			*mlx_win;
+}					t_win;
 
 typedef struct		s_image
 {
-	void	*img;
-	int		*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}									t_image;
+	void			*img;
+	int				*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}					t_image;
 
 typedef struct		s_elements
 {
-	char	**elem;
-	int		resolution_line;
-	int		res_x;
-	int		res_y;
-	int		north_line;
-	int		south_line;
-	int		west_line;
-	int		east_line;
-	int		sprite_line;
-	int		f_line;
-	int		c_line;
-	int		c_red;
-	int		c_green;
-	int		c_blue;
-	int		f_red;
-	int		f_green;
-	int		f_blue;
-	int		c_color_hex;
-	int		f_color_hex;
-	char	*north_path;
-	char	*south_path;
-	char	*west_path;
-	char	*east_path;
-	char	*spr_path;
+	char			**elem;
+	int				resolution_line;
+	int				res_x;
+	int				res_y;
+	int				north_line;
+	int				south_line;
+	int				west_line;
+	int				east_line;
+	int				sprite_line;
+	int				f_line;
+	int				c_line;
+	int				c_red;
+	int				c_green;
+	int				c_blue;
+	int				f_red;
+	int				f_green;
+	int				f_blue;
+	int				c_color_hex;
+	int				f_color_hex;
+	char			*north_path;
+	char			*south_path;
+	char			*west_path;
+	char			*east_path;
+	char			*spr_path;
 }					t_elements;
 
 typedef struct		s_data
 {
-	float				pos_x;
-	float				pos_y;
-	float				dir_x;
-	float				dir_y;
-	float				old_dir_x;
-	float				plane_x;
-	float				plane_y;
-	float				camera_x;
-	float				camera_y;
-	float				ray_dir_x;
-	float				ray_dir_y;
-	unsigned int		map_x;
-	unsigned int		map_y;
+	float			pos_x;
+	float			pos_y;
+	float			dir_x;
+	float			dir_y;
+	float			old_dir_x;
+	float			plane_x;
+	float			plane_y;
+	float			camera_x;
+	float			camera_y;
+	float			ray_dir_x;
+	float			ray_dir_y;
+	unsigned int	map_x;
+	unsigned int	map_y;
 	
 	//length of ray from current position to next x or y-side
-	float				side_dist_x;
-	float				side_dist_y;
-	float				delta_dist_x;
-	float				delta_dist_y;
-	float				perp_wall_dist;
+	float			side_dist_x;
+	float			side_dist_y;
+	float			delta_dist_x;
+	float			delta_dist_y;
+	float			perp_wall_dist;
 
 	//what direction to step in x or y-direction (either +1 or -1)
-	int					step_x;
-	int					step_y;
-	int					draw_start;
-	int					draw_end;
-	int					wall_height;
-	int					line_height;
-	int					side;
-	float				move_speed;
-	float				rot_speed;
-	float				old_plane_x;
+	int				step_x;
+	int				step_y;
+	int				draw_start;
+	int				draw_end;
+	int				wall_height;
+	int				line_height;
+	int				side;
+	float			move_speed;
+	float			rot_speed;
+	float			old_plane_x;
 
 
 }					t_data;
 
 typedef	struct 		s_pos
 {
-	float	rotation_angle;
-	float	ray_angle;
-	int		is_facing_up;
-	int		is_facing_down;
-	int		is_facing_right;
-	int		is_facing_left;
-	int		y_intercept;
-	int		x_intercept;	
-	int		y;
-	int		x;
-	int		ystep;
-	int		xstep;	
-	int		save_horiz_wall_hit_x;
-	int		save_horiz_wall_hit_y;
+	float			rotation_angle;
+	float			ray_angle;
+	int				is_facing_up;
+	int				is_facing_down;
+	int				is_facing_right;
+	int				is_facing_left;
+	int				y_intercept;
+	int				x_intercept;	
+	int				y;
+	int				x;
+	int				ystep;
+	int				xstep;	
+	int				save_horiz_wall_hit_x;
+	int				save_horiz_wall_hit_y;
 
 }					t_pos;
 
 
 typedef struct		s_parse
 {
-	char	*data;
-	char	*map_string;
-	char	*clean_map_str;
-	char	**map;
-	int		line_nbr;
-	int		column_nbr;
-	float	x_pos_init;
-	float	y_pos_init;
-	char	dir;
+	char			*data;
+	char			*map_string;
+	char			*clean_map_str;
+	char			**map;
+	int				line_nbr;
+	int				column_nbr;
+	float			x_pos_init;
+	float			y_pos_init;
+	char			dir;
 }					t_parse;
 
 typedef struct		s_spr
 {
-	int		numsprites;
-	float	*sprites_x;
-	float	*sprites_y;
-	float	rites_y;
-	int		spr_width;
-	int		spr_height;
-	float	*spr_buffer;
-	void	*sprite_text;
+	int				numsprites;
+	float			*sprites_x;
+	float			*sprites_y;
+	float			rites_y;
+	int				spr_width;
+	int				spr_height;
+	float			*spr_buffer;
+	void			*sprite_text;
 }					t_spr;
 
 typedef struct		s_text
 {
-	int		tex_width;
-	int		tex_height;
-	void	*n_color;
-	void	*s_color;
-	void	*e_color;
-	void	*w_color;
-	int		tex_x;
-	int		tex_y;
-	float	tex_pos;
-	int		*color;
-	float	step;
+	int				tex_width;
+	int				tex_height;
+	void			*n_color;
+	void			*s_color;
+	void			*e_color;
+	void			*w_color;
+	int				tex_x;
+	int				tex_y;
+	float			tex_pos;
+	int				*color;
+	float			step;
 }					t_text;
 
 typedef struct		s_index
 {
 	t_win			win;
-	t_image		img;
-	t_data		data;
-	t_parse		parse;
-	t_elements	el;
-	t_spr		spr;
-	t_text		text;
-	t_pos		pos;
+	t_image			img;
+	t_data			data;
+	t_parse			parse;
+	t_elements		el;
+	t_spr			spr;
+	t_text			text;
+	t_pos			pos;
 
 }					t_index;
 
@@ -309,12 +304,21 @@ int		check_borders_lines(t_index *m);
 int		check_borders_columns(t_index *m);
 int		check_letters(t_index *m, int i, int j);
 
-/////////////////// .c ///////////////////////
+/////////////////// add_data.c ///////////////////////
 
 int		add_data(t_index *m);
 int		add_textures(t_index *m);
 int		create_images(t_index *m);
 int		create_images2(t_index *m);
 int		create_elements_lines(t_index *m);
+
+/////////////raycasting.c/////////////
+
+void	draw(t_index *m);
+void	calculate_dist(t_index *m);
+void	calculate_wall_height(t_index *m);
+void	perform_dda(t_index *m, int  hit);
+void	calculate_step_sidedist(t_index *m);
+void	calculate_ray_pos_dir(int i, t_index *m);
 
 #endif
