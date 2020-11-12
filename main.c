@@ -12,7 +12,6 @@
 
 #include "./Cub3d.h"
 
-
 void	calculate_ray_pos_dir(int i, t_index *m)
 {
 	//calculate ray position and direction
@@ -27,7 +26,50 @@ void	calculate_ray_pos_dir(int i, t_index *m)
 	m->data.delta_dist_y = fabs(1 / m->data.ray_dir_y);
 }
 
-void		
+void	calculate_step_sidedist(t_index *m)
+{
+	if (m->data.ray_dir_x < 0)
+	{
+		m->data.step_x = -1;
+		m->data.side_dist_x = (m->data.pos_x - m->data.map_x) + m->data.delta_dist_x;
+	}
+	else 
+	{
+		m->data.step_x = 1;
+		m->data.side_dist_x = (m->data.map_x + 1.0 - m->data.pos_x) + m->data.delta_dist_x;
+	}
+	if (m->data.ray_dir_y < 0)
+	{
+		m->data.step_y = -1;
+		m->data.side_dist_y = (m->data.pos_y - m->data.map_y) + m->data.delta_dist_y;
+	}
+	else 
+	{
+		m->data.step_y = 1;
+		m->data.side_dist_y = (m->data.map_y + 1.0 - m->data.pos_y) + m->data.delta_dist_y;
+	}
+}
+
+void	perform_dda(t_index *m, int  hit)
+{
+	while (hit == 0)
+	{
+		if (m->data.side_dist_x < m->data.side_dist_y)
+		{
+			m->data.side_dist_x += m->data.side_dist_x;
+			m->data.map_x += m->data.step_x;
+			m->data.side = 0;
+		}
+		else
+		{
+			m->data.side_dist_y += m->data.delta_dist_y;
+			m->data.map_y += m->data.step_y;
+			m->data.side = 1;
+		}
+		if (m->parse.map[m->data.map_y][m->data.map_x] == '1')
+			hit = 1;
+	}
+}
 
 void	draw(t_index *m)
 {
@@ -41,7 +83,8 @@ void	draw(t_index *m)
 		hit = 0;
 
 		calculate_ray_pos_dir(i, m);
-
+		calculate_step_sidedist(m);
+		perform_dda(m, hit);
 		i++;
 	}
 	
