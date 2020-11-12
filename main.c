@@ -52,6 +52,7 @@ void	calculate_step_sidedist(t_index *m)
 
 void	perform_dda(t_index *m, int  hit)
 {
+	//jump to next map square, OR in x-direction, OR in y-direction
 	while (hit == 0)
 	{
 		if (m->data.side_dist_x < m->data.side_dist_y)
@@ -66,9 +67,37 @@ void	perform_dda(t_index *m, int  hit)
 			m->data.map_y += m->data.step_y;
 			m->data.side = 1;
 		}
+		//Check if ray has hit a wall
 		if (m->parse.map[m->data.map_y][m->data.map_x] == '1')
 			hit = 1;
 	}
+}
+void	calculate_wall_height(t_index *m)
+{
+	//Calculate height of line to draw on screen
+	m->data.wall_height = m->el.res_y;
+	m->data.line_height = (int)(m->data.wall_height / m->data.perp_wall_dist);
+	//calculate lowest and highest pixel to fill in current stripe
+	m->data.draw_start = -m->data.line_height / 2 + m->el.res_y / 2;
+	if (m->data.draw_start < 0)
+		m->data.draw_start = 0;
+	m->data.draw_end = m->data.line_height / 2 + m->el.res_y / 2;
+	if (m->data.draw_end >= m->el.res_y)
+		m->data.draw_end = m->el.res_y - 1;
+}
+
+void	calculate_dist(t_index *m)
+{
+	/*Calculate distance projected on camera direction 
+	(Euclidean distance will give fisheye effect!)*/
+	if (m->data.side == 0)
+		m->data.perp_wall_dist = (m->data.map_x - m->data.pos_x +
+		(1 - m->data.step_x) / 2) / m->data.ray_dir_x;
+	else
+		m->data.perp_wall_dist = (m->data.map_y - m->data.pos_y +
+		(1 - m->data.step_y) / 2) / m->data.ray_dir_y;
+	/*if (m->data.perp_wall_dist == 0)
+		m->data.perp_wall_dist = 0.1;*/
 }
 
 void	draw(t_index *m)
@@ -85,9 +114,11 @@ void	draw(t_index *m)
 		calculate_ray_pos_dir(i, m);
 		calculate_step_sidedist(m);
 		perform_dda(m, hit);
+		calculate_dist(m);
+		calculate_wall_height(m);
 		i++;
 	}
-	
+	mlx_put_image_to_window(m->win.mlx_ptr, m->win.mlx_win, m->img.img, 0, 0);
 }
 
 int		launch_program(t_index *m, char *av)
