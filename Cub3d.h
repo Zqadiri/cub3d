@@ -121,7 +121,7 @@ typedef struct		s_data
 
 }					t_data;
 
-typedef	struct 		s_pos
+/*typedef	struct 		s_pos
 {
 	float			rotation_angle;
 	float			ray_angle;
@@ -138,7 +138,7 @@ typedef	struct 		s_pos
 	int				save_horiz_wall_hit_x;
 	int				save_horiz_wall_hit_y;
 
-}					t_pos;
+}					t_pos;*/
 
 
 typedef struct		s_parse
@@ -190,7 +190,7 @@ typedef struct		s_index
 	t_elements		el;
 	t_spr			spr;
 	t_text			text;
-	t_pos			pos;
+	//t_pos			pos;
 
 }					t_index;
 
