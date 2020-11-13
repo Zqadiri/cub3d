@@ -68,7 +68,7 @@ void	perform_dda(t_index *m, int  hit)
 			m->data.side = 1;
 		}
 		//Check if ray has hit a wall
-		if (m->parse.map[m->data.map_y][m->data.map_x] == '1')
+		if (m->parse.map[m->data.map_y][m->data.map_x] > 0)
 			hit = 1;
 	}
 }
@@ -116,6 +116,8 @@ void	draw(t_index *m)
 		perform_dda(m, hit);
 		calculate_dist(m);
 		calculate_wall_height(m);
+		calculate_textures(m);
+		calculate_colors(m);
 		i++;
 	}
 	mlx_put_image_to_window(m->win.mlx_ptr, m->win.mlx_win, m->img.img, 0, 0);
@@ -136,7 +138,7 @@ int		launch_program(t_index *m, char *av)
 	m->img.img = mlx_new_image(m->win.mlx_ptr, m->el.res_x, m->el.res_y);
 	m->img.addr = (int *)mlx_get_data_addr(m->img.img, &m->img.bits_per_pixel,
 		&m->img.line_length, &m->img.endian);
-	//raycast_algo(m);
+	//draw(m);
 	return (1);
 }
 

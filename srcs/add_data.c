@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:45:33 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/12 10:42:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/13 16:58:41 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ int		add_textures(t_index *m)
 	if (create_images2(m) < 0)
 		return (exit_all(m));
 
-/*mlx_get_data_addr returns a char * address that represents the begining of 
-the memory area where the image is stored.*/
+	/*mlx_get_data_addr returns a char * address that represents the begining 
+	of the memory area where the image is stored.*/
 
 	m->text.n_color = mlx_get_data_addr(m->text.n_color,
 		&m->img.bits_per_pixel, &m->img.line_length, &m->img.endian);

@@ -320,5 +320,7 @@ void	calculate_wall_height(t_index *m);
 void	perform_dda(t_index *m, int  hit);
 void	calculate_step_sidedist(t_index *m);
 void	calculate_ray_pos_dir(int i, t_index *m);
+void	calculate_textures(t_index *m);
+void	calculate_colors(t_index *m);
 
 #endif
