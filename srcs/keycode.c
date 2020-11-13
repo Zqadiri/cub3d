@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:19:51 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/12 10:47:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/13 13:17:33 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int		keys_right_left(t_index *m, int keycode)
 
 int		ft_key(int keycode, t_index *m)
 {
-	//m->data.old_plane_x = m->data.plane_x;
+	m->data.old_plane_x = m->data.plane_x;
 	if (keycode == MLXK_ESC || keycode == MLXK_X)
 		exit_all(m);
 	keys_up_down(m, keycode);

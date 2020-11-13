@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:43:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/12 18:06:36 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/13 13:02:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,28 +54,26 @@ int		get_position(t_index *m)
 }
 
 /////////////////// if the map is surrounded by 1///////////////
-
 int		check_borders_columns(t_index *m)
 {
-	printf("lines ; %d\n", m->parse.line_nbr);
+	
+	printf("in clmns\n");
 	int i;
 	int j;
-
+	
 	i = 0;
 	while (m->parse.map[i] != NULL)
 	{
 		j = 0;
 		while (m->parse.map[i][j] != '\0')
 			j++;
-		printf("borders columns 1 ; %s\n",m->parse.map[i]);
-		if (m->parse.map[i][j - 1] != '1')
+		if (m->parse.map[i][j - 1] != '1' && m->parse.map[i][j - 1] != ' ' )
 			return_error_exit(m);
 		i++;
 	}
 	i = 0;
 	while (m->parse.map[i] != NULL)
 	{
-		printf("borders columns 2 ; %s\n",m->parse.map[0]);
 		if (m->parse.map[i][0] != '1' && m->parse.map[i][0] != ' ')
 			return_error_exit(m);
 		i++;
@@ -85,30 +83,30 @@ int		check_borders_columns(t_index *m)
 
 int		check_borders_lines(t_index *m)
 {
-	
+	printf("in brdrs\n");
 	int j;
 
 	j = 0;
+	// printf("*%s",m->parse.map[0]);
+	
+	// printf("*%s",m->parse.map[m->parse.line_nbr - 1]);
 	while (m->parse.map[0][j] != '\0')
 	{
-		//printf("borders lines 1 ; %s\n",m->parse.map[0]);
 		if (m->parse.map[0][j] != '1' && m->parse.map[0][j] != ' ')
 			return_error_exit(m);
 		j++;
 	}
 	j = 0;
-
 	while (m->parse.map[m->parse.line_nbr - 1][j] != '\0')
 	{
-		//printf("borders lines 2 ; %s\n",m->parse.map[m->parse.line_nbr - 1]);
 		if ((m->parse.map[m->parse.line_nbr - 1][j] != '1') &&
 			(m->parse.map[m->parse.line_nbr - 1][j] != ' '))
 			return_error_exit(m);
 		j++;
 	}
+	printf("out line\n");
 	return (1);
 }
-
 int		check_letters(t_index *m, int i, int j)
 {
 	if (m->el.elem[i][j] == 'R')

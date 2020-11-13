@@ -14,13 +14,15 @@
 
 void init_1(t_index *m)
 {
+  m->win.mlx_ptr = NULL;
+  m->win.mlx_win = NULL;
+
   m->img.img = NULL;
   m->img.addr = NULL;
   m->img.bits_per_pixel = 0;
   m->img.line_length = 0;
   m->img.endian = 0;
-  m->win.mlx_ptr = NULL;
-  m->win.mlx_win = NULL;
+ 
 }
 
 void	init_2(t_index *m)
@@ -29,17 +31,12 @@ void	init_2(t_index *m)
   m->el.resolution_line = 0;
   m->el.res_x = 0;
   m->el.res_y = 0;
-  m->el.north_path = NULL;
-  m->el.south_path = NULL;
-  m->el.west_path = NULL;
-  m->el.east_path = NULL;
-  m->el.spr_path = NULL;
-	m->el.north_line = 0;
+  m->el.north_line = 0;
 	m->el.south_line = 0;
 	m->el.west_line = 0;
 	m->el.east_line = 0;
 	m->el.sprite_line = 0;
-	m->el.f_line = 0;
+  m->el.f_line = 0;
 	m->el.c_line = 0;
 	m->el.c_red = 0;
 	m->el.c_green = 0;
@@ -49,6 +46,11 @@ void	init_2(t_index *m)
 	m->el.f_blue = 0;
 	m->el.c_color_hex = 0;
 	m->el.f_color_hex = 0;
+  m->el.north_path = NULL;
+  m->el.south_path = NULL;
+  m->el.west_path = NULL;
+  m->el.east_path = NULL;
+  m->el.spr_path = NULL;
 }
 
 void init_3(t_index *m)
@@ -56,9 +58,12 @@ void init_3(t_index *m)
   m->data.pos_x = 0;
   m->data.pos_y = 0;
   m->data.dir_x = 0;
+  m->data.dir_y = 0;
+  m->data.old_dir_x = 0;
   m->data.plane_x = 0;
   m->data.plane_y = 0;
   m->data.camera_x = 0;
+  m->data.camera_y = 0;
 	m->data.ray_dir_y = 0;
 	m->data.ray_dir_x = 0;
 	m->data.map_x = 0;
@@ -75,12 +80,11 @@ void init_3(t_index *m)
 	m->data.line_height = 0;
 	m->data.wall_height = 0;
   m->data.side = 0;
-  m->data.old_dir_x = 0;
 	m->data.old_plane_x = 0;
   m->data.rot_speed = 0;
   m->data.move_speed = 0;
-  m->pos.rotation_angle = 0;
-  m->pos.ray_angle = 0;
+  //m->pos.rotation_angle = 0;
+  //m->pos.ray_angle = 0;
 }
 
 void init_4(t_index  *m)
