@@ -322,5 +322,6 @@ void	calculate_step_sidedist(t_index *m);
 void	calculate_ray_pos_dir(int i, t_index *m);
 void	calculate_textures(t_index *m);
 void	calculate_colors(t_index *m);
+void	verline(int i, t_index *m);
 
 #endif

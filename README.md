@@ -11,6 +11,7 @@ https://lodev.org/cgtutor/raycasting.html
 https://lodev.org/cgtutor/raycasting2.html
 https://qst0.github.io/ft_libgfx/man_mlx.html
 https://github.com/keuhdall/images_example
+https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
 
 # The basic idea of raycasting  
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:31:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/13 18:49:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/14 16:43:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,31 @@ void	calculate_textures(t_index *m)
 		* m->text.step;
 }
 
+void	verline(int i, t_index *m)
+{
+	int j;
+	int k;
+	int y;
+
+	j = 0;
+	y = m->data.draw_start;
+	while (j < y)
+	{
+		m->img.addr[j * m->el.res_x + i] = m->el.c_color_hex;
+		j++;
+	}
+	while (y < m->data.draw_end)
+	{
+		m->text.tex_y = (int)m->text.tex_pos & (m->text.tex_height - 1);
+		m->text.tex_pos += m->text.step;
+		m->img.addr[y * m->el.res_x + i] =
+			m->text.color[m->text.tex_y * m->text.tex_height + m->text.tex_x];
+		y++;
+	}
+	k = y;
+	while (k < m->el.res_y)
+	{
+		m->img.addr[k * m->el.res_x + i] = m->el.f_color_hex;
+		k++;
+	}
+}

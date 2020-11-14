@@ -19,8 +19,8 @@ void	calculate_ray_pos_dir(int i, t_index *m)
 	m->data.ray_dir_x = m->data.dir_x + m->data.plane_x * m->data.camera_x;
 	m->data.ray_dir_y = m->data.dir_y + m->data.plane_y * m->data.camera_y;
 	//which box of the map we're in
-	m->data.map_x = m->data.pos_x;
-	m->data.map_y = m->data.pos_y;
+	m->data.map_x = (int)m->data.pos_x;
+	m->data.map_y = (int)m->data.pos_y;
 	//length of ray from one x or y-side to next x or y-side
 	m->data.delta_dist_x = fabs(1 / m->data.ray_dir_x);
 	m->data.delta_dist_y = fabs(1 / m->data.ray_dir_y);
@@ -68,7 +68,7 @@ void	perform_dda(t_index *m, int  hit)
 			m->data.side = 1;
 		}
 		//Check if ray has hit a wall
-		if (m->parse.map[m->data.map_y][m->data.map_x] > 0)
+		if (m->parse.map[m->data.map_y][m->data.map_x] == '1')
 			hit = 1;
 	}
 }
@@ -96,8 +96,8 @@ void	calculate_dist(t_index *m)
 	else
 		m->data.perp_wall_dist = (m->data.map_y - m->data.pos_y +
 		(1 - m->data.step_y) / 2) / m->data.ray_dir_y;
-	/*if (m->data.perp_wall_dist == 0)
-		m->data.perp_wall_dist = 0.1;*/
+	// if (m->data.perp_wall_dist == 0)
+	// 	m->data.perp_wall_dist = 0.1;
 }
 
 void	draw(t_index *m)
@@ -118,6 +118,7 @@ void	draw(t_index *m)
 		calculate_wall_height(m);
 		calculate_textures(m);
 		calculate_colors(m);
+		verline(i, m);
 		i++;
 	}
 	mlx_put_image_to_window(m->win.mlx_ptr, m->win.mlx_win, m->img.img, 0, 0);
@@ -138,7 +139,7 @@ int		launch_program(t_index *m, char *av)
 	m->img.img = mlx_new_image(m->win.mlx_ptr, m->el.res_x, m->el.res_y);
 	m->img.addr = (int *)mlx_get_data_addr(m->img.img, &m->img.bits_per_pixel,
 		&m->img.line_length, &m->img.endian);
-	//draw(m);
+	draw(m);
 	return (1);
 }
 
