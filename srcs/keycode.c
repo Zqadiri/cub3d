@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:19:51 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/14 17:13:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/16 10:57:33 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ int		keys_up_down(t_index *m, int keycode)
 
 int		keys_rot1(t_index *m, int keycode)
 {
+	//rotate to the right
 	printf("rot1\n");
 	if (keycode == MLXK_RIGHT)
 	{
+		//both camera direction and camera plane must be rotated
 		m->data.old_dir_x = m->data.dir_x;
 		m->data.dir_x = m->data.dir_x * cos(m->data.rot_speed) -
 			m->data.dir_y * sin(m->data.rot_speed);
@@ -64,9 +66,11 @@ int		keys_rot1(t_index *m, int keycode)
 
 int		keys_rot2(t_index *m, int keycode)
 {
+	//rotate to the left
 	printf("rot2\n");
-	if (keycode == MLXK_LEFT)
+	if (keycode == MLXK_LEFT )
 	{
+		//both camera direction and camera plane must be rotated
 		m->data.old_dir_x = m->data.dir_x;
 		m->data.dir_x = m->data.dir_x * cos(-m->data.rot_speed) -
 			m->data.dir_y * sin(-m->data.rot_speed);

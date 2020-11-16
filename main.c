@@ -31,22 +31,22 @@ void	calculate_step_sidedist(t_index *m)
 	if (m->data.ray_dir_x < 0)
 	{
 		m->data.step_x = -1;
-		m->data.side_dist_x = (m->data.pos_x - m->data.map_x) + m->data.delta_dist_x;
+		m->data.side_dist_x = (m->data.pos_x - m->data.map_x) * m->data.delta_dist_x;
 	}
 	else 
 	{
 		m->data.step_x = 1;
-		m->data.side_dist_x = (m->data.map_x + 1.0 - m->data.pos_x) + m->data.delta_dist_x;
+		m->data.side_dist_x = (m->data.map_x + 1.0 - m->data.pos_x) * m->data.delta_dist_x;
 	}
 	if (m->data.ray_dir_y < 0)
 	{
 		m->data.step_y = -1;
-		m->data.side_dist_y = (m->data.pos_y - m->data.map_y) + m->data.delta_dist_y;
+		m->data.side_dist_y = (m->data.pos_y - m->data.map_y) * m->data.delta_dist_y;
 	}
 	else 
 	{
 		m->data.step_y = 1;
-		m->data.side_dist_y = (m->data.map_y + 1.0 - m->data.pos_y) + m->data.delta_dist_y;
+		m->data.side_dist_y = (m->data.map_y + 1.0 - m->data.pos_y) * m->data.delta_dist_y;
 	}
 }
 
@@ -57,7 +57,7 @@ void	perform_dda(t_index *m, int  hit)
 	{
 		if (m->data.side_dist_x < m->data.side_dist_y)
 		{
-			m->data.side_dist_x += m->data.side_dist_x;
+			m->data.side_dist_x += m->data.delta_dist_x;
 			m->data.map_x += m->data.step_x;
 			m->data.side = 0;
 		}
@@ -96,8 +96,8 @@ void	calculate_dist(t_index *m)
 	else
 		m->data.perp_wall_dist = (m->data.map_y - m->data.pos_y +
 		(1 - m->data.step_y) / 2) / m->data.ray_dir_y;
-	// if (m->data.perp_wall_dist == 0)
-	// 	m->data.perp_wall_dist = 0.1;
+	if (m->data.perp_wall_dist == 0)
+		m->data.perp_wall_dist = 0.1;
 }
 
 void	draw(t_index *m)

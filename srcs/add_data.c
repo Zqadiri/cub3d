@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:45:33 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/13 16:58:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/14 18:52:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		add_data(t_index *m)
 {
 	if (m->parse.dir == 'E')
 	{
-		m->data.plane_x = 0;
+		m->data.plane_x = 0.0;
 		m->data.plane_y = 0.66;
 		m->data.dir_x = 1;
 		m->data.dir_y = 0;
