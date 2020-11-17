@@ -12,10 +12,11 @@ https://lodev.org/cgtutor/raycasting2.html
 https://qst0.github.io/ft_libgfx/man_mlx.html
 https://github.com/keuhdall/images_example
 https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
+https://github.com/vinibiavatti1/RayCastingTutorial/wiki/RayCasting
 
 # The basic idea of raycasting  
 
-# The 2D calculations: 
+## The 2D calculations: 
 
  
 The basic idea of raycasting is as follows: the map is a 2D square grid, and each square can either be 0 (= no wall), or a positive value (= a wall with a certain color or texture). 

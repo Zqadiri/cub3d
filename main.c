@@ -17,7 +17,7 @@ void	calculate_ray_pos_dir(int i, t_index *m)
 	//calculate ray position and direction
 	m->data.camera_x = 2 * i / (float)m->el.res_x - 1;//x-coordinate in camera space
 	m->data.ray_dir_x = m->data.dir_x + m->data.plane_x * m->data.camera_x;
-	m->data.ray_dir_y = m->data.dir_y + m->data.plane_y * m->data.camera_y;
+	m->data.ray_dir_y = m->data.dir_y + m->data.plane_y * m->data.camera_x;
 	//which box of the map we're in
 	m->data.map_x = (int)m->data.pos_x;
 	m->data.map_y = (int)m->data.pos_y;
@@ -96,8 +96,8 @@ void	calculate_dist(t_index *m)
 	else
 		m->data.perp_wall_dist = (m->data.map_y - m->data.pos_y +
 		(1 - m->data.step_y) / 2) / m->data.ray_dir_y;
-	if (m->data.perp_wall_dist == 0)
-		m->data.perp_wall_dist = 0.1;
+	// if (m->data.perp_wall_dist == 0)
+	// 	m->data.perp_wall_dist = 0.1;
 }
 
 void	draw(t_index *m)
