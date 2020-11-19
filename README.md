@@ -53,7 +53,7 @@ The image above represents such a 2D camera :
 * The posistion of the left blue dot is pos+dir-plane .
 (Addition of vectors)
 
-![Addiction of vectors](https://mathinsight.org/image/vector_a_plus_b)
+![Addiction of vectors](https://www.mathsisfun.com/algebra/images/vector-add.svg)
 
 The red lines in the image are a few rays. The direction of these rays is easily calculated out of the camera: it's the sum of the direction vector of the camear, and a part of the plane vector of the camera: for example the third red ray on the image, goes through the right part of the camera plane at the point about 1/3th of its length. So the direction of this ray is dir + plane * 1/3.
 
