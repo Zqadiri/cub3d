@@ -42,6 +42,13 @@ To find the first wall that a single ray meets on its way, you have to start fro
 ![image 1](https://lodev.org/cgtutor/images/raycastingcamera.gif)
 
 
+The image above represents such a 2D camera . 
+* The green spot is the position [vector "pos"].
+* The black line, ending in the black spot, represents the direction vector [vector "dir"].
+* the position of the black dot is pos+dir.
+* The blue line represents the full camera plane.
+* 
+
 
 
 
