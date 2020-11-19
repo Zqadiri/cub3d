@@ -4,15 +4,25 @@
 # SOme ressources:
 
 https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
+
 https://courses.pikuma.com/courses/raycasting
+
 https://harm-smits.github.io/42docs/projects/cub3d.html
+
 https://harm-smits.github.io/42docs/libs/minilibx.html
+
 https://lodev.org/cgtutor/raycasting.html
+
 https://lodev.org/cgtutor/raycasting2.html
+
 https://qst0.github.io/ft_libgfx/man_mlx.html
+
 https://github.com/keuhdall/images_example
+
 https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
+
 https://github.com/vinibiavatti1/RayCastingTutorial/wiki/RayCasting
+
 
 # The basic idea of raycasting  
 
@@ -26,7 +36,15 @@ For every vertical stripe of the screen send out a ray that starts at the player
 
  
 
-To find the first wall that a single ray meets on its way, you have to start from the player's positions and check whether or not the ray is inside a wall . When the ray hits a wall , the loop can stop so we can calculate the distance and draw the wall with the correct height . 
+To find the first wall that a single ray meets on its way, you have to start from the player's positions and check whether or not the ray is inside a wall . When the ray hits a wall , the loop can stop so we can calculate the distance and draw the wall with the correct height . If the ray position is not in a wall, you have to trace it further: add a certain value to its position, in the direction of the direction of this ray, and for this new position, again check if it's inside a wall or not. Keep doing this until finally a wall is hit.
+
+
+![image 1](https://lodev.org/cgtutor/images/raycastingcamera.gif)
+
+
+
+
+
 
  
 
