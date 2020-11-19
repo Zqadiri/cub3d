@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/14 18:39:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/18 09:23:10 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int		parse_data(int fd, t_index *m)
 	printf("in 4\n");
 	char	*line;
 	int		i;
-	int 	r;
 
 
 	i = 0;

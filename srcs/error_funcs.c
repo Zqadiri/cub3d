@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:13:22 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/10 12:21:51 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/18 09:21:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,7 @@ int		return_error_exit(t_index *m)
 	exit_all(m);
 	return (-1);
 }
-int		error_map(t_index *m)
-{
-	write(1, "Error\n", 6);
-	write(1, "No map included\n", 17);
-	exit(0);
-	return (-1);
-}
+
 
 int		write_error_floor(t_index *m, int i)
 {

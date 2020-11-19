@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2020/11/17 13:23:21 by zqadiri          ###   ########.fr        #
+#    Updated: 2020/11/18 09:21:20 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 			=	 cub3D
 MINILIBX_PATH 	= 	./minilibx
 LIBFT_PATH 		= 	./libft
 
-FILES_PATH 		=	./main.c\
+SRCS 			=	./srcs/main.c\
 					./srcs/add_data.c\
 					./srcs/check.c\
 					./srcs/check_data.c\
@@ -30,6 +30,7 @@ FILES_PATH 		=	./main.c\
 					./srcs/parsing2.c\
 					./srcs/sprites_data.c\
 					./srcs/utils.c\
+					./srcs/bmp.c
 					
 OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	Cub3d.h
@@ -37,54 +38,45 @@ LIBFT 			= 	libft
 MINILIBX 		= 	miniLibx
 CC				= 	gcc -g -Wall -Wextra -Werror -fsanitize=address
 RM				= 	rm -f
-MLXFLAGS 		=	-lmlx -framework OpenGl -framework Appkit
-LIBFLAGS 		=	./libft/*.c 
+MLXFLAGS 		= -I ./miniLibx -L ./miniLibx -lmlx -framework OpenGl -framework Appkit
+LIBFLAGS 		= -I ./libft -L ./libft -L . ./libft/*.c 
 
 # -I Add the directory dir to the list of directories to be searched for header files
 # -L Searches the library when linking
 # $@ is the name of the target being generated
 # @	Don’t print command
 
-
-all:			all_libft all_mini $(NAME)
-
-$(NAME):		
+all:			libft_all minilibx_all ${NAME}
+$(NAME):		${OBJS} 
 				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a libmlx.a -I./ $(OBJS) -o $@ 
-
-clean:			clean_libft clean_mini
+clean:			libft_clean minilibx_clean
 				@${RM} ${OBJS}
-
-fclean:			fclean_libft fclean_mini clean
+fclean:			libft_fclean minilibx_fclean clean
 				@${RM} ${NAME}
-
 re:				fclean all
 
 # make other makefiles compile with the -C flag
 # The -C flag makes you go to the appropriate path and do the asked command
-
-all_libft:
+libft_all:
 				make -C $(LIBFT_PATH) all
 				cp ./libft/libft.a libft.a
 
-clean_libft:
+libft_clean:
 				make -C $(LIBFT_PATH) clean
 
-fclean_libft:
+libft_fclean:
 				make -C $(LIBFT_PATH) fclean
 				$(RM) libft.a
 
-all_mini:
+minilibx_all:
 				make -C $(MINILIBX_PATH) all
-				cp ./minilibx/libmlx.a libmlx.a
+				cp ./minilibX/libmlx.a libmlx.a
 
-clean_mini:
+minilibx_clean:
 				make -C $(MINILIBX_PATH) clean
 
-
-fclean_mini:
+minilibx_fclean:
 				make -C $(MINILIBX_PATH) clean
 				$(RM) libmlx.a
-
-.PHONY:
-				all fclean clean re
 				
+.PHONY: 		all fclean clean re

@@ -324,4 +324,7 @@ void	calculate_textures(t_index *m);
 void	calculate_colors(t_index *m);
 void	verline(int i, t_index *m);
 
+////////// sreenshot //////////////
+int		screen_shot(t_index *m);
+
 #endif
