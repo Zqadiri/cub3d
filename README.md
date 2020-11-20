@@ -24,7 +24,7 @@ https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
 https://github.com/vinibiavatti1/RayCastingTutorial/wiki/RayCasting
 
 
-# The basic idea of raycasting  
+# The basic idea of raycasting  (lodev.org)
 
 ## The 2D calculations: 
 
@@ -53,9 +53,59 @@ The image above represents such a 2D camera :
 * The posistion of the left blue dot is pos+dir-plane .
 (Addition of vectors)
 
-![Addiction of vectors](https://mathinsight.org/image/vector_a_plus_b)
+![Addiction of vectors](https://www.mathsisfun.com/algebra/images/vector-add.svg)
 
-The red lines in the image are a few rays. The direction of these rays is easily calculated out of the camera: it's the sum of the direction vector of the camear, and a part of the plane vector of the camera: for example the third red ray on the image, goes through the right part of the camera plane at the point about 1/3th of its length. So the direction of this ray is dir + plane * 1/3.
+FOR EXAMPLE : The red lines in the image are a few rays. The direction of these rays is easily calculated out of the camera: it's the sum of the direction vector of the camear, and a part of the plane vector of the camera: for example the third red ray on the image, goes through the right part of the camera plane at the point about 1/3th of its length. So the direction of this ray is dir + plane * 1/3.
+This ray direction is the vector rayDir, and the X and Y component of this vector are then used by the DDA algorithm.
+
+
+## UNTextured raycaster :
+
+A first few variables are declared: posX and posY represent the position vector of the player, dirX and dirY represent the direction of the player, and planeX and planeY the camera plane of the player. Make sure the camera plane is perpendicular to the direction, but you can change the length of it.
+
+* The ratio between the length of the direction and the camera plane determinates the FOV, here the direction vector is a bit longer than the camera plane, so the FOV will be smaller than 90° . MORE the FOV is 2 * atan(0.66/1.0)=66°, which is perfect for a first person shooter game). Later on when rotating around with the input keys, the values of dir and plane will be changed, but they'll always remain perpendicular and keep the same length (θ = tan-1 ( y / x ) define the angle in the Euclidean plane, given in radians, between the positive x axis and the ray to the point (x, y) ).
+
+![Cartesian Coordinates to Polar Coordinates](https://www.google.com/imgres?imgurl=https%3A%2F%2Fmdn.mozillademos.org%2Ffiles%2F11557%2Fatan2.png&imgrefurl=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FMath%2Fatan2&tbnid=v1h7m3R7TSD8mM&vet=10CAMQxiAoAGoXChMI2Pj48pOP7QIVAAAAAB0AAAAAEAc..i&docid=3vrNlndlNn1TdM&w=300&h=300&itg=1&q=%CE%B8%20%3D%20tan-1%20(%20y%20%2F%20x%20)&ved=0CAMQxiAoAGoXChMI2Pj48pOP7QIVAAAAAB0AAAAAEAc)
+
+ Later on when rotating around with the input keys, the values of dir and plane will be changed, but they'll always remain perpendicular and keep the same length.
+
+# C Example
+
+```c
+    if (m->parse.dir == 'E')
+	{
+		m->data.plane_x = 0.0;
+		m->data.plane_y = 0.66;
+		m->data.dir_x = 1;
+		m->data.dir_y = 0;
+	}
+	if (m->parse.dir == 'W')
+	{
+		m->data.plane_x = 0;
+		m->data.plane_y = -0.66;
+		m->data.dir_x = -1;
+		m->data.dir_y = 0;
+	}
+	if (m->parse.dir == 'S')
+	{
+		m->data.plane_x = -0.66;
+		m->data.plane_y = 0;
+		m->data.dir_x = 0;
+		m->data.dir_y = 1;
+	}
+	if (m->parse.dir == 'N')
+	{
+		m->data.plane_x = 0.66;
+		m->data.plane_y = 0;
+		m->data.dir_x = 0;
+		m->data.dir_y = -1;
+	}
+```
+
+
+
+
+
 
  
 
