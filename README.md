@@ -65,12 +65,11 @@ A first few variables are declared: posX and posY represent the position vector 
 
 * The ratio between the length of the direction and the camera plane determinates the FOV, here the direction vector is a bit longer than the camera plane, so the FOV will be smaller than 90° . MORE the FOV is 2 * atan(0.66/1.0)=66°, which is perfect for a first person shooter game). Later on when rotating around with the input keys, the values of dir and plane will be changed, but they'll always remain perpendicular and keep the same length (θ = tan-1 ( y / x ) define the angle in the Euclidean plane, given in radians, between the positive x axis and the ray to the point (x, y) ).
 
-![Cartesian Coordinates to Polar Coordinates](https://www.google.com/imgres?imgurl=https%3A%2F%2Fmdn.mozillademos.org%2Ffiles%2F11557%2Fatan2.png&imgrefurl=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FMath%2Fatan2&tbnid=v1h7m3R7TSD8mM&vet=10CAMQxiAoAGoXChMI2Pj48pOP7QIVAAAAAB0AAAAAEAc..i&docid=3vrNlndlNn1TdM&w=300&h=300&itg=1&q=%CE%B8%20%3D%20tan-1%20(%20y%20%2F%20x%20)&ved=0CAMQxiAoAGoXChMI2Pj48pOP7QIVAAAAAB0AAAAAEAc)
+![Cartesian Coordinates to Polar Coordinates](https://www.mathsisfun.com/images/coordinates-triangle.gif)
 
- Later on when rotating around with the input keys, the values of dir and plane will be changed, but they'll always remain perpendicular and keep the same length.
+Later on when rotating around with the input keys, the values of dir and plane will be changed, but they'll always remain perpendicular and keep the same length.
 
-# C Example
-
+### set data basing on the player’s start position and spawning orientation.
 ```c
     if (m->parse.dir == 'E')
 	{
@@ -101,6 +100,48 @@ A first few variables are declared: posX and posY represent the position vector 
 		m->data.dir_y = -1;
 	}
 ```
+Here starts the actual raycasting. The raycasting loop is a for loop that goes through every x, so there isn't a calculation for every pixel of the screen, but only for every vertical stripe, which isn't much at all! To begin the raycasting loop, some variables are delcared and calculated:
+
+```c  
+void	calculate_ray_pos_dir(int i, t_index *m)
+{
+	//calculate ray position and direction
+	m->data.camera_x = 2 * i / (float)m->el.res_x - 1;//find the x-coordinate in camera space
+	m->data.ray_dir_x = m->data.dir_x + m->data.plane_x * m->data.camera_x;
+	m->data.ray_dir_y = m->data.dir_y + m->data.plane_y * m->data.camera_x;
+
+```
+* CameraX is the x-coordinate on the camera plane that the current x-coordinate of the screen represents, done this way so that the right side of the screen will get coordinate 1, the center of the screen gets coordinate 0, and the left side of the screen gets coordinate -1. 
+
+* rayDirY and rayDirX are the direction of a ray that has been cast.
+
+*  Out of this, the direction of the ray can be calculated as was explained earlier: as the sum of the direction vector, and a part of the plane vector. This has to be done both for the x and y coordinate of the vector (since adding two vectors is adding their x-coordinates, and adding their y-coordinates).
+
+In the next code piece, more variables are declared and calculated:
+
+```c
+	//which box of the map we're in
+	m->data.map_x = (int)m->data.pos_x;
+	m->data.map_y = (int)m->data.pos_y;
+    
+	//length of ray from one x or y-side to next x or y-side
+	m->data.delta_dist_x = fabs(1 / m->data.ray_dir_x);
+	m->data.delta_dist_y = fabs(1 / m->data.ray_dir_y);
+}
+
+```
+
+* mapX and mapY represent the current square of the map the ray is in. The ray position itself is a floating point number and contains both info about in which square of the map we are, and where in that square we are, but mapX and mapY are only the coordinates of that square.
+
+* sideDistX and sideDistY are initially the distance the ray has to travel from its start position to the first x-side and the first y-side. Later in the code their meaning will slightly change.
+
+* deltaDistX and deltaDistY are the distance the ray has to travel to go from 1 x-side to the next x-side, or from 1 y-side to the next y-side. The following image shows the initial sideDistX, sideDistY and deltaDistX and deltaDistY: 
+
+
+![image 2](https://lodev.org/cgtutor/images/raycastdelta.gif)
+
+You start with your normalized vector that represents your ray 
+
 
 
 
