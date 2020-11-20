@@ -125,8 +125,8 @@ In the next code piece, more variables are declared and calculated:
 	m->data.map_y = (int)m->data.pos_y;
     
 	//length of ray from one x or y-side to next x or y-side
-	m->data.delta_dist_x = fabs(1 / m->data.ray_dir_x);
-	m->data.delta_dist_y = fabs(1 / m->data.ray_dir_y);
+	m->data.delta_dist_x = sqrt(1 + (m->data.ray_dir_y * m->data.ray_dir_y) / (m->data.ray_dir_x * m->data.ray_dir_x));
+	m->data.delta_dist_y = sqrt(1 + (m->data.ray_dir_x * m->data.ray_dir_x) / (m->data.ray_dir_y * m->data.ray_dir_y));
 }
 
 ```
@@ -140,16 +140,40 @@ In the next code piece, more variables are declared and calculated:
 
 ![image 2](https://lodev.org/cgtutor/images/raycastdelta.gif)
 
-You start with your normalized vector that represents your ray 
+Assuming the unit length of each grid distance is 1.
 
+You start with your normalized vector that represents your ray it has an x component and a y component. First we want to see how long it is when it travels one unit in the x direction. We want to scale the entire vector so that the x component equals 1. To figure out what to scale it by, we do the following:
 
+For the x component :
 
+#####	      scale_Factor = 1/rayDirX;
 
+in math it's just :
 
+#####         scaled_X = rayDirX * (1/rayDirX) = 1
 
+them for the y component :
 
+#####         scaled_Y = rayDirY * (1/rayDirX) = rayDirY/rayDirX
+
+So now we have our scaled components as (1, rayDirY/rayDirX)
+Now, we want to know the length. Now Pythagorean comes into play. Which is :
+
+#####         length = sqrt((x * x) + (y * y))
+
+So plugging in our scaled components we get:
+
+#####         length = sqrt((1 * 1 ) + (rayDirY / rayDirX) * (rayDirY / rayDirX))
+
+Apply some algebra and simplify and we get:
+
+#####         length = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX))
+
+Same goes for the length when the y component travels one unit, except we'll have (rayDirX/rayDirY, 1) which results in :
+
+#####         length = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY))
  
-
+There we have your two equations.
  
 
  
