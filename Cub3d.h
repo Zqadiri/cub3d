@@ -326,5 +326,7 @@ void	verline(int i, t_index *m);
 
 ////////// sreenshot //////////////
 int		screen_shot(t_index *m);
+int     write_info(t_index *m, int fd);
+int     bit_map_file_headers(t_index *m, int fd, int file_size);
 
 #endif

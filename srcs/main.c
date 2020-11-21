@@ -22,18 +22,19 @@ void	calculate_ray_pos_dir(int i, t_index *m)
 	m->data.map_x = (int)m->data.pos_x;
 	m->data.map_y = (int)m->data.pos_y;
 	//length of ray from one x or y-side to next x or y-side
-	m->data.delta_dist_x = fabs(1 / m->data.ray_dir_x);
-	m->data.delta_dist_y = fabs(1 / m->data.ray_dir_y);
+	m->data.delta_dist_x = sqrt(1 + (m->data.ray_dir_y * m->data.ray_dir_y) / (m->data.ray_dir_x * m->data.ray_dir_x));
+	m->data.delta_dist_y = sqrt(1 + (m->data.ray_dir_x * m->data.ray_dir_x) / (m->data.ray_dir_y * m->data.ray_dir_y));
 }
 
 void	calculate_step_sidedist(t_index *m)
 {
+	//calculate step and initial sideDist
 	if (m->data.ray_dir_x < 0)
 	{
 		m->data.step_x = -1;
 		m->data.side_dist_x = (m->data.pos_x - m->data.map_x) * m->data.delta_dist_x;
 	}
-	else 
+	else
 	{
 		m->data.step_x = 1;
 		m->data.side_dist_x = (m->data.map_x + 1.0 - m->data.pos_x) * m->data.delta_dist_x;
@@ -88,8 +89,8 @@ void	calculate_wall_height(t_index *m)
 
 void	calculate_dist(t_index *m)
 {
-	/*Calculate distance projected on camera direction 
-	(Euclidean distance will give fisheye effect!)*/
+	// Calculate distance projected on camera direction 
+	// (Euclidean distance will give fisheye effect!)
 	if (m->data.side == 0)
 		m->data.perp_wall_dist = (m->data.map_x - m->data.pos_x +
 		(1 - m->data.step_x) / 2) / m->data.ray_dir_x;
@@ -161,6 +162,8 @@ int		main(int ac, char **av)
 	else if (ac == 3 && !ft_strncmp(av[2], "--save", 5))
 	{
 		if ((launch_program(&m, av[1])) < 0)
+			return (exit_all(&m));
+		if ((screen_shot(&m)) < 0)
 			return (exit_all(&m));
 	}
 	else

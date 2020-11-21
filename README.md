@@ -1,7 +1,7 @@
 # cub3d
  This project is inspired by the world-famous eponymous 90’s game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you’ll have to find your way.
 
-# SOme ressources:
+# SOme raycasting ressources:
 
 https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
 
@@ -23,10 +23,12 @@ https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
 
 https://github.com/vinibiavatti1/RayCastingTutorial/wiki/RayCasting
 
+https://gamedev.stackexchange.com/questions/45013/raycasting-tutorial-vector-math-question
 
-# The basic idea of raycasting  (lodev.org)
 
-## The 2D calculations: 
+## The basic idea of raycasting  (lodev.org)
+
+### The 2D calculations: 
 
  
 The basic idea of raycasting is as follows: the map is a 2D square grid, and each square can either be 0 (= no wall), or a positive value (= a wall with a certain color or texture). 
@@ -173,7 +175,141 @@ Same goes for the length when the y component travels one unit, except we'll hav
 
 #####         length = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY))
  
-There we have your two equations.
+There we have your two equations. The variable perpWallDist will be used later to calculate the length of the ray.
  
 
- 
+NOTE: If rayDirX or rayDirY are 0, then division through 0 occurs above, making the value of deltaDistX or deltaDistY infinity. That is fine if your system uses the IEEE 754 floating point standard and doesn't throw exceptions for this (e.g. if you use C++, Java or JS it works correctly, but Python does not allow it): The infinity will be used correctly in the comparison in the DDA steps below. If, however, you use a programming language that doesn't allow this, you can set the finite one to 0  which will make the DDA loop also work correctly.
+
+Now, before the actual DDA can start, first stepX, stepY, and the initial sideDistX and sideDistY still have to be calculated.
+
+If the ray direction has a negative x-component, stepX is -1, if the ray direciton has a positive x-component it's +1. If the x-component is 0, it doesn't matter what value stepX has since it'll then be unused.
+The same goes for the y-component.
+
+If the ray direction has a negative x-component, sideDistX is the distance from the ray starting position to the first side to the left, if the ray direciton has a positive x-component the first side to the right is used instead.
+The same goes for the y-component, but now with the first side above or below the position.
+For these values, the integer value mapX is used and the real position subtracted from it, and 1.0 is added in some of the cases depending if the side to the left or right, of the top or the bottom is used. Then you get the perpendicular distance to this side, so multiply it with deltaDistX or deltaDistY to get the real Euclidean distance.
+
+
+```c
+
+void	calculate_step_sidedist(t_index *m)
+{
+	//calculate step and initial sideDist
+	if (m->data.ray_dir_x < 0)
+	{
+		m->data.step_x = -1;
+		m->data.side_dist_x = (m->data.pos_x - m->data.map_x) * m->data.delta_dist_x;
+	}
+	else
+	{
+		m->data.step_x = 1;
+		m->data.side_dist_x = (m->data.map_x + 1.0 - m->data.pos_x) * m->data.delta_dist_x;
+	}
+	if (m->data.ray_dir_y < 0)
+	{
+		m->data.step_y = -1;
+		m->data.side_dist_y = (m->data.pos_y - m->data.map_y) * m->data.delta_dist_y;
+	}
+	else 
+	{
+		m->data.step_y = 1;
+		m->data.side_dist_y = (m->data.map_y + 1.0 - m->data.pos_y) * m->data.delta_dist_y;
+	}
+}
+
+```
+
+Now the actual DDA starts. It's a loop that increments the ray with 1 square every time, until a wall is hit. Each time, either it jumps a square in the x-direction (with stepX) or a square in the y-direction (with stepY), it always jumps 1 square at once. If the ray's direction would be the x-direction, the loop will only have to jump a square in the x-direction everytime, because the ray will never change its y-direction. If the ray is a bit sloped to the y-direction, then every so many jumps in the x-direction, the ray will have to jump one square in the y-direction. If the ray is exactly the y-direction, it never has to jump in the x-direction, etc..
+
+
+So sideDistX and sideDistY get incremented with deltaDistX with every jump in their direction, and mapX and mapY get incremented with stepX and stepY respectively.
+
+```c
+void	perform_dda(t_index *m, int  hit)
+{
+	while (hit == 0)
+	{
+		//jump to next map square, OR in x-direction, OR in y-direction
+		if (m->data.side_dist_x < m->data.side_dist_y)
+		{
+			m->data.side_dist_x += m->data.delta_dist_x;
+			m->data.map_x += m->data.step_x;
+			m->data.side = 0;
+		}
+		else
+		{
+			m->data.side_dist_y += m->data.delta_dist_y;
+			m->data.map_y += m->data.step_y;
+			m->data.side = 1;
+		}
+		//Check if ray has hit a wall
+		if (m->parse.map[m->data.map_y][m->data.map_x] == '1')
+			hit = 1;
+	}
+}
+```
+
+
+
+
+```c
+void	calculate_dist(t_index *m)
+{
+	// Calculate distance projected on camera direction 
+	// (Euclidean distance will give fisheye effect!)
+	if (m->data.side == 0)
+		m->data.perp_wall_dist = (m->data.map_x - m->data.pos_x +
+		(1 - m->data.step_x) / 2) / m->data.ray_dir_x;
+	else
+		m->data.perp_wall_dist = (m->data.map_y - m->data.pos_y +
+		(1 - m->data.step_y) / 2) / m->data.ray_dir_y;
+	// if (m->data.perp_wall_dist == 0)
+	// 	m->data.perp_wall_dist = 0.1;
+}
+
+```
+
+
+
+```c
+void	calculate_wall_height(t_index *m)
+{
+	//Calculate height of line to draw on screen
+	m->data.wall_height = m->el.res_y;
+	m->data.line_height = (int)(m->data.wall_height / m->data.perp_wall_dist);
+	//calculate lowest and highest pixel to fill in current stripe
+	m->data.draw_start = -m->data.line_height / 2 + m->el.res_y / 2;
+	if (m->data.draw_start < 0)
+		m->data.draw_start = 0;
+	m->data.draw_end = m->data.line_height / 2 + m->el.res_y / 2;
+	if (m->data.draw_end >= m->el.res_y)
+		m->data.draw_end = m->el.res_y - 1;
+}
+```
+
+
+
+## Screenshot :
+
+### Some ressources :
+
+https://docs.fileformat.com/image/bmp/
+
+http://www.fastgraph.com/help/bmp_header_format.html
+
+https://stackoverflow.com/questions/50090500/create-simple-bitmap-in-c-without-external-libraries
+
+https://medium.com/sysf/bits-to-bitmaps-a-simple-walkthrough-of-bmp-image-format-765dc6857393
+
+https://4nsi.com/faq/how-do-i-calculate-the-file-size-for-a-digital-image
+
+### What is a BMP file ?
+
+BMP is an image file format that contains bitmap graphics data . A bitmap (or raster graphic) is a digital image composed of a matrix of dots. When viewed at 100%, each dot corresponds to an individual pixel on a display. In a standard bitmap image, each dot can be assigned a different color. Together, these dots can be used to represent any type of rectangular picture.
+
+### BMP File Format Specifications :
+
+A BMP file format contains different sections that contain information about metadata, color pallet, and actual pixel data.
+
+![BMP Specifications](https://miro.medium.com/max/1400/1*2ohsW8Chn2QsTcSyVcTZcw.png)
+
