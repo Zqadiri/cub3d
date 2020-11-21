@@ -248,9 +248,26 @@ void	perform_dda(t_index *m, int  hit)
 	}
 }
 ```
+After the DDA is done, we have to calculate the distance of the ray to the wall, so that we can calculate how high the wall has to be drawn after this.
 
+We don't use the Euclidean distance to the point representing player, but instead the distance to the camera plane (or, the distance of the point projected on the camera direction to the player), to avoid the fisheye effect. The fisheye effect is an effect you see if you use the real distance, where all the walls become rounded, and can make you sick if you rotate.
 
+The following image shows why we take distance to camera plane instead of player. With P the player, and the black line the camera plane: To the left of the player, a few red rays are shown from hitpoints on the wall to the player, representing Euclidean distance. On the right side of the player, a few green rays are shown going from hitpoints on the wall directly to the camera plane instead of to the player. So the lengths of those green lines are examples of the perpendicular distance we'll use instead of direct Euclidean distance.
 
+In the image, the player is looking directly at the wall, and in that case you would expect the wall's bottom and top to form a perfectly horizontal line on the screen. However, the red rays all have a different lenght, so would compute different wall heights for different vertical stripes, hence the rounded effect.
+The green rays on the right all have the same length, so will give the correct result. The same still apllies for when the player rotates (then the camera plane is no longer horizontal and the green lines will have different lengths, but still with a constant change between each) and the walls become diagonal but straight lines on the screen. This explanation is somewhat handwavy but gives the idea.
+
+![image 2](https://lodev.org/cgtutor/images/raycastdist.png)
+
+Note that this part of the code isn't "fisheye correction", such a correction isn't needed for the way of raycasting used here, the fisheye effect is simply avoided by the way the distance is calculated here. It's even easier to calculate this perpendicular distance than the real distance, we don't even need to know the exact location where the wall was hit.
+
+In the code below, (1-stepX)/2 is 1 if stepX = -1 and 0 if stepX is +1, this is needed because we need to add 1 to the length when rayDirX < 0, this is for the same reason why 1.0 was added to the initial value of sideDistX in one case but not in the other.
+
+The distance is then calculated as follows: if an x-side is hit, mapX-posX+(1-stepX)/2) is the number of squares the ray has crossed in X direction (this is not necessarily a whole number).
+
+If the ray is perpendicular to the X side, this is the correct value already, but because the direction of the ray is different most of the times, its real perpendicular distance will be larger, so we divide it through the X coordinate of the rayDir vector.
+
+The computation is similar in case an y-side is hit. The calculated distance is never negative, since mapX-posX will be negative only if rayDirX is negative, and we divide these two through each other.
 
 ```c
 void	calculate_dist(t_index *m)
@@ -263,12 +280,12 @@ void	calculate_dist(t_index *m)
 	else
 		m->data.perp_wall_dist = (m->data.map_y - m->data.pos_y +
 		(1 - m->data.step_y) / 2) / m->data.ray_dir_y;
-	// if (m->data.perp_wall_dist == 0)
-	// 	m->data.perp_wall_dist = 0.1;
 }
 
 ```
+Now that we have the calculated distance (perpWallDist), we can calculate the height of the line that has to be drawn on screen: this is the inverse of perpWallDist, and then multiplied by h, the height in pixels of the screen, to bring it to pixel coordinates. You can of course also multiply it with another value, for example 2*h, if you want to walls to be higher or lower. The value of h will make the walls look like cubes with equal height, width and depth, while large values will create higher boxes (depending on your monitor).
 
+Then out of this lineHeight (which is thus the height of the vertical line that should be drawn), the start and end position of where we should really draw are calculated. The center of the wall should be at the center of the screen, and if these points lie outside the screen, they're capped to 0 or h-1.
 
 
 ```c
