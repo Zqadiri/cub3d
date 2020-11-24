@@ -164,7 +164,7 @@ typedef struct		s_spr
 	int				spr_height;
 	float			*spr_buffer;
 	void			*sprite_text;
-	
+	float 			sprite_dist;
 }					t_spr;
 
 typedef struct		s_text

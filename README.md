@@ -338,7 +338,57 @@ Drawing the sprites is done after the walls and floor are already drawn. Here ar
 
 *  While raycasting the walls, store the perpendicular distance of each vertical stripe in a 1D Buffer .
 
-*  Calculate the distance of each sprite to the player
+*  Calculate the distance of each sprite to the player and  Use this distance to sort the sprites, from furthest away to closest to the camera .
+
+```c
+
+int         swap(t_index *m, int i,int j)
+{
+    float   swap_x;
+    float   swap_y;
+    
+    m->spr.sprite_dist = ((m->data.pos_x - m->spr.sprites_x[j]) *
+    (m->data.pos_x - m->spr.sprites_x[j]) +
+    (m->data.pos_y - m->spr.sprites_y[j]) * (m->data.pos_y - m->spr.sprites_y[j]));
+    swap_x = m->spr.sprites_x[i];
+    swap_y = m->spr.sprites_y[j];
+    m->spr.sprites_x[i] = m->spr.sprites_x[i + 1];
+    m->spr.sprites_y[i] = m->spr.sprites_y[i + 1];
+    m->spr.sprites_x[i + 1] = swap_x;
+    m->spr.sprites_y[i + 1] = swap_y;
+}  
+
+int         sort_sprites(t_index *m)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (i < m->spr.numsprites - 1)
+    {
+        //sqrt not taken, unneeded
+        m->spr.sprite_dist = ((m->data.pos_x - m->spr.sprites_x[i])
+        * (m->data.pos_x - m->spr.sprites_x[i]) + (m->data.pos_y - m->spr.sprites_y[i]) 
+        * (m->data.pos_y - m->spr.sprites_y[i]));
+        j = i + 1;
+        while (j < m->spr.numsprites - 1)
+        {
+            if (((m->data.pos_x - m->spr.sprites_x[j])
+            * (m->data.pos_x - m->spr.sprites_x[j]) + (m->data.pos_y - m->spr.sprites_y[j]) 
+            * (m->data.pos_y - m->spr.sprites_y[j])) > m->spr.sprite_dist)
+            {
+                swap(m, i, j);
+            }
+            j++;   
+        }
+        i++;
+    }
+}
+
+```
+
+*  Project the sprite on the camera plane (in 2D): subtract the player position from the sprite position, then multiply the result with the inverse of the 2x2 camera matrix .
 
 
 
