@@ -165,6 +165,8 @@ typedef struct		s_spr
 	float			*spr_buffer;
 	void			*sprite_text;
 	float 			sprite_dist;
+	float			spr_x;
+	float			spr_y;
 }					t_spr;
 
 typedef struct		s_text
@@ -330,4 +332,11 @@ int		screen_shot(t_index *m);
 int     write_info(t_index *m, int fd);
 int     bit_map_file_headers(t_index *m, int fd, int file_size);
 
+
+////////// sprite /////////////
+
+int         sprite_raycasting(t_index *m);
+void         sort_sprites(t_index *m);
+void         swap(t_index *m, int i,int j);
+void         update(t_index *m, int i);
 #endif
