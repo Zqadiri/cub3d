@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/20 13:38:06 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/24 13:23:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,24 @@ int		check_elem_nbr(t_index *m)
 	return (1);
 }
 
+int		is_empty(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int		parse_map(int fd, t_index *m)
 {
 	char *line;
+	int end = 0;
 
 	line = "";
 	m->parse.map_string = "";
@@ -60,10 +75,15 @@ int		parse_map(int fd, t_index *m)
 	m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
 	while (get_next_line(fd, &line))
 	{
-		/* have to fix this part */
-		if (line[0] == '\0')
+		if (!is_empty(line) && end)
+			write_error_one(m);
+		if (is_empty(line))
+		{
+			end = 1;
+			continue;
 			//write_error_one(m);
-			get_next_line(fd, &line);
+			// get_next_line(fd, &line);
+		}
 		m->parse.map_string = ft_strjoin(m->parse.map_string, line);
 		m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
 		free(line);

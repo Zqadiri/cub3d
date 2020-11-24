@@ -330,3 +330,17 @@ A BMP file format contains different sections that contain information about met
 
 ![BMP Specifications](https://miro.medium.com/max/1400/1*2ohsW8Chn2QsTcSyVcTZcw.png)
 
+## Sprites :
+
+The technique used to draw the sprites is totally different from the raycasting technique. We have to do the projection only in 2D, and some extra techniques to combine it with raycasting are used.
+
+Drawing the sprites is done after the walls and floor are already drawn. Here are the steps used to draw the sprites:
+
+*  While raycasting the walls, store the perpendicular distance of each vertical stripe in a 1D Buffer .
+
+*  Calculate the distance of each sprite to the player
+
+
+
+
+

@@ -120,6 +120,7 @@ void	draw(t_index *m)
 		calculate_textures(m);
 		calculate_colors(m);
 		verline(i, m);
+		m->spr.spr_buffer[i] = m->data.perp_wall_dist;
 		i++;
 	}
 	mlx_put_image_to_window(m->win.mlx_ptr, m->win.mlx_win, m->img.img, 0, 0);
