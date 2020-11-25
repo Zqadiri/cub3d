@@ -117,29 +117,7 @@ typedef struct		s_data
 	float			move_speed;
 	float			rot_speed;
 	float			old_plane_x;
-
-
 }					t_data;
-
-/*typedef	struct 		s_pos
-{
-	float			rotation_angle;
-	float			ray_angle;
-	int				is_facing_up;
-	int				is_facing_down;
-	int				is_facing_right;
-	int				is_facing_left;
-	int				y_intercept;
-	int				x_intercept;	
-	int				y;
-	int				x;
-	int				ystep;
-	int				xstep;	
-	int				save_horiz_wall_hit_x;
-	int				save_horiz_wall_hit_y;
-
-}					t_pos;*/
-
 
 typedef struct		s_parse
 {
@@ -171,7 +149,11 @@ typedef struct		s_spr
 	float			transform_x;
 	float			transform_y;
 	int				spr_screen_x;
-	
+	int				v_move_screen;
+	int				draw_start_y;
+	int				draw_end_y;
+	int				draw_start_x;
+	int				draw_end_x;	
 }					t_spr;
 
 typedef struct		s_text
@@ -198,150 +180,149 @@ typedef struct		s_index
 	t_elements		el;
 	t_spr			spr;
 	t_text			text;
-	//t_pos			pos;
-
 }					t_index;
 
 //////////////////// keycode.c ///////////////////////
 
-int		ft_key(int keycode, t_index *m);
-int		keys_right_left(t_index *m, int keycode);
-int		keys_rot2(t_index *m, int keycode);
-int		keys_rot1(t_index *m, int keycode);
-int		keys_up_down(t_index *m, int keycode);
+int					ft_key(int keycode, t_index *m);
+int					keys_right_left(t_index *m, int keycode);
+int					keys_rot2(t_index *m, int keycode);
+int					keys_rot1(t_index *m, int keycode);
+int					keys_up_down(t_index *m, int keycode);
 
 //////////////////// init.c ///////////////////////
 
-void	init(t_index *m);
-void 	init_1(t_index *m);
-void	init_2(t_index *m);
-void 	init_3(t_index *m);
-void 	init_4(t_index  *m);
+void				init(t_index *m);
+void 				init_1(t_index *m);
+void				init_2(t_index *m);
+void 				init_3(t_index *m);
+void 				init_4(t_index  *m);
 
 //////////////////// main.c ///////////////////////
 
-void	cast_ray(int hit, float angle, t_index *m);
-void	cast_all_rays(t_index *m);
-int		launch_program(t_index *m, char *av);
+void				cast_ray(int hit, float angle, t_index *m);
+void				cast_all_rays(t_index *m);
+int					launch_program(t_index *m, char *av);
 
 //////////////////// parsing.c ///////////////////////
 
-int		parse_cub(t_index *m, char *filename);
-int		parse_data(int fd, t_index *m);
-int		parse_map(int fd, t_index *m);
-int		check_elem_nbr(t_index *m);
+int					parse_cub(t_index *m, char *filename);
+int					parse_data(int fd, t_index *m);
+int					parse_map(int fd, t_index *m);
+int					check_elem_nbr(t_index *m);
 
 //////////////////// parsing2.c ///////////////////////
 
-int		create_map(t_index *m);
-int		create_good_size_map(t_index *m);
-char	*create_new_line(char *str, int diff);
+int					create_map(t_index *m);
+int					create_good_size_map(t_index *m);
+char				*create_new_line(char *str, int diff);
 
 //////////////////// free.c ///////////////////////
 
-void	free_win(t_index *m);
-void	free_map(t_index *m);
-void	free_elem(t_index *m);
-void	free_paths(t_index *m);
+void				free_win(t_index *m);
+void				free_map(t_index *m);
+void				free_elem(t_index *m);
+void				free_paths(t_index *m);
 
 //////////////////// check_map.c ///////////////////////
 
-int		check_map_errors(t_index *m);
-int		check_spaces_algo(t_index *m);
-int		check_around(int i, int j, t_index *m);
-int		check_dir_letter(t_index *m);
-int		check_map_characters(t_index *m);
+int					check_map_errors(t_index *m);
+int					check_spaces_algo(t_index *m);
+int					check_around(int i, int j, t_index *m);
+int					check_dir_letter(t_index *m);
+int					check_map_characters(t_index *m);
 
 //////////////////// utils.c ///////////////////////
 
-int		new_strlen(char *s);
-void	create_hex_color(t_index *m);
-int		transform_to_hex(int r, int g, int b);
-int		calcul_digit(t_index *m, int i);
-int		exit_all(t_index *m);
-int		exit_it(t_index *m);
+int					new_strlen(char *s);
+void				create_hex_color(t_index *m);
+int					transform_to_hex(int r, int g, int b);
+int					calcul_digit(t_index *m, int i);
+int					exit_all(t_index *m);
+int					exit_it(t_index *m);
 
 //////////////////// error_funcs.c ///////////////////////
 
-int		ft_errors(int ac, char **av);
-int		return_error_exit(t_index *m);
-int		write_error_one(t_index *m);
-int		return_error(t_index *m);
-int		error_map(t_index *m);
-int		write_el_error(void);
-int		write_error_res(void);
-int		write_error_end_floor(t_index *m, int i);
-int		write_error_floor(t_index *m, int i);
-int		write_error_end_ceilling(t_index *m, int i);
-int		write_error_ceilling(t_index *m, int i);
+int					ft_errors(int ac, char **av);
+int					return_error_exit(t_index *m);
+int					write_error_one(t_index *m);
+int					return_error(t_index *m);
+int					error_map(t_index *m);
+int					write_el_error(void);
+int					write_error_res(void);
+int					write_error_end_floor(t_index *m, int i);
+int					write_error_floor(t_index *m, int i);
+int					write_error_end_ceilling(t_index *m, int i);
+int					write_error_ceilling(t_index *m, int i);
 
 //////////////////// check_data.c ///////////////////////
 
-int		check_north_and_south(t_index *m);
-int		check_west_and_east(t_index *m);
-int		check_elements_errors(t_index *m);
-int		check_path(char *str);
-int		check_resolution(t_index *m);
+int					check_north_and_south(t_index *m);
+int					check_west_and_east(t_index *m);
+int					check_elements_errors(t_index *m);
+int					check_path(char *str);
+int					check_resolution(t_index *m);
 
 /////////////////// get_textures.c ///////////////////////
 
-char	*get_north_texture(t_index *m);
-char	*get_sprite_texture(t_index *m);
-char	*get_south_texture(t_index *m);
-char	*get_west_texture(t_index *m);
-char	*get_east_texture(t_index *m);
+char				*get_north_texture(t_index *m);
+char				*get_sprite_texture(t_index *m);
+char				*get_south_texture(t_index *m);
+char				*get_west_texture(t_index *m);
+char				*get_east_texture(t_index *m);
 
 /////////////////// sprites_data.c ///////////////////////
 
-int		get_sprites(t_index *m);
-void	parse_sprites(t_index *m);
-int		malloc_size_sprite(t_index *m);
+int					get_sprites(t_index *m);
+void				parse_sprites(t_index *m);
+int					malloc_size_sprite(t_index *m);
 
 /////////////////// get_elements.c ///////////////////////
 
-int		get_ceilling_color(t_index *m);
-int		get_floor_color(t_index *m);
-int		get_resolution(t_index *m);
-int		get_elements(t_index *m);
+int					get_ceilling_color(t_index *m);
+int					get_floor_color(t_index *m);
+int					get_resolution(t_index *m);
+int					get_elements(t_index *m);
 
 /////////////////// check.c ///////////////////////
 
-int		get_position(t_index *m);
-int		get_position2(t_index *m, int i, int j);
-int		check_borders_lines(t_index *m);
-int		check_borders_columns(t_index *m);
-int		check_letters(t_index *m, int i, int j);
+int					get_position(t_index *m);
+int					get_position2(t_index *m, int i, int j);
+int					check_borders_lines(t_index *m);
+int					check_borders_columns(t_index *m);
+int					check_letters(t_index *m, int i, int j);
 
 /////////////////// add_data.c ///////////////////////
 
-int		add_data(t_index *m);
-int		add_textures(t_index *m);
-int		create_images(t_index *m);
-int		create_images2(t_index *m);
-int		create_elements_lines(t_index *m);
+int					add_data(t_index *m);
+int					add_textures(t_index *m);
+int					create_images(t_index *m);
+int					create_images2(t_index *m);
+int					create_elements_lines(t_index *m);
 
 /////////////raycasting.c/////////////
 
-void	draw(t_index *m);
-void	calculate_dist(t_index *m);
-void	calculate_wall_height(t_index *m);
-void	perform_dda(t_index *m, int  hit);
-void	calculate_step_sidedist(t_index *m);
-void	calculate_ray_pos_dir(int i, t_index *m);
-void	calculate_textures(t_index *m);
-void	calculate_colors(t_index *m);
-void	verline(int i, t_index *m);
+void				draw(t_index *m);
+void				calculate_dist(t_index *m);
+void				calculate_wall_height(t_index *m);
+void				perform_dda(t_index *m, int  hit);
+void				calculate_step_sidedist(t_index *m);
+void				calculate_ray_pos_dir(int i, t_index *m);
+void				calculate_textures(t_index *m);
+void				calculate_colors(t_index *m);
+void				verline(int i, t_index *m);
 
 ////////// sreenshot //////////////
-int		screen_shot(t_index *m);
-int     write_info(t_index *m, int fd);
-int     bit_map_file_headers(t_index *m, int fd, int file_size);
+int					screen_shot(t_index *m);
+int     			write_info(t_index *m, int fd);
+int     			bit_map_file_headers(t_index *m, int fd, int file_size);
 
 
 ////////// sprite /////////////
 
-int         sprite_raycasting(t_index *m);
-void         sort_sprites(t_index *m);
-void         swap(t_index *m, int i,int j);
-void         update(t_index *m, int i);
+int          		sprite_raycasting(t_index *m);
+void         		sort_sprites(t_index *m);
+void         		swap(t_index *m, int i,int j);
+void         		update(t_index *m, int i);
+void       			calculate_start_end(t_index *m);
 #endif

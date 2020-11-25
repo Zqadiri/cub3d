@@ -414,8 +414,38 @@ void         update(t_index *m, int i)
 
 ```
 
-* Calculate the size of the sprite on the screen (both in x and y direction) by using the perpendicular distance.
+*  Calculate the size of the sprite on the screen (both in x and y direction) by using the perpendicular distance.
 
+```c
+void        calculate_start_end(t_index *m)
+{
+    //parameters for scaling and moving the sprites
+    m->spr.v_move_screen = (int)(1.0 / m->spr.transform_y);
+    //calculate height of the sprite on screen
+    //using "transformY" instead of the real distance prevents fisheye
+    m->spr.spr_height = abs((int)(m->el.res_y / m->spr.transform_y)) / 1;
+    //calculate lowest and highest pixel to fill in current stripe
+    m->spr.draw_start_y = -m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
+    if (m->spr.draw_start_y < 0)
+        m->spr.draw_start_y = 0;
+    
+    m->spr.draw_end_y = m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
+    if (m->spr.draw_end_y >= m->el.res_y)
+        m->spr.draw_end_y = m->el.res_y - 1;
+    //calculate width of the sprite
+    m->spr.spr_width = abs((int)(m->el.res_y / m->spr.transform_y)) / 1;
+    m->spr.draw_start_x = -m->spr.spr_width / 2 + m->spr.spr_screen_x;
+    if (m->spr.draw_start_x < 0)
+        m->spr.draw_start_x = 0;
+    m->spr.draw_end_x = m->spr.spr_width / 2 + m->spr.spr_screen_x;
+    if (m->spr.draw_end_x >= m->el.res_x)
+        m->spr.draw_end_x = m->el.res_x - 1;   
+}  
+```
+
+*  Draw the sprites vertical stripe by vertical stripe, don't draw the vertical stripe if the distance is further away than the 1D ZBuffer of the walls of the current stripe .
+
+* Draw the vertical stripe pixel by pixel, make sure there's an invisible color or all sprites would be rectangles .
 
 
 

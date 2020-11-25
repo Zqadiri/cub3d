@@ -112,6 +112,12 @@ void init_4(t_index  *m)
   m->spr.invdet = 0;
   m->spr.transform_x = 0;
   m->spr.transform_y = 0;
+  m->spr.spr_screen_x = 0;
+  m->spr.v_move_screen = 0;
+  m->spr.draw_start_y = 0;
+  m->spr.draw_end_y = 0;
+  m->spr.draw_start_x = 0;
+  m->spr.draw_end_x = 0;
 
   m->text.tex_width = 0;
   m->text.tex_height = 0;

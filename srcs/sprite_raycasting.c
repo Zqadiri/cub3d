@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/25 10:57:03 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/25 18:04:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,31 @@ void         update(t_index *m, int i)
     m->spr.spr_screen_x = (int)(m->el.res_x / 2) * (1 + m->spr.transform_x / m->spr.transform_y);
 }
 
+void        calculate_start_end(t_index *m)
+{
+    //parameters for scaling and moving the sprites
+    m->spr.v_move_screen = (int)(1.0 / m->spr.transform_y);
+    //calculate height of the sprite on screen
+    //using "transformY" instead of the real distance prevents fisheye
+    m->spr.spr_height = abs((int)(m->el.res_y / m->spr.transform_y)) / 1;
+    //calculate lowest and highest pixel to fill in current stripe
+    m->spr.draw_start_y = -m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
+    if (m->spr.draw_start_y < 0)
+        m->spr.draw_start_y = 0;
+    
+    m->spr.draw_end_y = m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
+    if (m->spr.draw_end_y >= m->el.res_y)
+        m->spr.draw_end_y = m->el.res_y - 1;
+    //calculate width of the sprite
+    m->spr.spr_width = abs((int)(m->el.res_y / m->spr.transform_y)) / 1;
+    m->spr.draw_start_x = -m->spr.spr_width / 2 + m->spr.spr_screen_x;
+    if (m->spr.draw_start_x < 0)
+        m->spr.draw_start_x = 0;
+    m->spr.draw_end_x = m->spr.spr_width / 2 + m->spr.spr_screen_x;
+    if (m->spr.draw_end_x >= m->el.res_x)
+        m->spr.draw_end_x = m->el.res_x - 1;   
+}        
+
 
 int         sprite_raycasting(t_index *m)
 {
@@ -83,7 +108,9 @@ int         sprite_raycasting(t_index *m)
     while(i < m->spr.numsprites)
     {
        //after sorting the sprites, do the projection and draw them
-        update(m, i); 
+        update(m, i);
+        calculate_start_end(m);
+        
         i++;
     }
     return (1);
