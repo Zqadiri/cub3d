@@ -304,6 +304,24 @@ void	calculate_wall_height(t_index *m)
 	if (m->data.draw_end >= m->el.res_y)
 		m->data.draw_end = m->el.res_y - 1;
 }
+void	write(t_index *m)
+{
+	int y;
+	int d;
+
+	d = 0;
+	y = m->spr.drawstarty;
+	while (y < m->spr.drawendy)
+	{
+		d = (y - m->spr.vmovescreen) * 256 - m->el.res_y * 128 +
+			m->spr.sprheight * 128;
+		m->spr.texy = ((d * 64) / m->spr.sprheight) / 256;
+		if ((m->spr.color[64 * m->spr.texy + m->spr.texx] & 0x00FFFFFF) != 0)
+			m->img.addr[y * m->el.res_x + m->spr.stripe] =
+				m->spr.color[64 * m->spr.texy + m->spr.texx];
+		y++;
+	}
+}
 ```
 
 
@@ -445,7 +463,30 @@ void        calculate_start_end(t_index *m)
 
 *  Draw the sprites vertical stripe by vertical stripe, don't draw the vertical stripe if the distance is further away than the 1D ZBuffer of the walls of the current stripe .
 
+```c
+void        vertical(t_index *m)
+{
+    m->spr.stripe = m->spr.draw_start_x;
+    while (m->spr.stripe < m->spr.draw_end_x)
+    {
+        m->spr.tex_x = (int)((m->spr.stripe - (m->spr.spr_width / 2 +
+         m->spr.spr_screen_x)) * m->text.tex_width / m->spr.spr_width);
+        if (m->spr.transform_y > 0 && m->spr.stripe > 0 && m->spr.stripe < m->el.res_x 
+        && m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe] && m->spr.tex_x < 64)
+        {
+            draw_sprite(m);
+        }
+        m->spr.stripe++;
+        
+    }
+}
+
+```
+
 * Draw the vertical stripe pixel by pixel, make sure there's an invisible color or all sprites would be rectangles .
+
+
+
 
 
 

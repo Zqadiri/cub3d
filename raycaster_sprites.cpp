@@ -380,6 +380,9 @@ int main(int /*argc*/, char */*argv*/[])
       int drawEndX = spriteWidth / 2 + spriteScreenX;
       if(drawEndX >= w) drawEndX = w - 1;
 
+
+      
+
       //loop through every vertical stripe of the sprite on screen
       for(int stripe = drawStartX; stripe < drawEndX; stripe++)
       {

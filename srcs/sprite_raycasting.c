@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/25 18:04:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/25 18:26:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,34 @@ void        calculate_start_end(t_index *m)
         m->spr.draw_end_x = m->el.res_x - 1;   
 }        
 
+void        vertical(t_index *m)
+{
+    //loop through every vertical stripe of the sprite on screen
+    m->spr.stripe = m->spr.draw_start_x;
+    while (m->spr.stripe < m->spr.draw_end_x)
+    {
+        m->spr.tex_x = (int)((m->spr.stripe - (m->spr.spr_width / 2 +
+         m->spr.spr_screen_x)) * m->text.tex_width / m->spr.spr_width);
+        //the conditions in the if are:
+        //1) it's in front of camera plane so you don't see things behind you
+        //2) it's on the screen (left)
+        //3) it's on the screen (right)
+        //4) ZBuffer, with perpendicular distance
+        if (m->spr.transform_y > 0 && m->spr.stripe > 0 && m->spr.stripe < m->el.res_x 
+        && m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe] && m->spr.tex_x < 64)//for every pixel of the current stripe
+        {
+            // draw_sprite(m);
+        }
+        m->spr.stripe++;
+        
+    }
+}
+
+// void        draw_sprite(t_index *m)
+// {
+    
+// }
+
 
 int         sprite_raycasting(t_index *m)
 {
@@ -110,7 +138,7 @@ int         sprite_raycasting(t_index *m)
        //after sorting the sprites, do the projection and draw them
         update(m, i);
         calculate_start_end(m);
-        
+        vertical(m);
         i++;
     }
     return (1);
