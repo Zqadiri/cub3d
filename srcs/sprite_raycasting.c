@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/24 17:46:35 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/25 10:57:03 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ void         update(t_index *m, int i)
     // [               ]       =  1/(planeX*dirY-dirX*planeY) *   [                 ]
     // [ planeY   dirY ]                                          [ -planeY  planeX ]
     
+    //required for correct matrix multiplication                                          [ -planeY  planeX ]
+    m->spr.invdet = 1.0 / (m->data.plane_x * m->data.dir_y - m->data.dir_x * m->data.plane_y);
+    m->spr.transform_x = m->spr.invdet * (m->data.dir_y * m->spr.spr_x - m->data.dir_x * m->spr.spr_y);
+    m->spr.transform_y = m->spr.invdet * (-m->data.plane_y * m->spr.spr_x + m->data.plane_x * m->spr.spr_y);
+    m->spr.spr_screen_x = (int)(m->el.res_x / 2) * (1 + m->spr.transform_x / m->spr.transform_y);
 }
 
 

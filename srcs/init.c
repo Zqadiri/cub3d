@@ -106,6 +106,12 @@ void init_4(t_index  *m)
   m->spr.spr_height = 0;
   m->spr.spr_buffer = NULL;
   m->spr.sprite_text = NULL;
+  m->spr.sprite_dist = 0;
+  m->spr.spr_x = 0;
+  m->spr.spr_y = 0;
+  m->spr.invdet = 0;
+  m->spr.transform_x = 0;
+  m->spr.transform_y = 0;
 
   m->text.tex_width = 0;
   m->text.tex_height = 0;

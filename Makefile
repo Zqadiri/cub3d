@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2020/11/18 09:21:20 by zqadiri          ###   ########.fr        #
+#    Updated: 2020/11/25 10:45:25 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS 			=	./srcs/main.c\
 					./srcs/parsing2.c\
 					./srcs/sprites_data.c\
 					./srcs/utils.c\
-					./srcs/bmp.c
+					./srcs/bmp.c\
+					./srcs/sprite_raycasting.c
 					
 OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	Cub3d.h

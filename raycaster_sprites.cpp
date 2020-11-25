@@ -354,6 +354,7 @@ int main(int /*argc*/, char */*argv*/[])
       double invDet = 1.0 / (planeX * dirY - dirX * planeY); //required for correct matrix multiplication
 
       double transformX = invDet * (dirY * spriteX - dirX * spriteY);
+      
       double transformY = invDet * (-planeY * spriteX + planeX * spriteY); //this is actually the depth inside the screen, that what Z is in 3D, the distance of sprite to player, matching sqrt(spriteDistance[i])
 
       int spriteScreenX = int((w / 2) * (1 + transformX / transformY));

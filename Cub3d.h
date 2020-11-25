@@ -167,6 +167,11 @@ typedef struct		s_spr
 	float 			sprite_dist;
 	float			spr_x;
 	float			spr_y;
+	float			invdet;
+	float			transform_x;
+	float			transform_y;
+	int				spr_screen_x;
+	
 }					t_spr;
 
 typedef struct		s_text

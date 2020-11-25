@@ -25,6 +25,8 @@ https://github.com/vinibiavatti1/RayCastingTutorial/wiki/RayCasting
 
 https://gamedev.stackexchange.com/questions/45013/raycasting-tutorial-vector-math-question
 
+https://guy-grave.developpez.com/tutoriels/jeux/doom-wolfenstein-raycasting/
+
 
 ## The basic idea of raycasting  (lodev.org)
 
@@ -332,9 +334,9 @@ A BMP file format contains different sections that contain information about met
 
 ## Sprites :
 
-The technique used to draw the sprites is totally different from the raycasting technique. We have to do the projection only in 2D, and some extra techniques to combine it with raycasting are used.
+The technique used to draw the sprites is totally different from the raycasting technique. We have to do the projection only in 2D, and some extra techniques to combine it with the actual raycasting . Here we use 2D pictures always facing to you to represent sprites (so they're easy to draw and require a single picture), but that become smaller if they're further away.
 
-Drawing the sprites is done after the walls and floor are already drawn. Here are the steps used to draw the sprites:
+Drawing the sprites is done after the walls are already drawn. Here are the steps used to draw the sprites:
 
 *  While raycasting the walls, store the perpendicular distance of each vertical stripe in a 1D Buffer .
 
@@ -389,6 +391,33 @@ int         sort_sprites(t_index *m)
 ```
 
 *  Project the sprite on the camera plane (in 2D): subtract the player position from the sprite position, then multiply the result with the inverse of the 2x2 camera matrix .
+
+![matrix inverse](https://dcvp84mxptlac.cloudfront.net/diagrams2/MATH12-20-3-X_1.jpg)
+
+```c
+void         update(t_index *m, int i)
+{
+    //translate sprite position to relative to camera
+    m->spr.spr_x = m->spr.sprites_x[i] - m->data.pos_x;
+    m->spr.spr_y = m->spr.sprites_y[i] - m->data.pos_y;
+    //transform sprite with the inverse camera matrix
+    // [ planeX   dirX ] -1                                       [ dirY      -dirX ]
+    // [               ]       =  1/(planeX*dirY-dirX*planeY) *   [                 ]
+    // [ planeY   dirY ]                                          [ -planeY  planeX ]
+    
+    //required for correct matrix multiplication
+    m->spr.invdet = 1.0 / (m->data.plane_x * m->data.dir_y - m->data.dir_x * m->data.plane_y);
+    m->spr.transform_x = m->spr.invdet * (m->data.dir_y * m->spr.spr_x - m->data.dir_x * m->spr.spr_y);
+    m->spr.transform_y = m->spr.invdet * (-m->data.plane_y * m->spr.spr_x + m->data.plane_x * m->spr.spr_y);
+    m->spr.spr_screen_x = (int)(m->el.res_x / 2) * (1 + m->spr.transform_x / m->spr.transform_y);
+}
+
+```
+
+* Calculate the size of the sprite on the screen (both in x and y direction) by using the perpendicular distance.
+
+
+
 
 
 
