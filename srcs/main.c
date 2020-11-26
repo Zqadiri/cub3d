@@ -111,7 +111,6 @@ void	draw(t_index *m)
 	while (i < m->el.res_x)
 	{
 		hit = 0;
-
 		calculate_ray_pos_dir(i, m);
 		calculate_step_sidedist(m);
 		perform_dda(m, hit);

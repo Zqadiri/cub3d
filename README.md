@@ -389,7 +389,7 @@ int         sort_sprites(t_index *m)
 
 *  Project the sprite on the camera plane (in 2D): subtract the player position from the sprite position, then multiply the result with the inverse of the 2x2 camera matrix .
 
-![matrix inverse](https://dcvp84mxptlac.cloudfront.net/diagrams2/MATH12-20-3-X_1.jpg)
+![matrix inverse](https://i.pinimg.com/originals/c0/ad/cd/c0adcd88a08b12b2861f9b44712d67ef.gif)
 
 ```c
 void         update(t_index *m, int i)
@@ -417,27 +417,26 @@ void         update(t_index *m, int i)
 void        calculate_start_end(t_index *m)
 {
     //parameters for scaling and moving the sprites
-    m->spr.v_move_screen = (int)(1.0 / m->spr.transform_y);
+    m->spr.v_move_screen = (int)(94.0 / m->spr.transform_y);
     //calculate height of the sprite on screen
     //using "transformY" instead of the real distance prevents fisheye
-    m->spr.spr_height = abs((int)(m->el.res_y / m->spr.transform_y)) / 1;
+    m->spr.spr_height = (int)fabs((float)m->el.res_y / m->spr.transform_y);
     //calculate lowest and highest pixel to fill in current stripe
     m->spr.draw_start_y = -m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
     if (m->spr.draw_start_y < 0)
         m->spr.draw_start_y = 0;
-    
     m->spr.draw_end_y = m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
     if (m->spr.draw_end_y >= m->el.res_y)
         m->spr.draw_end_y = m->el.res_y - 1;
     //calculate width of the sprite
-    m->spr.spr_width = abs((int)(m->el.res_y / m->spr.transform_y)) / 1;
+    m->spr.spr_width = (int)fabs((float)m->el.res_y / m->spr.transform_y);
     m->spr.draw_start_x = -m->spr.spr_width / 2 + m->spr.spr_screen_x;
     if (m->spr.draw_start_x < 0)
         m->spr.draw_start_x = 0;
     m->spr.draw_end_x = m->spr.spr_width / 2 + m->spr.spr_screen_x;
     if (m->spr.draw_end_x >= m->el.res_x)
         m->spr.draw_end_x = m->el.res_x - 1;   
-}  
+}   
 ```
 
 *  Draw the sprites vertical stripe by vertical stripe, don't draw the vertical stripe if the distance is further away than the 1D ZBuffer of the walls of the current stripe .
@@ -461,7 +460,6 @@ void        vertical(t_index *m)
 }
 
 ```
-
 * Draw the vertical stripe pixel by pixel, make sure there's an invisible color or all sprites would be rectangles .
 
 ```c
@@ -485,7 +483,6 @@ void        draw_sprite(t_index *m)
         y++;
     }
 }
-
 ```
 
 

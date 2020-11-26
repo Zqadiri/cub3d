@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/25 20:01:35 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/26 10:50:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void         sort_sprites(t_index *m)
         i++;
     }
 }
+
 void         update(t_index *m, int i)
 {
     //translate sprite position to relative to camera
@@ -75,20 +76,19 @@ void         update(t_index *m, int i)
 void        calculate_start_end(t_index *m)
 {
     //parameters for scaling and moving the sprites
-    m->spr.v_move_screen = (int)(1.0 / m->spr.transform_y);
+    m->spr.v_move_screen = (int)(94.0 / m->spr.transform_y);
     //calculate height of the sprite on screen
     //using "transformY" instead of the real distance prevents fisheye
-    m->spr.spr_height = abs((int)(m->el.res_y / m->spr.transform_y)) / 1;
+    m->spr.spr_height = (int)fabs((float)m->el.res_y / m->spr.transform_y);
     //calculate lowest and highest pixel to fill in current stripe
     m->spr.draw_start_y = -m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
     if (m->spr.draw_start_y < 0)
         m->spr.draw_start_y = 0;
-    
     m->spr.draw_end_y = m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
     if (m->spr.draw_end_y >= m->el.res_y)
         m->spr.draw_end_y = m->el.res_y - 1;
     //calculate width of the sprite
-    m->spr.spr_width = abs((int)(m->el.res_y / m->spr.transform_y)) / 1;
+    m->spr.spr_width = (int)fabs((float)m->el.res_y / m->spr.transform_y);
     m->spr.draw_start_x = -m->spr.spr_width / 2 + m->spr.spr_screen_x;
     if (m->spr.draw_start_x < 0)
         m->spr.draw_start_x = 0;
@@ -103,8 +103,8 @@ void        vertical(t_index *m)
     m->spr.stripe = m->spr.draw_start_x;
     while (m->spr.stripe < m->spr.draw_end_x)
     {
-        m->spr.tex_x = (int)((m->spr.stripe - (m->spr.spr_width / 2 +
-         m->spr.spr_screen_x)) * m->text.tex_width / m->spr.spr_width);
+        m->spr.tex_x = (int)(256 * (m->spr.stripe - (-m->spr.spr_width / 2 +
+         m->spr.spr_screen_x)) * 64 / m->spr.spr_width) / 256;
         //the conditions in the if are:
         //1) it's in front of camera plane so you don't see things behind you
         //2) it's on the screen (left)
@@ -131,7 +131,7 @@ void        draw_sprite(t_index *m)
         //256 and 128 factors to avoid floats
         d = (y - m->spr.v_move_screen) * 256 - m->el.res_y *
              128 + m->spr.spr_height * 128;
-        m->spr.tex_y = ((d * m->text.tex_height) / m->spr.spr_height) / 256;
+        m->spr.tex_y = ((d * 64) / m->spr.spr_height) / 256;
         //get current color from the texture
         if ((m->spr.color[64 * m->spr.tex_y + m->spr.tex_x] & 0x00FFFFFF) != 0)
             m->img.addr[y * m->el.res_x + m->spr.stripe] =
@@ -139,7 +139,6 @@ void        draw_sprite(t_index *m)
         y++;
     }
 }
-
 
 int         sprite_raycasting(t_index *m)
 {
@@ -152,7 +151,7 @@ int         sprite_raycasting(t_index *m)
     {
        //after sorting the sprites, do the projection and draw them
         update(m, i);
-        calculate_start_end(m);
+        calculate_start_end(m);      
         vertical(m);
         i++;
     }
