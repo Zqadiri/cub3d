@@ -340,42 +340,42 @@ Drawing the sprites is done after the walls are already drawn. Here are the step
 *  Calculate the distance of each sprite to the player and  Use this distance to sort the sprites, from furthest away to closest to the camera .
 
 ```c
-
-int         swap(t_index *m, int i,int j)
+void         swap(t_index *m, int i,int j)
 {
     float   swap_x;
     float   swap_y;
     
     m->spr.sprite_dist = ((m->data.pos_x - m->spr.sprites_x[j]) *
     (m->data.pos_x - m->spr.sprites_x[j]) +
-    (m->data.pos_y - m->spr.sprites_y[j]) * (m->data.pos_y - m->spr.sprites_y[j]));
+    (m->data.pos_y - m->spr.sprites_y[j]) * 
+    (m->data.pos_y - m->spr.sprites_y[j]));
     swap_x = m->spr.sprites_x[i];
-    swap_y = m->spr.sprites_y[j];
+    swap_y = m->spr.sprites_y[i];
     m->spr.sprites_x[i] = m->spr.sprites_x[i + 1];
     m->spr.sprites_y[i] = m->spr.sprites_y[i + 1];
     m->spr.sprites_x[i + 1] = swap_x;
     m->spr.sprites_y[i + 1] = swap_y;
 }  
-
-int         sort_sprites(t_index *m)
+ 
+void         sort_sprites(t_index *m)
 {
     int i;
     int j;
 
     i = 0;
-    j = 0;
     while (i < m->spr.numsprites - 1)
     {
-        //sqrt not taken, unneeded
-        m->spr.sprite_dist = ((m->data.pos_x - m->spr.sprites_x[i])
-        * (m->data.pos_x - m->spr.sprites_x[i]) + (m->data.pos_y - m->spr.sprites_y[i]) 
-        * (m->data.pos_y - m->spr.sprites_y[i]));
+        m->spr.sprite_dist = ((m->data.pos_x - m->spr.sprites_x[i]) *
+        (m->data.pos_x - m->spr.sprites_x[i]) +
+        (m->data.pos_y - m->spr.sprites_y[i]) *
+        (m->data.pos_y - m->spr.sprites_y[i]));
         j = i + 1;
-        while (j < m->spr.numsprites - 1)
+        while (j < m->spr.numsprites)
         {
-            if (((m->data.pos_x - m->spr.sprites_x[j])
-            * (m->data.pos_x - m->spr.sprites_x[j]) + (m->data.pos_y - m->spr.sprites_y[j]) 
-            * (m->data.pos_y - m->spr.sprites_y[j])) > m->spr.sprite_dist)
+            if (((m->data.pos_x - m->spr.sprites_x[j])*
+             (m->data.pos_x - m->spr.sprites_x[j]) + 
+             (m->data.pos_y - m->spr.sprites_y[j]) *
+             (m->data.pos_y - m->spr.sprites_y[j])) > m->spr.sprite_dist)
             {
                 swap(m, i, j);
             }
@@ -402,11 +402,15 @@ void         update(t_index *m, int i)
     // [               ]       =  1/(planeX*dirY-dirX*planeY) *   [                 ]
     // [ planeY   dirY ]                                          [ -planeY  planeX ]
     
-    //required for correct matrix multiplication
-    m->spr.invdet = 1.0 / (m->data.plane_x * m->data.dir_y - m->data.dir_x * m->data.plane_y);
-    m->spr.transform_x = m->spr.invdet * (m->data.dir_y * m->spr.spr_x - m->data.dir_x * m->spr.spr_y);
-    m->spr.transform_y = m->spr.invdet * (-m->data.plane_y * m->spr.spr_x + m->data.plane_x * m->spr.spr_y);
-    m->spr.spr_screen_x = (int)(m->el.res_x / 2) * (1 + m->spr.transform_x / m->spr.transform_y);
+    //required for correct matrix multiplication                                          [ -planeY  planeX ]
+    m->spr.invdet = 1.0 / (m->data.plane_x * m->data.dir_y 
+                    - m->data.dir_x * m->data.plane_y);
+    m->spr.transform_x = m->spr.invdet * (m->data.dir_y * m->spr.spr_x 
+                        - m->data.dir_x * m->spr.spr_y);
+    m->spr.transform_y = m->spr.invdet * (-m->data.plane_y * m->spr.spr_x 
+                        + m->data.plane_x * m->spr.spr_y);
+    m->spr.spr_screen_x = (int)((m->el.res_x / 2) * 
+                        (1 + m->spr.transform_x / m->spr.transform_y));
 }
 
 ```
@@ -414,6 +418,7 @@ void         update(t_index *m, int i)
 *  Calculate the size of the sprite on the screen (both in x and y direction) by using the perpendicular distance.
 
 ```c
+
 void        calculate_start_end(t_index *m)
 {
     //parameters for scaling and moving the sprites
@@ -434,9 +439,12 @@ void        calculate_start_end(t_index *m)
     if (m->spr.draw_start_x < 0)
         m->spr.draw_start_x = 0;
     m->spr.draw_end_x = m->spr.spr_width / 2 + m->spr.spr_screen_x;
-    if (m->spr.draw_end_x >= m->el.res_x)
+    if (m->spr.draw_end_x >= m->el.res_y)
         m->spr.draw_end_x = m->el.res_x - 1;  
-}    
+    // printf("*%d \n", m->spr.draw_end_x);
+    // printf("*%d \n", m->spr.draw_end_y); 
+}  
+  
 ```
 *  Draw the sprites vertical stripe by vertical stripe, don't draw the vertical stripe if the distance is further away than the 1D ZBuffer of the walls of the current stripe .
 
@@ -447,8 +455,8 @@ void        vertical(t_index *m)
     m->spr.stripe = m->spr.draw_start_x;
     while (m->spr.stripe < m->spr.draw_end_x)
     {
-        m->spr.tex_x = (int)(256 * (m->spr.stripe - (-m->spr.spr_width / 2 +
-         m->spr.spr_screen_x)) * 64 / m->spr.spr_width) / 256;
+        m->spr.tex_x = (int)((m->spr.stripe - (-m->spr.spr_width / 2 +
+         m->spr.spr_screen_x)) * 64 / m->spr.spr_width);
         //the conditions in the if are:
         //1) it's in front of camera plane so you don't see things behind you
         //2) it's on the screen (left)
