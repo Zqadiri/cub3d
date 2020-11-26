@@ -119,6 +119,8 @@ void init_4(t_index  *m)
   m->spr.draw_start_x = 0;
   m->spr.draw_end_x = 0;
   m->spr.tex_x = 0;
+  m->spr.tex_y = 0;
+  m->spr.color = NULL;
   
 
   m->text.tex_width = 0;

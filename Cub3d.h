@@ -156,6 +156,8 @@ typedef struct		s_spr
 	int				draw_end_x;
 	int				stripe;
 	int				tex_x;
+	int				tex_y;
+	int				*color;
 }					t_spr;
 
 typedef struct		s_text
@@ -328,6 +330,6 @@ void         		swap(t_index *m, int i,int j);
 void         		update(t_index *m, int i);
 void       			calculate_start_end(t_index *m);
 void        		vertical(t_index *m);
-// void        		draw_sprite(t_index *m);
+void        		draw_sprite(t_index *m);
 
 #endif

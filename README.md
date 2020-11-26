@@ -304,28 +304,7 @@ void	calculate_wall_height(t_index *m)
 	if (m->data.draw_end >= m->el.res_y)
 		m->data.draw_end = m->el.res_y - 1;
 }
-void	write(t_index *m)
-{
-	int y;
-	int d;
-
-	d = 0;
-	y = m->spr.drawstarty;
-	while (y < m->spr.drawendy)
-	{
-		d = (y - m->spr.vmovescreen) * 256 - m->el.res_y * 128 +
-			m->spr.sprheight * 128;
-		m->spr.texy = ((d * 64) / m->spr.sprheight) / 256;
-		if ((m->spr.color[64 * m->spr.texy + m->spr.texx] & 0x00FFFFFF) != 0)
-			m->img.addr[y * m->el.res_x + m->spr.stripe] =
-				m->spr.color[64 * m->spr.texy + m->spr.texx];
-		y++;
-	}
-}
 ```
-
-
-
 ## Screenshot :
 
 ### Some ressources :
@@ -484,6 +463,30 @@ void        vertical(t_index *m)
 ```
 
 * Draw the vertical stripe pixel by pixel, make sure there's an invisible color or all sprites would be rectangles .
+
+```c
+void        draw_sprite(t_index *m)
+{
+    int y;
+    int d;
+
+    d = 0;
+    y = m->spr.draw_start_y;
+    while (y < m->spr.draw_end_y)
+    {
+        //256 and 128 factors to avoid floats
+        d = (y - m->spr.v_move_screen) * 256 - m->el.res_y *
+             128 + m->spr.spr_height * 128;
+        m->spr.tex_y = ((d * m->text.tex_height) / m->spr.spr_height) / 256;
+        //get current color from the texture
+        if ((m->spr.color[64 * m->spr.tex_y + m->spr.tex_x] & 0x00FFFFFF) != 0)
+            m->img.addr[y * m->el.res_x + m->spr.stripe] =
+				m->spr.color[64 * m->spr.tex_y + m->spr.tex_x];
+        y++;
+    }
+}
+
+```
 
 
 

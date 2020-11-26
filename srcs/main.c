@@ -123,6 +123,7 @@ void	draw(t_index *m)
 		m->spr.spr_buffer[i] = m->data.perp_wall_dist;
 		i++;
 	}
+	sprite_raycasting(m);
 	mlx_put_image_to_window(m->win.mlx_ptr, m->win.mlx_win, m->img.img, 0, 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/25 18:26:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/25 20:01:35 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,17 +113,32 @@ void        vertical(t_index *m)
         if (m->spr.transform_y > 0 && m->spr.stripe > 0 && m->spr.stripe < m->el.res_x 
         && m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe] && m->spr.tex_x < 64)//for every pixel of the current stripe
         {
-            // draw_sprite(m);
+            draw_sprite(m);
         }
-        m->spr.stripe++;
-        
+        m->spr.stripe++; 
     }
 }
 
-// void        draw_sprite(t_index *m)
-// {
-    
-// }
+void        draw_sprite(t_index *m)
+{
+    int y;
+    int d;
+
+    d = 0;
+    y = m->spr.draw_start_y;
+    while (y < m->spr.draw_end_y)
+    {
+        //256 and 128 factors to avoid floats
+        d = (y - m->spr.v_move_screen) * 256 - m->el.res_y *
+             128 + m->spr.spr_height * 128;
+        m->spr.tex_y = ((d * m->text.tex_height) / m->spr.spr_height) / 256;
+        //get current color from the texture
+        if ((m->spr.color[64 * m->spr.tex_y + m->spr.tex_x] & 0x00FFFFFF) != 0)
+            m->img.addr[y * m->el.res_x + m->spr.stripe] =
+				m->spr.color[64 * m->spr.tex_y + m->spr.tex_x];
+        y++;
+    }
+}
 
 
 int         sprite_raycasting(t_index *m)
