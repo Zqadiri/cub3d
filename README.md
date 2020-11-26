@@ -435,30 +435,33 @@ void        calculate_start_end(t_index *m)
         m->spr.draw_start_x = 0;
     m->spr.draw_end_x = m->spr.spr_width / 2 + m->spr.spr_screen_x;
     if (m->spr.draw_end_x >= m->el.res_x)
-        m->spr.draw_end_x = m->el.res_x - 1;   
-}   
+        m->spr.draw_end_x = m->el.res_x - 1;  
+}    
 ```
-
 *  Draw the sprites vertical stripe by vertical stripe, don't draw the vertical stripe if the distance is further away than the 1D ZBuffer of the walls of the current stripe .
 
 ```c
 void        vertical(t_index *m)
 {
+    //loop through every vertical stripe of the sprite on screen
     m->spr.stripe = m->spr.draw_start_x;
     while (m->spr.stripe < m->spr.draw_end_x)
     {
-        m->spr.tex_x = (int)((m->spr.stripe - (m->spr.spr_width / 2 +
-         m->spr.spr_screen_x)) * m->text.tex_width / m->spr.spr_width);
+        m->spr.tex_x = (int)(256 * (m->spr.stripe - (-m->spr.spr_width / 2 +
+         m->spr.spr_screen_x)) * 64 / m->spr.spr_width) / 256;
+        //the conditions in the if are:
+        //1) it's in front of camera plane so you don't see things behind you
+        //2) it's on the screen (left)
+        //3) it's on the screen (right)
+        //4) ZBuffer, with perpendicular distance
         if (m->spr.transform_y > 0 && m->spr.stripe > 0 && m->spr.stripe < m->el.res_x 
-        && m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe] && m->spr.tex_x < 64)
+        && m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe] && m->spr.tex_x < 64)//for every pixel of the current stripe
         {
             draw_sprite(m);
         }
-        m->spr.stripe++;
-        
+        m->spr.stripe++; 
     }
 }
-
 ```
 * Draw the vertical stripe pixel by pixel, make sure there's an invisible color or all sprites would be rectangles .
 
@@ -475,7 +478,7 @@ void        draw_sprite(t_index *m)
         //256 and 128 factors to avoid floats
         d = (y - m->spr.v_move_screen) * 256 - m->el.res_y *
              128 + m->spr.spr_height * 128;
-        m->spr.tex_y = ((d * m->text.tex_height) / m->spr.spr_height) / 256;
+        m->spr.tex_y = ((d * 64) / m->spr.spr_height) / 256;
         //get current color from the texture
         if ((m->spr.color[64 * m->spr.tex_y + m->spr.tex_x] & 0x00FFFFFF) != 0)
             m->img.addr[y * m->el.res_x + m->spr.stripe] =
@@ -484,11 +487,6 @@ void        draw_sprite(t_index *m)
     }
 }
 ```
-
-
-
-
-
 
 
 

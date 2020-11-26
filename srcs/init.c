@@ -121,6 +121,7 @@ void init_4(t_index  *m)
   m->spr.tex_x = 0;
   m->spr.tex_y = 0;
   m->spr.color = NULL;
+  m->spr.stripe = 0;
   
 
   m->text.tex_width = 0;

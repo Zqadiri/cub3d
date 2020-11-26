@@ -137,7 +137,6 @@ typedef struct		s_spr
 	int				numsprites;
 	float			*sprites_x;
 	float			*sprites_y;
-	float			rites_y;
 	int				spr_width;
 	int				spr_height;
 	float			*spr_buffer;
@@ -317,10 +316,10 @@ void				calculate_colors(t_index *m);
 void				verline(int i, t_index *m);
 
 ////////// sreenshot //////////////
+
 int					screen_shot(t_index *m);
 int     			write_info(t_index *m, int fd);
 int     			bit_map_file_headers(t_index *m, int fd, int file_size);
-
 
 ////////// sprite /////////////
 
