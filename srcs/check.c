@@ -6,14 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:43:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/13 13:02:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/28 14:28:46 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Cub3d.h"
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////// POSITIONS ///////////////////////////////
 
 int		get_position2(t_index *m, int i, int j)
 {
@@ -53,21 +50,18 @@ int		get_position(t_index *m)
 	return (1);
 }
 
-/////////////////// if the map is surrounded by 1///////////////
 int		check_borders_columns(t_index *m)
 {
-	
-	printf("in clmns\n");
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	while (m->parse.map[i] != NULL)
 	{
 		j = 0;
 		while (m->parse.map[i][j] != '\0')
 			j++;
-		if (m->parse.map[i][j - 1] != '1' && m->parse.map[i][j - 1] != ' ' )
+		if (m->parse.map[i][j - 1] != '1' && m->parse.map[i][j - 1] != ' ')
 			return_error_exit(m);
 		i++;
 	}
@@ -83,13 +77,9 @@ int		check_borders_columns(t_index *m)
 
 int		check_borders_lines(t_index *m)
 {
-	printf("in brdrs\n");
 	int j;
 
 	j = 0;
-	// printf("*%s",m->parse.map[0]);
-	
-	// printf("*%s",m->parse.map[m->parse.line_nbr - 1]);
 	while (m->parse.map[0][j] != '\0')
 	{
 		if (m->parse.map[0][j] != '1' && m->parse.map[0][j] != ' ')
@@ -104,9 +94,9 @@ int		check_borders_lines(t_index *m)
 			return_error_exit(m);
 		j++;
 	}
-	printf("out line\n");
 	return (1);
 }
+
 int		check_letters(t_index *m, int i, int j)
 {
 	if (m->el.elem[i][j] == 'R')
@@ -130,7 +120,3 @@ int		check_letters(t_index *m, int i, int j)
 		m->el.c_line = i;
 	return (1);
 }
-
-
-
-

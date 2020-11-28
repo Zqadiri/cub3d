@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:03:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/12 17:47:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/28 14:32:47 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,6 @@ int		check_dir_letter(t_index *m)
 
 int		check_around(int i, int j, t_index *m)
 {
-	/*if (m->parse.map[i - 1][j + 1] == ' ')
-		return (-1);
-	if (m->parse.map[i - 1][j - 1] == ' ')
-		return (-1);
-	if (m->parse.map[i + 1][j - 1] == ' ')
-		return (-1);
-	if (m->parse.map[i + 1][j + 1] == ' ')
-		return (-1);*/
 	if (m->parse.map[i][j - 1] == ' ')
 		return (-1);
 	if (m->parse.map[i][j + 1] == ' ')
@@ -66,7 +58,6 @@ int		check_around(int i, int j, t_index *m)
 		return (-1);
 	return (1);
 }
-
 
 int		check_spaces_algo(t_index *m)
 {

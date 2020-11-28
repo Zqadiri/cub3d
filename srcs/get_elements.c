@@ -6,11 +6,31 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/10 12:17:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/28 14:37:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Cub3d.h"
+
+int		create_elements_lines(t_index *m)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (m->el.elem[i] != NULL)
+	{
+		j = 0;
+		while (m->el.elem[i][j] != '\0')
+		{
+			if (check_letters(m, i, j) < 0)
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 
 int		get_resolution(t_index *m)
 {
@@ -20,7 +40,6 @@ int		get_resolution(t_index *m)
 	digit = 0;
 	i = 1;
 	i = calcul_digit(m, i);
-	//printf("!!!!%s\n", m->el.elem[m->el.resolution_line]);
 	while (m->el.elem[m->el.resolution_line][i] == ' ')
 		i++;
 	if (m->el.elem[m->el.resolution_line][i] == '\0' ||

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:08:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/10 11:39:40 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/28 13:32:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@ int		exit_all(t_index *m)
 	free_elem(m);
 	exit(0);
 	return (-1);
+}
+
+int		digit(char *c)
+{
+	int i;
+
+	i = 0;
+	while (c[i] != '\0' && !ft_isalpha(c[i]))
+	{
+		if (c[i] >= '0' && c[i] <= '9')
+			return (1);
+	}	
+	return (0); 
 }
 
 int		transform_to_hex(int r, int g, int b)

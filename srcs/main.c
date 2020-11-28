@@ -10,50 +10,57 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3d.h"
+# include "../Cub3d.h"
 
-void	calculate_ray_pos_dir(int i, t_index *m)
+void		calculate_ray_pos_dir(int i, t_index *m)
 {
-	//calculate ray position and direction
-	m->data.camera_x = 2 * i / (float)m->el.res_x - 1;//find the x-coordinate in camera space
+	m->data.camera_x = 2 * i / (float)m->el.res_x - 1;
 	m->data.ray_dir_x = m->data.dir_x + m->data.plane_x * m->data.camera_x;
 	m->data.ray_dir_y = m->data.dir_y + m->data.plane_y * m->data.camera_x;
-	//which box of the map we're in
 	m->data.map_x = (int)m->data.pos_x;
 	m->data.map_y = (int)m->data.pos_y;
-	//length of ray from one x or y-side to next x or y-side
-	m->data.delta_dist_x = sqrt(1 + (m->data.ray_dir_y * m->data.ray_dir_y) / (m->data.ray_dir_x * m->data.ray_dir_x));
-	m->data.delta_dist_y = sqrt(1 + (m->data.ray_dir_x * m->data.ray_dir_x) / (m->data.ray_dir_y * m->data.ray_dir_y));
+	m->data.delta_dist_x = sqrt(1 + (m->data.ray_dir_y * m->data.ray_dir_y) 
+	/ (m->data.ray_dir_x * m->data.ray_dir_x));
+	m->data.delta_dist_y = sqrt(1 + (m->data.ray_dir_x * m->data.ray_dir_x) 
+	/ (m->data.ray_dir_y * m->data.ray_dir_y));
 }
 
-void	calculate_step_sidedist(t_index *m)
+void		calculate_step_sidedist(t_index *m)
 {
-	//calculate step and initial sideDist
 	if (m->data.ray_dir_x < 0)
 	{
 		m->data.step_x = -1;
-		m->data.side_dist_x = (m->data.pos_x - m->data.map_x) * m->data.delta_dist_x;
+		m->data.side_dist_x = (m->data.pos_x - m->data.map_x) 
+		* m->data.delta_dist_x;
 	}
 	else
 	{
 		m->data.step_x = 1;
-		m->data.side_dist_x = (m->data.map_x + 1.0 - m->data.pos_x) * m->data.delta_dist_x;
+		m->data.side_dist_x = (m->data.map_x + 1.0 - m->data.pos_x) 
+		* m->data.delta_dist_x;
 	}
 	if (m->data.ray_dir_y < 0)
 	{
 		m->data.step_y = -1;
-		m->data.side_dist_y = (m->data.pos_y - m->data.map_y) * m->data.delta_dist_y;
+		m->data.side_dist_y = (m->data.pos_y - m->data.map_y) 
+		* m->data.delta_dist_y;
 	}
 	else 
 	{
 		m->data.step_y = 1;
-		m->data.side_dist_y = (m->data.map_y + 1.0 - m->data.pos_y) * m->data.delta_dist_y;
+		m->data.side_dist_y = (m->data.map_y + 1.0 - m->data.pos_y) 
+		* m->data.delta_dist_y;
 	}
 }
 
-void	perform_dda(t_index *m, int  hit)
+/*
+** jump to next map square, OR in x-direction,
+** OR in y-direction & Check if ray has hit a wall
+*/
+
+void		perform_dda(t_index *m, int hit)
 {
-	//jump to next map square, OR in x-direction, OR in y-direction
+
 	while (hit == 0)
 	{
 		if (m->data.side_dist_x < m->data.side_dist_y)
@@ -68,17 +75,17 @@ void	perform_dda(t_index *m, int  hit)
 			m->data.map_y += m->data.step_y;
 			m->data.side = 1;
 		}
-		//Check if ray has hit a wall
 		if (m->parse.map[m->data.map_y][m->data.map_x] == '1')
 			hit = 1;
 	}
 }
+
 void	calculate_wall_height(t_index *m)
 {
-	//Calculate height of line to draw on screen
+	/* Calculate height of line to draw on screen */
 	m->data.wall_height = m->el.res_y;
 	m->data.line_height = (int)(m->data.wall_height / m->data.perp_wall_dist);
-	//calculate lowest and highest pixel to fill in current stripe
+	/* calculate lowest and highest pixel to fill in current stripe*/
 	m->data.draw_start = -m->data.line_height / 2 + m->el.res_y / 2;
 	if (m->data.draw_start < 0)
 		m->data.draw_start = 0;
@@ -87,10 +94,10 @@ void	calculate_wall_height(t_index *m)
 		m->data.draw_end = m->el.res_y - 1;
 }
 
-void	calculate_dist(t_index *m)
+void		calculate_dist(t_index *m)
 {
-	// Calculate distance projected on camera direction 
-	// (Euclidean distance will give fisheye effect!)
+	/*Calculate distance projected on camera direction 
+	 (Euclidean distance will give fisheye effect!)*/
 	if (m->data.side == 0)
 		m->data.perp_wall_dist = (m->data.map_x - m->data.pos_x +
 		(1 - m->data.step_x) / 2) / m->data.ray_dir_x;
@@ -101,10 +108,10 @@ void	calculate_dist(t_index *m)
 		m->data.perp_wall_dist = 0.1;
 }
 
-void	draw(t_index *m)
+void		draw(t_index *m)
 {
-	int 	i;
-	int 	hit; //was there a wall hit?
+	int		i;
+	int		hit;
 
 	i = 0;
 	hit = 0;
@@ -126,9 +133,8 @@ void	draw(t_index *m)
 	mlx_put_image_to_window(m->win.mlx_ptr, m->win.mlx_win, m->img.img, 0, 0);
 }
 
-int		launch_program(t_index *m, char *av)
+int			launch_program(t_index *m, char *av)
 {
-	//printf("in 0\n");
 	init(m);
 	if (parse_cub(m, av) < 0)
 		return (-1);
@@ -145,7 +151,7 @@ int		launch_program(t_index *m, char *av)
 	return (1);
 }
 
-int		main(int ac, char **av)
+int			main (int ac, char **av)
 {
 	t_index		m;
 
@@ -153,7 +159,6 @@ int		main(int ac, char **av)
 		return (-1);
 	else if (ac == 2)
 	{
-		//printf("in 3\n");
 		if ((launch_program(&m, av[1])) < 0)
 			return (exit_all(&m));
 		mlx_hook(m.win.mlx_win, 2, 1L << 1, ft_key, &m);
