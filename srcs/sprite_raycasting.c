@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/26 17:21:57 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/26 18:53:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void         swap(t_index *m, int i,int j)
 {
     float   swap_x;
     float   swap_y;
-    
+
     m->spr.sprite_dist = ((m->data.pos_x - m->spr.sprites_x[j]) *
     (m->data.pos_x - m->spr.sprites_x[j]) +
     (m->data.pos_y - m->spr.sprites_y[j]) * 

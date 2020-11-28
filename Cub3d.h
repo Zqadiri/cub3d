@@ -331,4 +331,7 @@ void       			calculate_start_end(t_index *m);
 void        		vertical(t_index *m);
 void        		draw_sprite(t_index *m);
 
+int		digit(char *c);
+int		is_empty(char *s);
+
 #endif

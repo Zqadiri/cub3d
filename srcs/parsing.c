@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/24 13:23:44 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/28 13:13:14 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		is_empty(char *s)
 	int i;
 
 	i = 0;
+	if (s[0] == '\0')
+		return (1);
 	while (s[i] != '\0')
 	{
 		if (s[i] != ' ')
@@ -68,21 +70,23 @@ int		parse_map(int fd, t_index *m)
 	int end = 0;
 
 	line = "";
-	m->parse.map_string = "";
-	while (line[0] == '\0')
-		get_next_line(fd, &line);
+	m->parse.map_string = "";	
+	while (is_empty(line))
+	{
+		printf("-%s\n", line);
+		get_next_line(fd, &line);	
+	}
 	m->parse.map_string = ft_strjoin(m->parse.map_string, line);
 	m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
 	while (get_next_line(fd, &line))
 	{
+		
 		if (!is_empty(line) && end)
 			write_error_one(m);
 		if (is_empty(line))
 		{
 			end = 1;
 			continue;
-			//write_error_one(m);
-			// get_next_line(fd, &line);
 		}
 		m->parse.map_string = ft_strjoin(m->parse.map_string, line);
 		m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
@@ -91,11 +95,25 @@ int		parse_map(int fd, t_index *m)
 	}
 	m->parse.map_string = ft_strjoin(m->parse.map_string, line);
 	m->parse.map_string = ft_strjoin(m->parse.map_string, "\0");
+	printf("%s\n", m->parse.map_string);
 	free(line);
 	line = NULL;
-	
 	return (1);
 }
+
+int		digit(char *c)
+{
+	int i;
+
+	i = 0;
+	while (c[i] != '\0' && !ft_isalpha(c[i]))
+	{
+		if (c[i] >= '0' && c[i] <= '9')
+			return (1);
+	}	
+	return (0); 
+}
+
 
 int		parse_data(int fd, t_index *m)
 {
@@ -106,38 +124,32 @@ int		parse_data(int fd, t_index *m)
 
 	i = 0;
 	m->parse.data = "";
-	while (get_next_line(fd, &line) != 0 && line[0] == '\0' )
+	line = "";
+	while (is_empty(line))
 		get_next_line(fd, &line);
-	//printf("R LINE  :%s\n", line);
+	// printf("line :%s\n", line);
 	m->parse.data = ft_strjoin(m->parse.data, line);
+	// printf("parse data :%s\n", m->parse.data);
 	m->parse.data = ft_strjoin(m->parse.data, "\n");
-	while (/*(r =*/ get_next_line(fd, &line) && i < 7)
 	while (get_next_line(fd, &line) && i < 7)
 	{
+		printf("in");
 		while ( line[0] == '\0')
 			 get_next_line(fd, &line);
-		//printf("r = %d\n", r);
-		//if (!ft_isdigit(line[0]) /*&& r != 0*/)
-		if (line[0] == '\0')
-			get_next_line(fd, &line);
-		if (!ft_isdigit(line[0]))
+		if (!digit(line))
 		{
 			m->parse.data = ft_strjoin(m->parse.data, line);
 			m->parse.data = ft_strjoin(m->parse.data, "\n");
 			free(line);
 			line = NULL;
 			i++;
-		}
+		}	
 	}
-	while (line[0] == '\0')
-		get_next_line(fd, &line);
 	m->parse.data = ft_strjoin(m->parse.data, line);
 	m->parse.data = ft_strjoin(m->parse.data, "\0");
 	free(line);
 	line = NULL;
-	// printf("parse data :%s\n", m->parse.data);
-	//if (r == 0)
-		//exit_it(m);
+	printf("parse data :%s\n", m->parse.data);
 	printf("out 4\n");
 	return (1);
 }
