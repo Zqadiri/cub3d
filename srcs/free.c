@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:58:47 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/09 12:00:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/29 17:56:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3d.h"
+#include "../cub3d.h"
 
 void	free_paths(t_index *m)
 {

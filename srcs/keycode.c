@@ -6,31 +6,23 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:19:51 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/16 10:57:33 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/29 17:56:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-#include "../Cub3d.h"
-
+#include "../cub3d.h"
 
 int		keys_up_down(t_index *m, int keycode)
 {
-	//move forward if no wall in front of you
 	if (keycode == MLXK_W || keycode == MLXK_UP)
 	{
-		// calculate the future position of the coordinate x 
 		if (m->parse.map[(int)m->data.pos_y][(int)(m->data.pos_x +
 		m->data.dir_x * (m->data.move_speed + 0.1))] != '1')
-		// update the x position
 			m->data.pos_x += m->data.dir_x * m->data.move_speed;
 		if (m->parse.map[(int)(m->data.pos_y + m->data.dir_y *
 		(m->data.move_speed + 0.1))][(int)m->data.pos_x] != '1')
-		// update the y position
 			m->data.pos_y += m->data.dir_y * m->data.move_speed;
 	}
-	//move backwards if no wall behind you
 	if (keycode == MLXK_S || keycode == MLXK_DOWN)
 	{
 		if (m->parse.map[(int)m->data.pos_y][(int)(m->data.pos_x -
@@ -45,11 +37,8 @@ int		keys_up_down(t_index *m, int keycode)
 
 int		keys_rot1(t_index *m, int keycode)
 {
-	//rotate to the right
-	printf("rot1\n");
 	if (keycode == MLXK_RIGHT)
 	{
-		//both camera direction and camera plane must be rotated
 		m->data.old_dir_x = m->data.dir_x;
 		m->data.dir_x = m->data.dir_x * cos(m->data.rot_speed) -
 			m->data.dir_y * sin(m->data.rot_speed);
@@ -66,11 +55,8 @@ int		keys_rot1(t_index *m, int keycode)
 
 int		keys_rot2(t_index *m, int keycode)
 {
-	//rotate to the left
-	printf("rot2\n");
-	if (keycode == MLXK_LEFT )
+	if (keycode == MLXK_LEFT)
 	{
-		//both camera direction and camera plane must be rotated
 		m->data.old_dir_x = m->data.dir_x;
 		m->data.dir_x = m->data.dir_x * cos(-m->data.rot_speed) -
 			m->data.dir_y * sin(-m->data.rot_speed);
@@ -87,7 +73,6 @@ int		keys_rot2(t_index *m, int keycode)
 
 int		keys_right_left(t_index *m, int keycode)
 {
-	printf("rot right left \n");
 	if (keycode == MLXK_A)
 	{
 		if (m->parse.map[(int)(m->data.pos_y - m->data.dir_x *
@@ -122,4 +107,3 @@ int		ft_key(int keycode, t_index *m)
 	draw(m);
 	return (0);
 }
-

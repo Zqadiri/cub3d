@@ -6,14 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:46:15 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/09 17:46:52 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/29 17:57:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3d.h"
-
-////////////////////////////////////////////////////////////////////////
-//////////check if the sprite is in the map and get the position ////////////////
+#include "../cub3d.h"
 
 int		malloc_size_sprite(t_index *m)
 {

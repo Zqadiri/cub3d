@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:31:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/28 14:36:35 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/29 17:56:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3d.h"
+#include "../cub3d.h"
 
 void		calculate_colors(t_index *m)
 {

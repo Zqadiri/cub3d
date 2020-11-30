@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:43:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/28 14:28:46 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/29 17:56:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3d.h"
+#include "../cub3d.h"
 
 int		get_position2(t_index *m, int i, int j)
 {
@@ -115,8 +115,8 @@ int		check_letters(t_index *m, int i, int j)
 	if (m->el.elem[i][j] == 'E')
 		m->el.east_line = i;
 	if (m->el.elem[i][j] == 'F')
-		m->el.f_line = i;
+		m->el.f_l = i;
 	if (m->el.elem[i][j] == 'C')
-		m->el.c_line = i;
+		m->el.c_l = i;
 	return (1);
 }

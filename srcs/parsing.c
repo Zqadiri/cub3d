@@ -6,20 +6,20 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/28 14:04:50 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/30 11:21:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3d.h"
+#include "../cub3d.h"
 
-int		check_elem_nbr(t_index *m)
+int			check_elem_nbr(t_index *m)
 {
 	int i;
 	int cpt;
 
-	i = 0;
+	i = -1;
 	cpt = 0;
-	while (m->parse.data[i] != '\0')
+	while (m->parse.data[++i] != '\0')
 	{
 		if (m->parse.data[i] == 'R')
 			cpt++;
@@ -40,19 +40,13 @@ int		check_elem_nbr(t_index *m)
 			cpt++;
 		if (m->parse.data[i] == 'C')
 			cpt++;
-		i++;
 	}
 	if (cpt != 8)
 		write_el_error();
 	return (1);
 }
 
-/*
-**jump to next map square, OR in x-direction,
-**OR in y-direction & Check if ray has hit a wall
-*/
-
-int		is_empty(char *s)
+int			is_empty(char *s)
 {
 	int i;
 
@@ -68,10 +62,10 @@ int		is_empty(char *s)
 	return (1);
 }
 
-int		parse_map(int fd, t_index *m)
+int			parse_map(int fd, t_index *m)
 {
-	char *line;
-	int end;
+	char	*line;
+	int		end;
 
 	end = 0;
 	line = "";
@@ -102,7 +96,7 @@ int		parse_map(int fd, t_index *m)
 	return (1);
 }
 
-int		parse_data(int fd, t_index *m)
+int			parse_data(int fd, t_index *m)
 {
 	char	*line;
 	int		i;
@@ -134,9 +128,9 @@ int		parse_data(int fd, t_index *m)
 	return (1);
 }
 
-int		parse_cub(t_index *m, char *filename)
+int			parse_cub(t_index *m, char *filename)
 {
-	int	fd;
+	int		fd;
 
 	fd = open(filename, O_RDONLY);
 	if (parse_data(fd, m) < 0)

@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:47:24 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/09 17:49:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/11/29 17:56:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3d.h"
+#include "../cub3d.h"
 
 char	*get_sprite_texture(t_index *m)
 {
@@ -151,4 +151,3 @@ char	*get_south_texture(t_index *m)
 	m->el.south_path[j] = '\0';
 	return ("");
 }
-

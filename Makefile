@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2020/11/25 10:45:25 by zqadiri          ###   ########.fr        #
+#    Updated: 2020/11/30 11:28:19 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,13 @@ SRCS 			=	./srcs/main.c\
 					./srcs/parsing.c\
 					./srcs/parsing2.c\
 					./srcs/sprites_data.c\
+					./srcs/utils2.c\
 					./srcs/utils.c\
 					./srcs/bmp.c\
-					./srcs/sprite_raycasting.c
+					./srcs/sprite_raycasting.c\
+					./srcs/sprite_raycasting2.c\
+					./srcs/error_funcs2.c\
+					./srcs/raycasting.c
 					
 OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	Cub3d.h
@@ -81,3 +85,13 @@ minilibx_fclean:
 				$(RM) libmlx.a
 				
 .PHONY: 		all fclean clean re
+
+
+
+
+
+# sprite_raycasting
+# utils2
+# bmp
+# parsing.c
+# sprite_raycasting2
