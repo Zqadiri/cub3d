@@ -337,7 +337,7 @@ Drawing the sprites is done after the walls are already drawn. Here are the step
 
 *  While raycasting the walls, store the perpendicular distance of each vertical stripe in a 1D Buffer .
 
-*  Calculate the distance of each sprite to the player and  Use this distance to sort the sprites, from furthest away to closest to the camera .
+*  Calculate the distance of each sprite to the  and  Use this distance to sort the sprites, from furthest away to closest to the camera .
 
 ```c
 void         swap(t_index *m, int i,int j)
@@ -494,6 +494,7 @@ void        draw_sprite(t_index *m)
         y++;
     }
 }
+
 ```
 
 

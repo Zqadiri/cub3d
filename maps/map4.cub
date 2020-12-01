@@ -1,0 +1,38 @@
+
+
+   
+
+R     1890 1080
+
+
+
+NO      ./textures/colorstone.xpm
+
+SO ./textures/bluestone.xpm
+
+
+
+
+
+
+WE ./textures/greystone.xpm 
+EA ./textures/redbrick.xpm
+
+
+
+
+S ./textures/barrel.xpm
+
+
+
+F    228,0,106
+
+
+C       127,8,255
+
+
+
+
+ 1
+1S1
+ 1

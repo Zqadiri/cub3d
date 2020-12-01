@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:13:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/30 11:13:32 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/01 13:09:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,15 @@ void	init_4(t_index *m)
 	m->spr.spr_height = 0;
 	m->spr.spr_buffer = NULL;
 	m->spr.sprite_text = NULL;
-	m->spr.sprite_dist = 0;
 	m->spr.spr_x = 0;
 	m->spr.spr_y = 0;
 	m->spr.invdet = 0;
 	m->spr.transform_x = 0;
 	m->spr.transform_y = 0;
 	m->spr.spr_screen_x = 0;
-	m->spr.v_move_screen = 0;
 	m->spr.draw_start_y = 0;
+	m->spr.order = NULL;
+	m->spr.dist = NULL;
 }
 
 void	init_5(t_index *m)
