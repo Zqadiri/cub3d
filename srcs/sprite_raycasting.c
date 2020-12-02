@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/01 13:29:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/02 11:58:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void        calculate_start_end(t_index *m)
 {
+    m->spr.v_move_screen = (int)(94.0 / m->spr.transform_y);
     m->spr.spr_height = abs((int)(m->el.res_y / m->spr.transform_y));
     m->spr.draw_start_y = -m->spr.spr_height / 2 + m->el.res_y / 2;
     if (m->spr.draw_start_y < 0)
@@ -38,8 +39,9 @@ void         order(t_index *m)
     while (++i < m->spr.numsprites)
     {
         m->spr.order[i] = i;
-        m->spr.dist[i] = ((m->data.pos_x - m->spr.sprites_x[i]) * (m->data.pos_x - m->spr.sprites_x[i])
-                        + (m->data.pos_y - m->spr.sprites_y[i]) *  (m->data.pos_y - m->spr.sprites_y[i]));
+        m->s_xy[i].dist = ((m->data.pos_x - m->s_xy[i].x) *
+                (m->data.pos_x - m->s_xy[i].x) + (m->data.pos_y -
+                    m->s_xy[i].y) *  (m->data.pos_y - m->s_xy[i].y));
     } 
 }  
  
@@ -56,14 +58,20 @@ void         sort_sprites(t_index *m)
        j = -1;
        while (++j < m->spr.numsprites - 1)
        {
-           if (m->spr.dist[j] < m->spr.dist[j + 1])
+           if (m->s_xy[j].dist < m->s_xy[j + 1].dist)
            {
-               tmp = m->spr.dist[j];
-               m->spr.dist[j] = m->spr.dist[j + 1];
-               m->spr.dist[j + 1] = tmp;
-               tmp = m->spr.order[i];
-               m->spr.order[j] = m->spr.order[j + 1];
-               m->spr.order[j + 1] = (int)tmp;
+               tmp = m->s_xy[j].dist;
+               m->s_xy[j].dist = m->s_xy[j + 1].dist;
+               m->s_xy[j + 1].dist = tmp;
+               tmp = m->s_xy[j].x;
+               m->s_xy[j].x = m->s_xy[j + 1].x;
+               m->s_xy[j + 1].x = tmp;
+               tmp = m->s_xy[j].y;
+               m->s_xy[j].y = m->s_xy[j + 1].y;
+               m->s_xy[j + 1].y = tmp; 
+            //    tmp = m->spr.order[i];
+            //    m->spr.order[j] = m->spr.order[j + 1];
+            //    m->spr.order[j + 1] = (int)tmp;
            }
        }  
     }
@@ -71,8 +79,11 @@ void         sort_sprites(t_index *m)
 
 void    update(t_index *m, int i)
 {
-    m->spr.spr_x = m->spr.sprites_x[m->spr.order[i]] - m->data.pos_x;
-    m->spr.spr_y = m->spr.sprites_y[m->spr.order[i]] - m->data.pos_y;
+    // int k;
+    
+    // k = m->spr.order[i];
+    m->spr.spr_x = m->s_xy[i].x - m->data.pos_x;
+    m->spr.spr_y = m->s_xy[i].y - m->data.pos_y;
     m->spr.invdet = 1.0 / (m->data.plane_x * m->data.dir_y -
             m->data.dir_x * m->data.plane_y);
     m->spr.transform_x = m->spr.invdet * (m->data.dir_y * m->spr.spr_x -
@@ -100,7 +111,8 @@ void         sprite_raycasting(t_index *m)
                         m->spr.spr_screen_x)) * 64 / m->spr.spr_width) / 256;
             if (m->spr.transform_y > 0 && m->spr.stripe >= 0
                 && m->spr.stripe < m->el.res_x
-                && m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe])
+                && m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe]
+                && m->spr.tex_x < 64)
             {
                 draw_sprite(m);
             }

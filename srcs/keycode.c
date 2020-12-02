@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:19:51 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/29 17:56:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/02 12:21:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		keys_up_down(t_index *m, int keycode)
 {
-	if (keycode == MLXK_W || keycode == MLXK_UP)
+	if (keycode == MLXK_W)
 	{
 		if (m->parse.map[(int)m->data.pos_y][(int)(m->data.pos_x +
 		m->data.dir_x * (m->data.move_speed + 0.1))] != '1')
@@ -23,7 +23,7 @@ int		keys_up_down(t_index *m, int keycode)
 		(m->data.move_speed + 0.1))][(int)m->data.pos_x] != '1')
 			m->data.pos_y += m->data.dir_y * m->data.move_speed;
 	}
-	if (keycode == MLXK_S || keycode == MLXK_DOWN)
+	if (keycode == MLXK_S)
 	{
 		if (m->parse.map[(int)m->data.pos_y][(int)(m->data.pos_x -
 		m->data.dir_x * (m->data.move_speed + 0.1))] != '1')

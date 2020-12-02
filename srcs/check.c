@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:43:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/01 13:06:35 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/01 18:16:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		get_position2(t_index *m, int i, int j)
 {
 	if ((ft_isalpha(m->parse.map[i][j])))
 	{
-		m->parse.x_pos_init = j + 0.5;
-		m->parse.y_pos_init = i + 0.5;
+		m->parse.x_pos_init = (double)j + 0.5;
+		m->parse.y_pos_init = (double)i + 0.5;
 		if (m->parse.dir == 0)
 			m->parse.dir = m->parse.map[i][j];
 		else
