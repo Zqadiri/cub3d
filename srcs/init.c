@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:13:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/02 11:50:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/02 14:35:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ void	init_4(t_index *m)
 	m->parse.y_pos_init = 0;
 	m->parse.dir = 0;
 	m->spr.numsprites = 0;
-	// m->spr.sprites_x = NULL;
-	// m->spr.sprites_y = NULL;
 	m->spr.spr_width = 0;
 	m->spr.spr_height = 0;
 	m->spr.spr_buffer = NULL;
