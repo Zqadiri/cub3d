@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2020/12/03 10:43:33 by zqadiri          ###   ########.fr        #
+#    Updated: 2020/12/03 10:54:23 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ SRCS 			=	./srcs/main.c\
 					./srcs/raycasting.c
 					
 OBJS			= 	${SRCS:.c=.o}
-INCLUDE 		= 	cub3d.h
+INCLUDE 		= 	cub.h
 LIBFT 			= 	libft
 MINILIBX 		= 	miniLibx
-CC				= 	gcc -g -Wall -Wextra -Werror -fsanitize=address
+CC				= 	gcc -g -Wall -Wextra -Werror -Ofast 
 RM				= 	rm -f
 MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit
 
@@ -55,7 +55,7 @@ LIBFLAGS 		= -I ./libft -L ./libft -L . ./libft/*.c
 
 all:			libft_all minilibx_all ${NAME}
 $(NAME):		${OBJS} 
-				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a -I ./libmlx.dylib $(OBJS) -o $@ 
+				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a -I ./ $(OBJS) -o $@ 
 clean:			libft_clean minilibx_clean
 				@${RM} ${OBJS}
 fclean:			libft_fclean minilibx_fclean clean

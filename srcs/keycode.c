@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:19:51 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/02 12:21:16 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:52:06 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 int		keys_up_down(t_index *m, int keycode)
 {

@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:03:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/29 17:56:29 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:51:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 int		check_map_characters(t_index *m)
 {

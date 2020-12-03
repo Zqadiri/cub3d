@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:08:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/29 18:57:52 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:52:56 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 int		exit_it(t_index *m)
 {

@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/30 11:21:44 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:52:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 int			check_elem_nbr(t_index *m)
 {

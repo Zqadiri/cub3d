@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:14:37 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/30 11:15:21 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:52:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 int     new_strlen(char *s)
 {

@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/29 17:57:17 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:52:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 char	*create_new_line(char *str, int diff)
 {

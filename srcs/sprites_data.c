@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:46:15 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:37:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:52:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 int		malloc_size_sprite(t_index *m)
 {

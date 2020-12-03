@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:12:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/02 12:16:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:52:10 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 void	draw(t_index *m)
 {

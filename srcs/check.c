@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:43:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/01 18:16:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:51:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 int		get_position2(t_index *m, int i, int j)
 {

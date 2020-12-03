@@ -6,11 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:08:42 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/30 11:11:40 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:50:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub.h"
 
 int         file_header(t_index *m, int fd, int file_size, int info)
 {
