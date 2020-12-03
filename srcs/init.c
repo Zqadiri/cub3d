@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:13:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/02 14:35:49 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:43:55 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void	init_4(t_index *m)
 	m->spr.transform_y = 0;
 	m->spr.spr_screen_x = 0;
 	m->spr.draw_start_y = 0;
-	m->spr.order = NULL;
-	m->spr.v_move_screen = 0;
 	m->s_xy = NULL;
 }
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:46:15 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/02 14:35:36 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:37:04 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int		malloc_size_sprite(t_index *m)
 		exit_all(m);
 		return (-1);
 	}
-	if (!(m->spr.order = malloc(sizeof(int *) * m->spr.numsprites + 1)))
-	{
-		write(1, "Error\n", 6);
-		write(1, "Can't malloc the sprite", 23);
-		exit_all(m);
-		return (-1);
-	}
+	// if (!(m->spr.order = malloc(sizeof(int *) * m->spr.numsprites + 1)))
+	// {
+	// 	write(1, "Error\n", 6);
+	// 	write(1, "Can't malloc the sprite", 23);
+	// 	exit_all(m);
+	// 	return (-1);
+	// }
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/02 11:58:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 10:46:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void        calculate_start_end(t_index *m)
 {
-    m->spr.v_move_screen = (int)(94.0 / m->spr.transform_y);
     m->spr.spr_height = abs((int)(m->el.res_y / m->spr.transform_y));
     m->spr.draw_start_y = -m->spr.spr_height / 2 + m->el.res_y / 2;
     if (m->spr.draw_start_y < 0)
@@ -38,7 +37,6 @@ void         order(t_index *m)
     i = -1;
     while (++i < m->spr.numsprites)
     {
-        m->spr.order[i] = i;
         m->s_xy[i].dist = ((m->data.pos_x - m->s_xy[i].x) *
                 (m->data.pos_x - m->s_xy[i].x) + (m->data.pos_y -
                     m->s_xy[i].y) *  (m->data.pos_y - m->s_xy[i].y));
@@ -69,9 +67,6 @@ void         sort_sprites(t_index *m)
                tmp = m->s_xy[j].y;
                m->s_xy[j].y = m->s_xy[j + 1].y;
                m->s_xy[j + 1].y = tmp; 
-            //    tmp = m->spr.order[i];
-            //    m->spr.order[j] = m->spr.order[j + 1];
-            //    m->spr.order[j + 1] = (int)tmp;
            }
        }  
     }
@@ -79,9 +74,6 @@ void         sort_sprites(t_index *m)
 
 void    update(t_index *m, int i)
 {
-    // int k;
-    
-    // k = m->spr.order[i];
     m->spr.spr_x = m->s_xy[i].x - m->data.pos_x;
     m->spr.spr_y = m->s_xy[i].y - m->data.pos_y;
     m->spr.invdet = 1.0 / (m->data.plane_x * m->data.dir_y -

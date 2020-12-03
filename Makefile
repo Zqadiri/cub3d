@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2020/11/30 19:25:51 by zqadiri          ###   ########.fr        #
+#    Updated: 2020/12/03 10:43:33 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRCS 			=	./srcs/main.c\
 					./srcs/raycasting.c
 					
 OBJS			= 	${SRCS:.c=.o}
-INCLUDE 		= 	Cub3d.h
+INCLUDE 		= 	cub3d.h
 LIBFT 			= 	libft
 MINILIBX 		= 	miniLibx
 CC				= 	gcc -g -Wall -Wextra -Werror -fsanitize=address
