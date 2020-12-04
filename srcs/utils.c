@@ -38,6 +38,7 @@ int		digit(char *c)
 	{
 		if (c[i] >= '0' && c[i] <= '9')
 			return (1);
+		i++;
 	}
 	return (0);
 }
