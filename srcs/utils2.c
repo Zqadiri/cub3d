@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:14:37 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:52:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 11:12:38 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int     calcul_digit(t_index *m, int i)
 		i++;
 	}
 	m->el.res_x = digit;
+	printf("%d\n", digit);
 	return (i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:52:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/04 14:06:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int			check_elem_nbr(t_index *m)
 		if (m->parse.data[i] == 'C')
 			cpt++;
 	}
-	if (cpt != 8)
-		write_el_error();
 	return (1);
 }
 
@@ -64,6 +62,7 @@ int			is_empty(char *s)
 
 int			parse_map(int fd, t_index *m)
 {
+	printf("parse_map\n");
 	char	*line;
 	int		end;
 
@@ -93,11 +92,13 @@ int			parse_map(int fd, t_index *m)
 	printf("%s\n", m->parse.map_string);
 	free(line);
 	line = NULL;
+	
 	return (1);
 }
 
 int			parse_data(int fd, t_index *m)
 {
+	printf("parse_data\n");
 	char	*line;
 	int		i;
 
@@ -110,7 +111,7 @@ int			parse_data(int fd, t_index *m)
 	m->parse.data = ft_strjoin(m->parse.data, "\n");
 	while (get_next_line(fd, &line) && i < 7)
 	{
-		while (line[0] == '\0')
+		while (is_empty(line))
 			get_next_line(fd, &line);
 		if (!digit(line))
 		{
@@ -130,12 +131,11 @@ int			parse_data(int fd, t_index *m)
 
 int			parse_cub(t_index *m, char *filename)
 {
+	printf("parse_cub\n");
 	int		fd;
 
 	fd = open(filename, O_RDONLY);
 	if (parse_data(fd, m) < 0)
-		return (-1);
-	if (check_elem_nbr(m) < 0)
 		return (-1);
 	if (parse_map(fd, m) < 0)
 		return (-1);

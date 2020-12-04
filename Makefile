@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2020/12/03 10:54:23 by zqadiri          ###   ########.fr        #
+#    Updated: 2020/12/04 10:44:18 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	cub.h
 LIBFT 			= 	libft
 MINILIBX 		= 	miniLibx
-CC				= 	gcc -g -Wall -Wextra -Werror -Ofast 
+CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast -fsanitize=address -g
 RM				= 	rm -f
 MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit
 
@@ -53,7 +53,7 @@ LIBFLAGS 		= -I ./libft -L ./libft -L . ./libft/*.c
 # @	Don’t print command
 # -I /usr/local/include -L /usr/local/bin -lmlx -framework OpenGl -framework AppKit libmlx.dylib \
 
-all:			libft_all minilibx_all ${NAME}
+all:			libft_all  ${NAME}
 $(NAME):		${OBJS} 
 				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a -I ./ $(OBJS) -o $@ 
 clean:			libft_clean minilibx_clean

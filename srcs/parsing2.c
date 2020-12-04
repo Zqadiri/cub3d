@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:52:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 19:05:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*create_new_line(char *str, int diff)
 
 int		create_good_size_map(t_index *m)
 {
+	printf("cgsm\n");
 	int i;
 	int len;
 	int diff;
@@ -66,6 +67,7 @@ int		create_good_size_map(t_index *m)
 
 int		create_map(t_index *m)
 {
+	printf("create_map\n");
 	if (!(m->parse.map = ft_split(m->parse.map_string, '\n')))
 		return (-1);
 	if (get_position(m) < 0)

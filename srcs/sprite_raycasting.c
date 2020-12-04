@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:52:45 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 11:11:20 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void        calculate_start_end(t_index *m)
         m->spr.draw_start_y = 0;
     m->spr.draw_end_y = m->spr.spr_height / 2 + m->el.res_y / 2;
     if (m->spr.draw_end_y >= m->el.res_y)
-        m->spr.draw_end_y = m->el.res_y - 1;
+        m->spr.draw_end_y = m->el.res_y;
     m->spr.spr_width = abs((int)(m->el.res_y / m->spr.transform_y));
     m->spr.draw_start_x = -m->spr.spr_width / 2 + m->spr.spr_screen_x;
     if (m->spr.draw_start_x < 0)
         m->spr.draw_start_x = 0;
     m->spr.draw_end_x = m->spr.spr_width / 2 + m->spr.spr_screen_x;
     if (m->spr.draw_end_x >= m->el.res_x)
-        m->spr.draw_end_x = m->el.res_x - 1;  
+        m->spr.draw_end_x = m->el.res_x;  
 }  
 
 void         order(t_index *m)

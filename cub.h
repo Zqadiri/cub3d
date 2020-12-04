@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:50:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 18:01:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@
 # define MLXK_D 2
 # define MLXK_LEFT 123
 # define MLXK_RIGHT 124
-# define MLXK_UP 126
-# define MLXK_DOWN 125
-# define MLXK_TD 14
-# define MLXK_TG 12
-
-
 
 typedef struct		s_win
 {
@@ -126,6 +120,7 @@ typedef struct		s_parse
 	double			x_pos_init;
 	double			y_pos_init;
 	char			dir;
+	int				el_nbr;
 }					t_parse;
 
 typedef struct 		s_spr_xy
@@ -335,5 +330,6 @@ void        		draw_sprite(t_index *m);
 
 int					digit(char *c);
 int					is_empty(char *s);
+int					check_elem_nbr2(t_index *m, int i, int cpt);
 
 #endif

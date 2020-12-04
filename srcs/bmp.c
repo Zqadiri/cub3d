@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 11:08:42 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:50:59 by zqadiri          ###   ########.fr       */
+/*   Created: 2020/12/03 17:29:03 by zqadiri           #+#    #+#             */
+/*   Updated: 2020/12/03 17:36:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int         file_header(t_index *m, int fd, int file_size, int info)
+int     file_header(t_index *m, int fd, int file_size, int info)
 {
-    char    header[54];
+    char header[54];
 
     ft_bzero(header, 54);
     header[0] = (unsigned int)('B');
@@ -40,21 +40,20 @@ int         file_header(t_index *m, int fd, int file_size, int info)
     return(1);
 }
 
-int         write_info(t_index *m, int fd)
+int     write_info(t_index *m, int fd)
 {
-    char    *data;
+    char *data;
 
     data = (char *)m->img.addr;
-    if (write(fd, data, (4 * m->el.res_x * m->el.res_y)) < 0)
-        return (-1);
+    write(fd, data, (4 * m->el.res_x * m->el.res_y));
     return (1);
 }
 
-int         screen_shot(t_index *m)
+int     screen_shot(t_index *m)
 {
-    int     fd;
-    int     file_size;
-    int     info;
+    int fd;
+    int file_size;
+    int info;
 
     info = m->el.res_x;
     file_size = 14 + 40 * (m->el.res_x * m->el.res_y) * 4;

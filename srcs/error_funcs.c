@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:13:22 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:51:42 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 17:39:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ int		write_error_end_ceilling(t_index *m, int i)
 	}
 	return (-1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:13:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:52:03 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 18:01:29 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_1(t_index *m)
 	m->data.old_plane_x = 0;
 	m->data.rot_speed = 0;
 	m->data.move_speed = 0;
+	m->parse.el_nbr = 0;
 }
 
 void	init_2(t_index *m)

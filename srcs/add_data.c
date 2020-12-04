@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:45:33 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:50:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 19:04:11 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	data_e_w_s(t_index *m)
 
 int		add_data(t_index *m)
 {
+	printf("add_datta\n");
 	data_e_w_s(m);
 	if (m->parse.dir == 'N')
 	{
@@ -55,7 +56,8 @@ int		add_data(t_index *m)
 	m->spr.spr_height = 0;
 	m->data.move_speed = 0.2;
 	m->data.rot_speed = 0.06;
-	if (!(m->spr.spr_buffer = (double *)malloc(sizeof(double) * m->el.res_x + 1)))
+	if (!(m->spr.spr_buffer = (double *)
+		malloc(sizeof(double) * m->el.res_x + 1)))
 		return (exit_all(m));
 	return (1);
 }

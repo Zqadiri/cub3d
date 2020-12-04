@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:22:00 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:51:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/03 19:06:56 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int	check_resolution(t_index *m)
 {
-	// int w;
-	// int h;
-
-	// mlx_get_screen_size(m->win.mlx_ptr, &w, &h)
 	if (m->el.elem[m->el.resolution_line][0] != 'R')
 	{
 		write(1, "Error\n", 6);
@@ -96,6 +92,7 @@ int	check_north_and_south(t_index *m)
 
 int	check_elements_errors(t_index *m)
 {
+	printf("checkel_\n");
 	if (check_north_and_south(m) < 0)
 		return (-1);
 	if (check_west_and_east(m) < 0)
