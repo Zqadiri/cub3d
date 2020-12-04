@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/04 14:06:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/04 14:27:43 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,21 @@ int			parse_data(int fd, t_index *m)
 		get_next_line(fd, &line);
 	m->parse.data = ft_strjoin(m->parse.data, line);
 	m->parse.data = ft_strjoin(m->parse.data, "\n");
-	while (get_next_line(fd, &line) && i < 7)
+	while (get_next_line(fd, &line))
 	{
 		while (is_empty(line))
 			get_next_line(fd, &line);
+		if (digit(line)){ // You should break here.
+			printf("Error\n");
+			return (-1);
+		}
+		printf("%s\n", line);
 		if (!digit(line))
 		{
 			m->parse.data = ft_strjoin(m->parse.data, line);
 			m->parse.data = ft_strjoin(m->parse.data, "\n");
 			free(line);
 			line = NULL;
-			i++;
 		}
 	}
 	m->parse.data = ft_strjoin(m->parse.data, line);
