@@ -6,26 +6,24 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 16:29:07 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:51:45 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/05 17:13:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int		write_error_res(void)
+int		write_error_res(t_index *m)
 {
 	write(1, "Error\n", 6);
 	write(1, "Wrong arguments\n", 16);
-	exit(0);
-	return (-1);
+	return (exit_all(m));
 }
 
-int		write_el_error(void)
+int		write_el_error(t_index *m)
 {
 	write(1, "Error\n", 6);
 	write(1, "Wrong elements\n", 16);
-	exit(0);
-	return (-1);
+	return (exit_all(m));
 }
 
 int		ft_errors(int ac, char **av)

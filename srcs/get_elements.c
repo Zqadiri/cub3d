@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 19:06:10 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/05 17:17:37 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		get_resolution(t_index *m)
 		i++;
 	if (m->el.elem[m->el.resolution_line][i] == '\0' ||
 			!ft_isdigit(m->el.elem[m->el.resolution_line][i]))
-		write_error_res();
+		write_error_res(m);
 	while (m->el.elem[m->el.resolution_line][i] >= '0' &&
 			m->el.elem[m->el.resolution_line][i] <= '9')
 	{
@@ -55,7 +55,7 @@ int		get_resolution(t_index *m)
 	while (m->el.elem[m->el.resolution_line][i] != '\0')
 	{
 		if (m->el.elem[m->el.resolution_line][i] != ' ')
-			write_error_res();
+			write_error_res(m);
 		i++;
 	}
 	return (1);
@@ -121,7 +121,7 @@ int		get_ceilling_color(t_index *m)
 
 int		get_elements(t_index *m)
 {
-	printf("get_elements\n");
+	// printf("get_elements\n");
 	m->el.elem = ft_split(m->parse.data, '\n');
 	if (create_elements_lines(m) < 0)
 		return (-1);

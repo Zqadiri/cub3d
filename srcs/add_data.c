@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:45:33 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 19:04:11 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/05 17:02:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	data_e_w_s(t_index *m)
 
 int		add_data(t_index *m)
 {
-	printf("add_datta\n");
+	// printf("add_datta\n");
 	data_e_w_s(m);
 	if (m->parse.dir == 'N')
 	{

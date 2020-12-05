@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/04 14:27:43 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:51:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			is_empty(char *s)
 
 int			parse_map(int fd, t_index *m)
 {
-	printf("parse_map\n");
+	// printf("parse_map\n");
 	char	*line;
 	int		end;
 
@@ -89,7 +89,7 @@ int			parse_map(int fd, t_index *m)
 	}
 	m->parse.map_string = ft_strjoin(m->parse.map_string, line);
 	m->parse.map_string = ft_strjoin(m->parse.map_string, "\0");
-	printf("%s\n", m->parse.map_string);
+	// printf("%s\n", m->parse.map_string);
 	free(line);
 	line = NULL;
 	
@@ -98,36 +98,41 @@ int			parse_map(int fd, t_index *m)
 
 int			parse_data(int fd, t_index *m)
 {
-	printf("parse_data\n");
+	// printf("parse_data\n");
 	char	*line;
 	int		i;
+	// char	*save;
 
 	i = 0;
 	m->parse.data = "";
 	line = "";
 	while (is_empty(line))
 		get_next_line(fd, &line);
+	// save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, line);
 	m->parse.data = ft_strjoin(m->parse.data, "\n");
-	while (get_next_line(fd, &line))
+	// free(save);
+	while (get_next_line(fd, &line) && i < 7)
 	{
 		while (is_empty(line))
 			get_next_line(fd, &line);
-		if (digit(line)){ // You should break here.
-			printf("Error\n");
-			return (-1);
-		}
-		printf("%s\n", line);
+		if(digit(line))
+			write_el_error(m);
 		if (!digit(line))
 		{
+			// save = m->parse.data;
 			m->parse.data = ft_strjoin(m->parse.data, line);
 			m->parse.data = ft_strjoin(m->parse.data, "\n");
+			// free(save);
 			free(line);
 			line = NULL;
+			i++;
 		}
 	}
+	// save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, line);
 	m->parse.data = ft_strjoin(m->parse.data, "\0");
+	// free(save);
 	free(line);
 	line = NULL;
 	return (1);
@@ -135,7 +140,7 @@ int			parse_data(int fd, t_index *m)
 
 int			parse_cub(t_index *m, char *filename)
 {
-	printf("parse_cub\n");
+	// printf("parse_cub\n");
 	int		fd;
 
 	fd = open(filename, O_RDONLY);

@@ -1,11 +1,11 @@
 
 
-R     1920 0
+R     1920 1922
 
 
 
 
-NO      ./textures/colorstone.xpm
+NO      ./textures/colorstone
 
 SO ./textures/bluestone.xpm
 

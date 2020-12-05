@@ -28,6 +28,9 @@ https://gamedev.stackexchange.com/questions/45013/raycasting-tutorial-vector-mat
 https://guy-grave.developpez.com/tutoriels/jeux/doom-wolfenstein-raycasting/
 
 
+https://stackoverflow.com/questions/62393477/what-is-the-math-behind-billboard-sprite-drawing-inverse-matrix
+
+
 ## The basic idea of raycasting  (lodev.org)
 
 ### The 2D calculations: 

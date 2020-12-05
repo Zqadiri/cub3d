@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 18:01:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/05 19:41:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 
 typedef struct		s_win
 {
-	void			*mlx_ptr;
-	void			*mlx_win;
+	void			*mlx_ptr; // freed
+	void			*mlx_win; //freeed
 }					t_win;
 
 typedef struct		s_image
@@ -51,7 +51,7 @@ typedef struct		s_image
 
 typedef struct		s_elements
 {
-	char			**elem;
+	char			**elem; // freed
 	int				resolution_line;
 	int				res_x;
 	int				res_y;
@@ -70,11 +70,11 @@ typedef struct		s_elements
 	int				f_b;
 	int				c_color_hex;
 	int				f_color_hex;
-	char			*north_path;
-	char			*south_path;
-	char			*west_path;
-	char			*east_path;
-	char			*spr_path;
+	char			*north_path;// freed
+	char			*south_path;// freed
+	char			*west_path;// freed
+	char			*east_path;// freed
+	char			*spr_path;// freed
 }					t_elements;
 
 typedef struct		s_data
@@ -111,10 +111,10 @@ typedef struct		s_data
 
 typedef struct		s_parse
 {
-	char			*data;
-	char			*map_string;
-	char			*clean_map_str;
-	char			**map;
+	char			*data; // freed 
+	char			*map_string;// freed
+	// char			*clean_map_str; 
+	char			**map; // freed
 	int				line_nbr;
 	int				column_nbr;
 	double			x_pos_init;
@@ -136,7 +136,7 @@ typedef struct		s_spr
 	int				numsprites;
 	int				spr_width;
 	int				spr_height;
-	double			*spr_buffer;
+	double			*spr_buffer; // freed
 	void			*sprite_text;
 	double			spr_x;
 	double			spr_y;
@@ -179,7 +179,7 @@ typedef struct		s_index
 	t_elements		el;
 	t_spr			spr;
 	t_text			text;
-	t_spr_xy		*s_xy;
+	t_spr_xy		*s_xy; // freed
 }					t_index;
 
 //////////////////// keycode.c ///////////////////////
@@ -198,6 +198,7 @@ void				init_2(t_index *m);
 void 				init_3(t_index *m);
 void 				init_4(t_index  *m);
 void 				init_5(t_index  *m);
+void				free_text(t_index *m);
 
 //////////////////// main.c ///////////////////////
 
@@ -216,8 +217,7 @@ int					check_elem_nbr(t_index *m);
 
 int					create_map(t_index *m);
 int					create_good_size_map(t_index *m);
-char				*create_new_line(char *str, int diff);
-
+char				*create_new_line(char *str, int diff, char *new);
 //////////////////// free.c ///////////////////////
 
 void				free_win(t_index *m);
@@ -249,8 +249,8 @@ int					return_error_exit(t_index *m);
 int					write_error_one(t_index *m);
 int					return_error(t_index *m);
 int					error_map(t_index *m);
-int					write_el_error(void);
-int					write_error_res(void);
+int					write_el_error(t_index *m);
+int					write_error_res(t_index *m);
 int					write_error_end_floor(t_index *m, int i);
 int					write_error_floor(t_index *m, int i);
 int					write_error_end_ceilling(t_index *m, int i);

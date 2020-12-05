@@ -6,25 +6,18 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:08:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:52:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/05 18:03:23 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int		exit_it(t_index *m)
-{
-	free_win(m);
-	free_elem(m);
-	exit(0);
-	return (-1);
-}
-
 int		exit_all(t_index *m)
 {
-	free_win(m);
 	free_map(m);
 	free_elem(m);
+	free_text(m);
+	free_win(m);
 	exit(0);
 	return (-1);
 }

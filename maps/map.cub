@@ -2,7 +2,7 @@ R     1920 1900
 NO      ./textures/colorstone.xpm
 SO ./textures/bluestone.xpm
 WE ./textures/greystone.xpm
-
+EA ./textures/redbrick.xpm
 
 S     ./textures/barrel.xpm
 F       130,8,255
