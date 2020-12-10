@@ -48,6 +48,8 @@ int			is_empty(char *s)
 {
 	int i;
 
+	if (!s)
+		return (1);
 	i = 0;
 	if (s[0] == '\0')
 		return (1);
@@ -65,14 +67,21 @@ int			parse_map(int fd, t_index *m)
 	// printf("parse_map\n");
 	char	*line;
 	int		end;
+	char	*pfree;
 
 	end = 0;
-	line = "";
+	line = NULL;
 	m->parse.map_string = "";
 	while (is_empty(line))
+	{
+		free(line);
 		get_next_line(fd, &line);
+	}
 	m->parse.map_string = ft_strjoin(m->parse.map_string, line);
+	pfree = m->parse.map_string;
 	m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
+	free(pfree);
+	free(line);
 	while (get_next_line(fd, &line))
 	{
 		if (!is_empty(line) && end)
@@ -80,15 +89,24 @@ int			parse_map(int fd, t_index *m)
 		if (is_empty(line))
 		{
 			end = 1;
+			free(line);
 			continue;
 		}
+		pfree = m->parse.map_string;
 		m->parse.map_string = ft_strjoin(m->parse.map_string, line);
+		free(pfree);
+		pfree = m->parse.map_string;
 		m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
+		free(pfree);
 		free(line);
 		line = NULL;
 	}
+	pfree = m->parse.map_string;
 	m->parse.map_string = ft_strjoin(m->parse.map_string, line);
+	free(pfree);
+	pfree = m->parse.map_string;
 	m->parse.map_string = ft_strjoin(m->parse.map_string, "\0");
+	free(pfree);
 	// printf("%s\n", m->parse.map_string);
 	free(line);
 	line = NULL;
@@ -101,38 +119,49 @@ int			parse_data(int fd, t_index *m)
 	// printf("parse_data\n");
 	char	*line;
 	int		i;
-	// char	*save;
+	char	*save;
 
 	i = 0;
 	m->parse.data = "";
-	line = "";
+	line = NULL;
 	while (is_empty(line))
+	{
+		free(line);
 		get_next_line(fd, &line);
-	// save = m->parse.data;
+	}
 	m->parse.data = ft_strjoin(m->parse.data, line);
+	save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, "\n");
-	// free(save);
+	free(save);
+	free(line);
 	while (get_next_line(fd, &line) && i < 7)
 	{
 		while (is_empty(line))
+		{
+			free(line);
 			get_next_line(fd, &line);
+		}
 		if(digit(line))
 			write_el_error(m);
 		if (!digit(line))
 		{
-			// save = m->parse.data;
+			save = m->parse.data;
 			m->parse.data = ft_strjoin(m->parse.data, line);
+			free(save);
+			save = m->parse.data;
 			m->parse.data = ft_strjoin(m->parse.data, "\n");
-			// free(save);
+			free(save);
 			free(line);
 			line = NULL;
 			i++;
 		}
 	}
-	// save = m->parse.data;
+	save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, line);
+	free(save);
+	save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, "\0");
-	// free(save);
+	free(save);
 	free(line);
 	line = NULL;
 	return (1);

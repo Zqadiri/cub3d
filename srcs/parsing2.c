@@ -61,8 +61,10 @@ int		create_good_size_map(t_index *m)
 			diff = len - new_strlen(m->parse.map[i]);
 			// if (!(new = malloc(sizeof(char *) * (new_strlen(m->parse.map[i]) + diff + 1))))
 			// 	return (-1);
+			new = m->parse.map[i];
 			if (!(m->parse.map[i] = create_new_line(m->parse.map[i], diff, new)))
 				return (-1);
+			free(new);
 		}
 		i++;
 	}
