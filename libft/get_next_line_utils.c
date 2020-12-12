@@ -22,7 +22,7 @@ size_t			ft_strln(const char *str)
 	return (i);
 }
 
-char			*ft_substring(char const *s, unsigned int start, size_t len)
+char			*ft_substri(char const *s, unsigned int start, size_t len)
 {
 	size_t		i;
 	char		*p;

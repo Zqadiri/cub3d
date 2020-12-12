@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:58:47 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/05 18:13:24 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/11 13:15:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,10 @@ void	free_map(t_index *m)
 
 void	free_win(t_index *m)
 {
-	// if (m->text.n_color)
-	// 	mlx_destroy_image(m->win.mlx_ptr, m->text.n_color);
-	// if (m->text.s_color)
-	// 	mlx_destroy_image(m->win.mlx_ptr, m->text.s_color);
-	// if (m->text.e_color)
-	// 	mlx_destroy_image(m->win.mlx_ptr, m->text.e_color);
-	// if (m->text.w_color)
-	// 	mlx_destroy_image(m->win.mlx_ptr, m->text.w_color);
 	if (m->img.img)
 		mlx_destroy_image(m->win.mlx_ptr, m->img.img);
 	if (m->win.mlx_win)
 		mlx_destroy_window(m->win.mlx_ptr, m->win.mlx_win);
-	
 }
 
 void	free_text(t_index *m)
@@ -112,5 +103,4 @@ void	free_text(t_index *m)
 		free(m->s_xy);
 		m->s_xy = 0;
 	}
-	
 }

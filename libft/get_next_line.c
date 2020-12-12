@@ -86,7 +86,7 @@ int			get_next_line(int fd, char **line)
 	}
 	if (ft_strchar(save, '\n') != NULL)
 	{
-		*line = ft_substring(save, 0, ft_strlength(save));
+		*line = ft_substri(save, 0, ft_strlength(save));
 		ptr = save;
 		save = ft_strduplicate(save + ft_strlength(save) + 1);
 		return (free_ptr(&ptr, &buff, 2, 1));

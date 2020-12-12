@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:13:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/05 19:42:14 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/11 13:16:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	init_1(t_index *m)
 	m->data.rot_speed = 0;
 	m->data.move_speed = 0;
 	m->parse.el_nbr = 0;
+	m->parse.i = 0;
+	m->parse.end = 0;
+	m->parse.line = NULL;
 }
 
 void	init_2(t_index *m)
@@ -84,8 +87,7 @@ void	init_3(t_index *m)
 void	init_4(t_index *m)
 {
 	m->parse.data = NULL;
-	m->parse.map_string = NULL;
-	// m->parse.clean_map_str = NULL;
+	m->parse.map_string = "";
 	m->parse.map = NULL;
 	m->parse.line_nbr = 0;
 	m->parse.column_nbr = 0;

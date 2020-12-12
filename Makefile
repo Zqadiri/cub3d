@@ -41,7 +41,7 @@ OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	cub.h
 LIBFT 			= 	libft
 MINILIBX 		= 	miniLibx
-CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast  -g
+CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast
 RM				= 	rm -f
 MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit
 

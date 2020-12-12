@@ -66,24 +66,20 @@ int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_addlst_back(t_list **aslt, t_list *new);
 
+# ifndef GET_NEXT_LINE_H
+#  define GET_NEXT_LINE_H
 
+#  define BUFFER_SIZE 32
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+int					get_next_line(int fd, char **line);
+size_t				ft_strln(const char *s);
+unsigned int		ft_strlength(char *save);
+char				*ft_substri(char const *s, unsigned int start, size_t len);
+int					free_ptr(char **ptr, char **buff, int f, int r);
+int					ft_helper(char **line, char *save);
+char				*ft_join(char *s1, char *s2);
+char				*ft_strchar(char *save, char c);
+char				*ft_strduplicate(const char *src);
 
-
-# define BUFFER_SIZE 32
-
-int				get_next_line(int fd, char **line);
-size_t			ft_strln(const char *s);
-unsigned int	ft_strlength(char *save);
-char			*ft_substring(char const *s, unsigned int start, size_t len);
-int				free_ptr(char **ptr, char **buff, int f, int r);
-int				ft_helper(char **line, char *save);
-char			*ft_join(char *s1, char *s2);
-char			*ft_strchar(char *save, char c);
-char			*ft_strduplicate(const char *src);
-
-
-#endif
+# endif
 #endif

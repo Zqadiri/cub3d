@@ -6,7 +6,7 @@ R     1890 1080
 
 
 
-NO      ./textures/colorstone.xpm
+NO      ./textures/colorstone
 
 SO ./textures/bluestone.xpm
 
@@ -33,6 +33,10 @@ C       127,8,255
 
 
 
- 1
-1S1
- 1
+  1
+ 101
+10S01
+ 101
+  1
+
+ 

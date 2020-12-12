@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:12:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/05 18:10:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/11 13:18:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	draw(t_index *m)
 
 int		launch_program(t_index *m, char *av)
 {
-	// printf("launch\n");
 	init(m);
 	if (parse_cub(m, av) < 0)
 		return (-1);
@@ -59,8 +58,6 @@ int		launch_program(t_index *m, char *av)
 int		main(int ac, char **av)
 {
 	t_index	m;
-
-	// printf("%d", ac);
 
 	if (ft_errors(ac, av) < 0)
 		return (-1);

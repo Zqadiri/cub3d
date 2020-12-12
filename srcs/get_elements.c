@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/05 17:17:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/11 13:18:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ int		get_ceilling_color(t_index *m)
 
 int		get_elements(t_index *m)
 {
-	// printf("get_elements\n");
 	m->el.elem = ft_split(m->parse.data, '\n');
 	if (create_elements_lines(m) < 0)
 		return (-1);
