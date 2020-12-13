@@ -55,7 +55,7 @@ LIBFLAGS 		= -I ./libft -L ./libft -L . ./libft/*.c
 
 all:			libft_all ${NAME}
 $(NAME):		${OBJS} 
-				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a  -I  $(OBJS) -o $@ 
+				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a  -I  ./ $(OBJS) -o $@ 
 clean:			libft_clean minilibx_clean
 				@${RM} ${OBJS}
 fclean:			libft_fclean minilibx_fclean clean
