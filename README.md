@@ -23,8 +23,6 @@ https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
 
 https://github.com/vinibiavatti1/RayCastingTutorial/wiki/RayCasting
 
-https://gamedev.stackexchange.com/questions/45013/raycasting-tutorial-vector-math-question
-
 https://guy-grave.developpez.com/tutoriels/jeux/doom-wolfenstein-raycasting/
 
 
@@ -137,7 +135,6 @@ In the next code piece, more variables are declared and calculated:
 }
 
 ```
-
 * mapX and mapY represent the current square of the map the ray is in. The ray position itself is a floating point number and contains both info about in which square of the map we are, and where in that square we are, but mapX and mapY are only the coordinates of that square.
 
 * sideDistX and sideDistY are initially the distance the ray has to travel from its start position to the first x-side and the first y-side. Later in the code their meaning will slightly change.
@@ -343,49 +340,47 @@ Drawing the sprites is done after the walls are already drawn. Here are the step
 *  Calculate the distance of each sprite to the  and  Use this distance to sort the sprites, from furthest away to closest to the camera .
 
 ```c
-void         swap(t_index *m, int i,int j)
-{
-    float   swap_x;
-    float   swap_y;
-    
-    m->spr.sprite_dist = ((m->data.pos_x - m->spr.sprites_x[j]) *
-    (m->data.pos_x - m->spr.sprites_x[j]) +
-    (m->data.pos_y - m->spr.sprites_y[j]) * 
-    (m->data.pos_y - m->spr.sprites_y[j]));
-    swap_x = m->spr.sprites_x[i];
-    swap_y = m->spr.sprites_y[i];
-    m->spr.sprites_x[i] = m->spr.sprites_x[i + 1];
-    m->spr.sprites_y[i] = m->spr.sprites_y[i + 1];
-    m->spr.sprites_x[i + 1] = swap_x;
-    m->spr.sprites_y[i + 1] = swap_y;
-}  
- 
-void         sort_sprites(t_index *m)
-{
-    int i;
-    int j;
 
-    i = 0;
-    while (i < m->spr.numsprites - 1)
-    {
-        m->spr.sprite_dist = ((m->data.pos_x - m->spr.sprites_x[i]) *
-        (m->data.pos_x - m->spr.sprites_x[i]) +
-        (m->data.pos_y - m->spr.sprites_y[i]) *
-        (m->data.pos_y - m->spr.sprites_y[i]));
-        j = i + 1;
-        while (j < m->spr.numsprites)
-        {
-            if (((m->data.pos_x - m->spr.sprites_x[j])*
-             (m->data.pos_x - m->spr.sprites_x[j]) + 
-             (m->data.pos_y - m->spr.sprites_y[j]) *
-             (m->data.pos_y - m->spr.sprites_y[j])) > m->spr.sprite_dist)
-            {
-                swap(m, i, j);
-            }
-            j++;   
-        }
-        i++;
-    }
+void		order(t_index *m)
+{
+	int i;
+
+	i = -1;
+	while (++i < m->spr.numsprites)
+	{
+		m->s_xy[i].dist = ((m->data.pos_x - m->s_xy[i].x) *
+				(m->data.pos_x - m->s_xy[i].x) + (m->data.pos_y -
+					m->s_xy[i].y) * (m->data.pos_y - m->s_xy[i].y));
+	}
+}
+
+void		sort_sprites(t_index *m)
+{
+	int		i;
+	int		j;
+	double	tmp;
+
+	order(m);
+	i = -1;
+	while (++i < m->spr.numsprites)
+	{
+		j = -1;
+		while (++j < m->spr.numsprites - 1)
+		{
+			if (m->s_xy[j].dist < m->s_xy[j + 1].dist)
+			{
+				tmp = m->s_xy[j].dist;
+				m->s_xy[j].dist = m->s_xy[j + 1].dist;
+				m->s_xy[j + 1].dist = tmp;
+				tmp = m->s_xy[j].x;
+				m->s_xy[j].x = m->s_xy[j + 1].x;
+				m->s_xy[j + 1].x = tmp;
+				tmp = m->s_xy[j].y;
+				m->s_xy[j].y = m->s_xy[j + 1].y;
+				m->s_xy[j + 1].y = tmp;
+			}
+		}
+	}
 }
 
 ```
@@ -398,22 +393,22 @@ void         sort_sprites(t_index *m)
 void         update(t_index *m, int i)
 {
     //translate sprite position to relative to camera
-    m->spr.spr_x = m->spr.sprites_x[i] - m->data.pos_x;
-    m->spr.spr_y = m->spr.sprites_y[i] - m->data.pos_y;
+    m->spr.spr_x = m->s_xy[i].x - m->data.pos_x;
+	m->spr.spr_y = m->s_xy[i].y - m->data.pos_y;
     //transform sprite with the inverse camera matrix
     // [ planeX   dirX ] -1                                       [ dirY      -dirX ]
     // [               ]       =  1/(planeX*dirY-dirX*planeY) *   [                 ]
     // [ planeY   dirY ]                                          [ -planeY  planeX ]
     
     //required for correct matrix multiplication                                          [ -planeY  planeX ]
-    m->spr.invdet = 1.0 / (m->data.plane_x * m->data.dir_y 
-                    - m->data.dir_x * m->data.plane_y);
-    m->spr.transform_x = m->spr.invdet * (m->data.dir_y * m->spr.spr_x 
-                        - m->data.dir_x * m->spr.spr_y);
-    m->spr.transform_y = m->spr.invdet * (-m->data.plane_y * m->spr.spr_x 
-                        + m->data.plane_x * m->spr.spr_y);
-    m->spr.spr_screen_x = (int)((m->el.res_x / 2) * 
-                        (1 + m->spr.transform_x / m->spr.transform_y));
+    m->spr.invdet = 1.0 / (m->data.plane_x * m->data.dir_y -
+			m->data.dir_x * m->data.plane_y);
+	m->spr.transform_x = m->spr.invdet * (m->data.dir_y * m->spr.spr_x -
+			m->data.dir_x * m->spr.spr_y);
+	m->spr.transform_y = m->spr.invdet * (-m->data.plane_y * m->spr.spr_x +
+			m->data.plane_x * m->spr.spr_y);
+	m->spr.spr_screen_x = (int)((m->el.res_x / 2) *
+			(1 + m->spr.transform_x / m->spr.transform_y));
 }
 
 ```
@@ -424,54 +419,56 @@ void         update(t_index *m, int i)
 
 void        calculate_start_end(t_index *m)
 {
-    //parameters for scaling and moving the sprites
-    m->spr.v_move_screen = (int)(94.0 / m->spr.transform_y);
     //calculate height of the sprite on screen
     //using "transformY" instead of the real distance prevents fisheye
-    m->spr.spr_height = (int)fabs((float)m->el.res_y / m->spr.transform_y);
+    m->spr.spr_height = abs((int)(m->el.res_y / m->spr.transform_y));
     //calculate lowest and highest pixel to fill in current stripe
-    m->spr.draw_start_y = -m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
+    m->spr.draw_start_y = -m->spr.spr_height / 2 + m->el.res_y / 2;
     if (m->spr.draw_start_y < 0)
         m->spr.draw_start_y = 0;
-    m->spr.draw_end_y = m->spr.spr_height / 2 + m->el.res_y / 2 + m->spr.v_move_screen;
+    m->spr.draw_end_y = m->spr.spr_height / 2 + m->el.res_y / 2;
     if (m->spr.draw_end_y >= m->el.res_y)
-        m->spr.draw_end_y = m->el.res_y - 1;
+        m->spr.draw_end_y = m->el.res_y;
     //calculate width of the sprite
-    m->spr.spr_width = (int)fabs((float)m->el.res_y / m->spr.transform_y);
+    m->spr.spr_width = abs((int)(m->el.res_y / m->spr.transform_y));
     m->spr.draw_start_x = -m->spr.spr_width / 2 + m->spr.spr_screen_x;
     if (m->spr.draw_start_x < 0)
         m->spr.draw_start_x = 0;
     m->spr.draw_end_x = m->spr.spr_width / 2 + m->spr.spr_screen_x;
     if (m->spr.draw_end_x >= m->el.res_y)
-        m->spr.draw_end_x = m->el.res_x - 1;  
-    // printf("*%d \n", m->spr.draw_end_x);
-    // printf("*%d \n", m->spr.draw_end_y); 
+        m->spr.draw_end_x = m->el.res_x;  
 }  
   
 ```
 *  Draw the sprites vertical stripe by vertical stripe, don't draw the vertical stripe if the distance is further away than the 1D ZBuffer of the walls of the current stripe .
 
 ```c
-void        vertical(t_index *m)
+void		sprite_raycasting(t_index *m)
 {
-    //loop through every vertical stripe of the sprite on screen
-    m->spr.stripe = m->spr.draw_start_x;
-    while (m->spr.stripe < m->spr.draw_end_x)
-    {
-        m->spr.tex_x = (int)((m->spr.stripe - (-m->spr.spr_width / 2 +
-         m->spr.spr_screen_x)) * 64 / m->spr.spr_width);
-        //the conditions in the if are:
-        //1) it's in front of camera plane so you don't see things behind you
-        //2) it's on the screen (left)
-        //3) it's on the screen (right)
-        //4) ZBuffer, with perpendicular distance
-        if (m->spr.transform_y > 0 && m->spr.stripe > 0 && m->spr.stripe < m->el.res_x 
-        && m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe] && m->spr.tex_x < 64)//for every pixel of the current stripe
-        {
-            draw_sprite(m);
-        }
-        m->spr.stripe++; 
-    }
+	int	i;
+
+	sort_sprites(m);
+	i = -1;
+	while (++i < m->spr.numsprites)
+	{
+		update(m, i);
+		calculate_start_end(m);
+		m->spr.stripe = m->spr.draw_start_x;
+		while (m->spr.stripe < m->spr.draw_end_x)
+		{
+			m->spr.tex_x = (int)(256 * (m->spr.stripe -
+						(-m->spr.spr_width / 2 + m->spr.spr_screen_x)) *
+						64 / m->spr.spr_width) / 256;
+			if (m->spr.transform_y > 0 && m->spr.stripe >= 0
+					&& m->spr.stripe < m->el.res_x
+					&& m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe]
+					&& m->spr.tex_x < 64)
+			{
+				draw_sprite(m);
+			}
+			m->spr.stripe++;
+		}
+	}
 }
 ```
 * Draw the vertical stripe pixel by pixel, make sure there's an invisible color or all sprites would be rectangles .
@@ -487,7 +484,7 @@ void        draw_sprite(t_index *m)
     while (y < m->spr.draw_end_y)
     {
         //256 and 128 factors to avoid floats
-        d = (y - m->spr.v_move_screen) * 256 - m->el.res_y *
+        d = (y) * 256 - m->el.res_y *
              128 + m->spr.spr_height * 128;
         m->spr.tex_y = ((d * 64) / m->spr.spr_height) / 256;
         //get current color from the texture
@@ -497,7 +494,6 @@ void        draw_sprite(t_index *m)
         y++;
     }
 }
-
 ```
 
 

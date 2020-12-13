@@ -94,6 +94,6 @@ void		calculate_dist(t_index *m)
 	else
 		m->data.perp_wall_dist = (m->data.map_y - m->data.pos_y +
 								(1 - m->data.step_y) / 2) / m->data.ray_dir_y;
-	if (m->data.perp_wall_dist == 0)
-		m->data.perp_wall_dist = 0.1;
+	// if (m->data.perp_wall_dist == 0)
+	// 	m->data.perp_wall_dist = 0.1;
 }

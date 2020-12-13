@@ -51,11 +51,11 @@ LIBFLAGS 		= -I ./libft -L ./libft -L . ./libft/*.c
 # -L Searches the library when linking
 # $@ is the name of the target being generated
 # @	Don’t print command
-# -I /usr/local/include -L /usr/local/bin -lmlx -framework OpenGl -framework AppKit libmlx.dylib \
+# -I /usr/local/include -L /usr/local/bin -lmlx -framework OpenGl -framework AppKit libmlx.dylib 
 
-all:			libft_all  ${NAME}
+all:			libft_all ${NAME}
 $(NAME):		${OBJS} 
-				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a -I ./ $(OBJS) -o $@ 
+				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a  -I  $(OBJS) -o $@ 
 clean:			libft_clean minilibx_clean
 				@${RM} ${OBJS}
 fclean:			libft_fclean minilibx_fclean clean
@@ -87,13 +87,3 @@ minilibx_fclean:
 				$(RM) libmlx.a
 				
 .PHONY: 		all fclean clean re
-
-
-
-
-
-# sprite_raycasting
-# utils2
-# bmp
-# parsing.c
-# sprite_raycasting2
