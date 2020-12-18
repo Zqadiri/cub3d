@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2020/12/05 13:43:11 by zqadiri          ###   ########.fr        #
+#    Updated: 2020/12/17 17:21:10 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,6 @@ MINILIBX 		= 	miniLibx
 CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast
 RM				= 	rm -f
 MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit
-
 LIBFLAGS 		= -I ./libft -L ./libft -L . ./libft/*.c 
 
 # -I Add the directory dir to the list of directories to be searched for header files

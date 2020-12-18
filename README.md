@@ -191,9 +191,7 @@ If the ray direction has a negative x-component, sideDistX is the distance from 
 The same goes for the y-component, but now with the first side above or below the position.
 For these values, the integer value mapX is used and the real position subtracted from it, and 1.0 is added in some of the cases depending if the side to the left or right, of the top or the bottom is used. Then you get the perpendicular distance to this side, so multiply it with deltaDistX or deltaDistY to get the real Euclidean distance.
 
-
 ```c
-
 void	calculate_step_sidedist(t_index *m)
 {
 	//calculate step and initial sideDist

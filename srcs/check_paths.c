@@ -6,11 +6,12 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:31:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:51:38 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/18 19:53:15 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
+
 
 void		calculate_colors(t_index *m)
 {
@@ -24,6 +25,13 @@ void		calculate_colors(t_index *m)
 		m->text.color = (int *)m->text.w_color;
 	m->spr.color = (int *)m->spr.sprite_text;
 }
+
+/*
+** wallx is where exactly the wall was hit
+** find x coordinate on the texture .
+** step is how much to increase the texture coordinate per screen pixel
+** tex_pos : starting texture coordinate
+*/
 
 void		calculate_textures(t_index *m)
 {
