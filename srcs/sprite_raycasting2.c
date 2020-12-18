@@ -6,11 +6,17 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:16:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/11 13:44:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/18 20:25:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
+
+/*
+** for every pixel of the current stripe
+** get current color from the texture
+** paint pixel if it isn't black, black is the invisible color
+*/
 
 void	draw_sprite(t_index *m)
 {

@@ -6,11 +6,16 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/11 13:30:52 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/18 20:28:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
+
+/*
+** calculate height of the sprite on screen
+** calculate lowest and highest pixel to fill in current stripe
+*/
 
 void		calculate_start_end(t_index *m)
 {
@@ -43,6 +48,10 @@ void		order(t_index *m)
 	}
 }
 
+/*
+** sort sprites from far to close
+*/
+
 void		sort_sprites(t_index *m)
 {
 	int		i;
@@ -72,6 +81,13 @@ void		sort_sprites(t_index *m)
 	}
 }
 
+/*
+** transform sprite with the inverse camera matrix
+**[ planeX   dirX ] -1                                   [ dirY      -dirX ]
+**[               ]     =  1/(planeX*dirY-dirX*planeY) * [                 ]
+**[ planeY   dirY ]                                      [ -planeY  planeX ]
+*/
+
 void		update(t_index *m, int i)
 {
 	m->spr.spr_x = m->s_xy[i].x - m->data.pos_x;
@@ -85,6 +101,15 @@ void		update(t_index *m, int i)
 	m->spr.spr_screen_x = (int)((m->el.res_x / 2) *
 			(1 + m->spr.transform_x / m->spr.transform_y));
 }
+
+/*
+** loop through every vertical stripe of the sprite on screen
+** the conditions in the if are:
+** 1) it's in front of camera plane so you don't see things behind you
+** 2) it's on the screen (left)
+** 3) it's on the screen (right)
+** 4) ZBuffer, with perpendicular distance
+*/
 
 void		sprite_raycasting(t_index *m)
 {

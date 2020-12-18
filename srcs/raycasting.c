@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 17:10:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/18 19:39:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/18 20:29:04 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		perform_dda(t_index *m, int hit)
 /*
 ** Calculate distance projected on camera direction
 ** mapX-posX+(1-stepX)/2) is the number of squares
-** the ray has crossed in X direction 
+** the ray has crossed in X direction
 */
 
 void		calculate_dist(t_index *m)
