@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:22:00 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 19:06:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/28 19:19:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	check_resolution(t_index *m)
 		m->el.res_x = 2560;
 	if (m->el.res_y > 1440)
 		m->el.res_y = 1440;
+	printf ("%d", m->el.res_y);
 	return (1);
 }
 
@@ -92,7 +93,8 @@ int	check_north_and_south(t_index *m)
 
 int	check_elements_errors(t_index *m)
 {
-	printf("checkel_\n");
+	if (check_resolution(m) < 0)
+		return (-1);
 	if (check_north_and_south(m) < 0)
 		return (-1);
 	if (check_west_and_east(m) < 0)
@@ -106,8 +108,6 @@ int	check_elements_errors(t_index *m)
 	if (check_path(m->el.east_path) < 0)
 		return (-1);
 	if (check_path(m->el.spr_path) < 0)
-		return (-1);
-	if (check_resolution(m) < 0)
 		return (-1);
 	return (1);
 }

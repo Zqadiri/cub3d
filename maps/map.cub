@@ -1,28 +1,12 @@
-
-
-
-
-R     0 15000
+R       1500 500000000
 NO      ./textures/colorstone
-SO ./textures/bluestone.xpm
-
-
-
-
-
-WE ./textures/greystone.xpm
-
-
-
-
-
-
-
+SO      ./textures/bluestone.xpm
+WE  ./textures/greystone.xpm
 EA ./textures/redbrick.xpm
-
 S     ./textures/barrel.xpm
-F       130,8,255
-C      127,8,255
+
+F       255,14,255
+C      255,8,255
 
 
 

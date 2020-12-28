@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:13:22 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 17:39:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/28 15:09:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		write_error_floor(t_index *m, int i)
 {
 	if (m->el.elem[m->el.f_l][i] == '\0' ||
 		m->el.elem[m->el.f_l][i] == ' ' ||
+		m->el.elem[m->el.f_l][i] == '-' ||
 		!ft_isdigit(m->el.elem[m->el.f_l][++i]))
 	{
 		write(1, "Error\n", 6);
@@ -48,6 +49,7 @@ int		write_error_ceilling(t_index *m, int i)
 {
 	if (m->el.elem[m->el.c_l][i] == '\0' ||
 		m->el.elem[m->el.c_l][i] == ' ' ||
+		m->el.elem[m->el.c_l][i] == '-' ||
 		!ft_isdigit(m->el.elem[m->el.f_l][++i]))
 	{
 		write(1, "Error\n", 6);

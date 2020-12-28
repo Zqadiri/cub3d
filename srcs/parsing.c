@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/11 13:42:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/28 18:29:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,14 @@ int			parse_cub(t_index *m, char *filename)
 {
 	int		fd;
 
+	if (check_file_cub(filename) < 0)
+		return (-1);
 	fd = open(filename, O_RDONLY);
 	if (parse_data(fd, m) < 0)
 		return (-1);
 	if (parse_map(fd, m) < 0)
+		return (-1);
+	if (check_elem_nbr(m) < 0)
 		return (-1);
 	close(fd);
 	if (create_map(m) < 0)

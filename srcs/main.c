@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:12:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/11 13:18:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/28 19:10:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ int		launch_program(t_index *m, char *av)
 		return (-1);
 	if (!(m->win.mlx_ptr = mlx_init()))
 		return (-1);
-	m->win.mlx_win = mlx_new_window(m->win.mlx_ptr,
-		m->el.res_x, m->el.res_y, WINDOW_TITLE);
+	if (!(m->win.mlx_win = mlx_new_window(m->win.mlx_ptr,
+		m->el.res_x, m->el.res_y, WINDOW_TITLE)))
+		return (-1);
 	add_data(m);
 	add_textures(m);
 	m->img.img = mlx_new_image(m->win.mlx_ptr, m->el.res_x, m->el.res_y);

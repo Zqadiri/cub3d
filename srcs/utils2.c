@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:14:37 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/11 13:32:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/28 19:08:41 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		new_strlen(char *s)
 
 int		calcul_digit(t_index *m, int i)
 {
-	int digit;
+	unsigned int digit;
 
 	digit = 0;
 	while (m->el.elem[m->el.resolution_line][i] == ' ')
@@ -37,7 +37,7 @@ int		calcul_digit(t_index *m, int i)
 		digit = (digit * 10) + m->el.elem[m->el.resolution_line][i] - '0';
 		i++;
 	}
-	m->el.res_x = digit;
+	m->el.res_x = (int)digit;
 	return (i);
 }
 

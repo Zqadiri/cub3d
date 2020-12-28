@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/05 19:41:44 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/28 19:05:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,9 @@ typedef struct		s_index
 	t_spr_xy		*s_xy;
 }					t_index;
 
+int					check_file_cub(char *filename);
 int					ft_key(int keycode, t_index *m);
+int					check_valid_color(t_index *m);
 int					keys_right_left(t_index *m, int keycode);
 int					keys_rot2(t_index *m, int keycode);
 int					keys_rot1(t_index *m, int keycode);

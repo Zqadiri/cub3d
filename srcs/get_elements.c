@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/11 13:18:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/28 19:20:11 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ int		get_elements(t_index *m)
 	if (get_floor_color(m) < 0)
 		return (-1);
 	if (get_ceilling_color(m) < 0)
+		return (-1);
+	if (check_valid_color(m) < 0)
 		return (-1);
 	create_hex_color(m);
 	if (!get_sprite_texture(m))

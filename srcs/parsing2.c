@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/11 13:37:57 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/28 18:24:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,23 @@ int		check_elem_nbr(t_index *m)
 			m->parse.el_nbr++;
 	}
 	(m->parse.el_nbr != 8) ? write_el_error(m) : 1;
+	return (1);
+}
+
+int		check_valid_color(t_index *m)
+{
+	if (m->el.c_r < 0 || m->el.c_r > 255)
+		write_error_res(m);
+	if (m->el.c_g < 0 || m->el.c_g > 255)
+		write_error_res(m);
+	if (m->el.c_b < 0 || m->el.c_b > 255)
+		write_error_res(m);
+	if (m->el.f_r < 0 || m->el.f_r > 255)
+		write_error_res(m);
+	if (m->el.f_g < 0 || m->el.f_g > 255)
+		write_error_res(m);
+	if (m->el.f_b < 0 || m->el.f_b > 255)
+		write_error_res(m);
 	return (1);
 }
 
