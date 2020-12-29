@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:54:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/18 20:28:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/29 16:11:21 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void		calculate_start_end(t_index *m)
 	if (m->spr.draw_start_y < 0)
 		m->spr.draw_start_y = 0;
 	m->spr.draw_end_y = m->spr.spr_height / 2 + m->el.res_y / 2;
-	if (m->spr.draw_end_y >= m->el.res_y)
-		m->spr.draw_end_y = m->el.res_y;
+	if (m->spr.draw_end_y >= (int)m->el.res_y)
+		m->spr.draw_end_y = (int)m->el.res_y;
 	m->spr.spr_width = abs((int)(m->el.res_y / m->spr.transform_y));
 	m->spr.draw_start_x = -m->spr.spr_width / 2 + m->spr.spr_screen_x;
 	if (m->spr.draw_start_x < 0)
 		m->spr.draw_start_x = 0;
 	m->spr.draw_end_x = m->spr.spr_width / 2 + m->spr.spr_screen_x;
-	if (m->spr.draw_end_x >= m->el.res_x)
-		m->spr.draw_end_x = m->el.res_x;
+	if (m->spr.draw_end_x >= (int)m->el.res_x)
+		m->spr.draw_end_x = (int)m->el.res_x;
 }
 
 void		order(t_index *m)
@@ -128,7 +128,7 @@ void		sprite_raycasting(t_index *m)
 						(-m->spr.spr_width / 2 + m->spr.spr_screen_x)) *
 						64 / m->spr.spr_width) / 256;
 			if (m->spr.transform_y > 0 && m->spr.stripe >= 0
-					&& m->spr.stripe < m->el.res_x
+					&& m->spr.stripe < (int)m->el.res_x
 					&& m->spr.transform_y < m->spr.spr_buffer[m->spr.stripe]
 					&& m->spr.tex_x < 64)
 			{

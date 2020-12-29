@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:22:00 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/28 19:19:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/29 16:14:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	check_resolution(t_index *m)
 		m->el.res_x = 2560;
 	if (m->el.res_y > 1440)
 		m->el.res_y = 1440;
-	printf ("%d", m->el.res_y);
 	return (1);
 }
 

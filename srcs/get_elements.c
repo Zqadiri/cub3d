@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/28 19:20:11 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/29 16:15:15 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int		create_elements_lines(t_index *m)
 
 int		get_resolution(t_index *m)
 {
-	int	i;
-	int	digit;
+	int					i;
+	unsigned long int	digit;
 
 	digit = 0;
 	i = 1;

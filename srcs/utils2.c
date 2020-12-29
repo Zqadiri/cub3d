@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:14:37 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/28 19:08:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/29 16:13:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		new_strlen(char *s)
 
 int		calcul_digit(t_index *m, int i)
 {
-	unsigned int digit;
+	unsigned long int digit;
 
 	digit = 0;
 	while (m->el.elem[m->el.resolution_line][i] == ' ')

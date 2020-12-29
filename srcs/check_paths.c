@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:31:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/28 19:04:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/29 16:11:02 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		verline(int i, t_index *m)
 		y++;
 	}
 	k = y;
-	while (k < m->el.res_y)
+	while (k < (int)m->el.res_y)
 	{
 		m->img.addr[k * m->el.res_x + i] = m->el.f_color_hex;
 		k++;

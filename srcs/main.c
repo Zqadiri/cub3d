@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:12:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/28 19:10:48 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/29 16:05:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	draw(t_index *m)
 
 	i = 0;
 	hit = 0;
-	while (i < m->el.res_x)
+	while (i < (int)m->el.res_x)
 	{
 		hit = 0;
 		calculate_ray_pos_dir(i, m);

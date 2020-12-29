@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2020/12/28 18:49:46 by zqadiri          ###   ########.fr        #
+#    Updated: 2020/12/29 16:20:56 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	cub.h
 LIBFT 			= 	libft
 MINILIBX 		= 	miniLibx
-CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast -fsanitize=address
+CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast 
 
 RM				= 	rm -f
 MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit
@@ -64,6 +64,7 @@ re:				fclean all
 
 # make other makefiles compile with the -C flag
 # The -C flag makes you go to the appropriate path and do the asked command
+
 libft_all:
 				make -C $(LIBFT_PATH) all
 				cp ./libft/libft.a libft.a

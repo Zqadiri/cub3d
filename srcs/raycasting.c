@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 17:10:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/18 20:29:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/29 16:21:51 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 void		calculate_ray_pos_dir(int i, t_index *m)
 {
-	m->data.camera_x = 2 * i / (float)m->el.res_x - 1;
+	m->data.camera_x = 2 * i / (double)m->el.res_x - 1;
 	m->data.ray_dir_x = m->data.dir_x + m->data.plane_x * m->data.camera_x;
 	m->data.ray_dir_y = m->data.dir_y + m->data.plane_y * m->data.camera_x;
 	m->data.map_x = (int)m->data.pos_x;
@@ -122,6 +122,6 @@ void		calculate_wall_height(t_index *m)
 	if (m->data.draw_start < 0)
 		m->data.draw_start = 0;
 	m->data.draw_end = m->data.line_height / 2 + m->el.res_y / 2;
-	if (m->data.draw_end >= m->el.res_y)
+	if (m->data.draw_end >= (int)m->el.res_y)
 		m->data.draw_end = m->el.res_y - 1;
 }

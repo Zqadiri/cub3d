@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:08:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/28 18:28:10 by zqadiri          ###   ########.fr       */
+/*   Updated: 2020/12/29 16:15:54 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ int		exit_all(t_index *m)
 	free_win(m);
 	exit(0);
 	return (-1);
-}
-
-int		exit_it(t_index *m)
-{
-	free_elem(m);
-	free_text(m);
-	free_win(m);
-	exit(0);
 }
 
 int		digit(char *c)
