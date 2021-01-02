@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:45:33 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/18 20:27:21 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/02 16:01:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int		create_images2(t_index *m)
 }
 
 /*
-**The functions that create images mlx_xpm_file_to_image(), will
-**return NULL if an error occurs. Otherwise they return a non-null
-**pointer as an image identifier.
+** The functions that create images mlx_xpm_file_to_image(), will
+** return NULL if an error occurs. Otherwise they return a non-null
+** pointer as an image identifier.
 */
 
 int		create_images(t_index *m)
@@ -114,8 +114,8 @@ int		create_images(t_index *m)
 }
 
 /*
-**mlx_get_data_addr returns a char * address that represents
-**the begining of the memory area where the image is stored.
+** mlx_get_data_addr returns a char * address that represents
+** the begining of the memory area where the image is stored.
 */
 
 int		add_textures(t_index *m)

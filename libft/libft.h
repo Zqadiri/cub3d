@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:47:26 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/11/05 18:29:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/02 11:51:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <string.h>
+# include <stdio.h>
 
 typedef struct		s_list
 {
@@ -65,6 +66,7 @@ void				ft_lstadd_front(t_list **aslt, t_list *new);
 int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_addlst_back(t_list **aslt, t_list *new);
+char    			*ft_strndup (const char *s, size_t n);
 
 # ifndef GET_NEXT_LINE_H
 #  define GET_NEXT_LINE_H

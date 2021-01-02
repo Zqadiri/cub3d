@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:22:00 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/29 16:14:50 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/02 16:02:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,6 @@ int	check_resolution(t_index *m)
 		m->el.res_x = 2560;
 	if (m->el.res_y > 1440)
 		m->el.res_y = 1440;
-	return (1);
-}
-
-int	check_path(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == ' ')
-		{
-			write(1, "Error\n", 6);
-			write(1, "Wrong texture path\n", 19);
-			return (-1);
-		}
-		i++;
-	}
 	return (1);
 }
 
@@ -98,15 +80,9 @@ int	check_elements_errors(t_index *m)
 		return (-1);
 	if (check_west_and_east(m) < 0)
 		return (-1);
-	if (check_path(m->el.north_path) < 0)
+	if (trim_path(m) < 0)
 		return (-1);
-	if (check_path(m->el.south_path) < 0)
-		return (-1);
-	if (check_path(m->el.west_path) < 0)
-		return (-1);
-	if (check_path(m->el.east_path) < 0)
-		return (-1);
-	if (check_path(m->el.spr_path) < 0)
+	if (trim_path_helper(m) < 0)
 		return (-1);
 	return (1);
 }

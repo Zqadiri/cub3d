@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2020/12/29 16:20:56 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/01/02 16:00:55 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS 			=	./srcs/main.c\
 					./srcs/sprite_raycasting.c\
 					./srcs/sprite_raycasting2.c\
 					./srcs/error_funcs2.c\
-					./srcs/raycasting.c
+					./srcs/raycasting.c\
+					./srcs/raycasting2.c
 					
 OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	cub.h
@@ -44,8 +45,8 @@ MINILIBX 		= 	miniLibx
 CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast 
 
 RM				= 	rm -f
-MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit
-LIBFLAGS 		= -I ./libft -L ./libft -L . ./libft/*.c 
+MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit 
+LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 
 # -I Add the directory dir to the list of directories to be searched for header files
 # -L Searches the library when linking
@@ -88,3 +89,5 @@ minilibx_fclean:
 				$(RM) libmlx.a
 				
 .PHONY: 		all fclean clean re
+
+# check file with just map

@@ -1,24 +1,24 @@
-R     1920 1922
+R     19 19
 
 
 
 
-NO      ./textures/colorstone
+NO      ./my\ textures/colorstone
 
-SO ./textures/bluestone.xpm
-
-
+SO ./my\ textures/bluestone.xpm
 
 
 
 
-WE ./textures/greystone.xpm
-EA ./textures/redbrick.xpm
+
+
+WE ./my\ textures/greystone.xpm
+EA ./my\ textures/redbrick.xpm
 
 
 
 
-S ./textures/barrel.xpm
+S ./my\ textures/barrel.xpm
 
 
 F    228,0,106

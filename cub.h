@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/29 16:16:02 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/02 16:00:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,8 @@ int						write_error_ceilling(t_index *m, int i);
 int						check_north_and_south(t_index *m);
 int						check_west_and_east(t_index *m);
 int						check_elements_errors(t_index *m);
-int						check_path(char *str);
+int						trim_path(t_index *m);
+int						trim_path_helper(t_index *m);
 int						check_resolution(t_index *m);
 char					*get_north_texture(t_index *m);
 char					*get_sprite_texture(t_index *m);
@@ -279,5 +280,6 @@ int						digit(char *c);
 int						is_empty(char *s);
 int						check_elem_nbr2(t_index *m, int i, int cpt);
 void					clear(char *save, char *line);
+int 					is_white_space(char c);
 
 #endif
