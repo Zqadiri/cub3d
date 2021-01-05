@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/28 18:29:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/05 19:23:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ int			join_line(t_index *m, char *line, char *pfree, int last)
 int			parse_map(int fd, t_index *m)
 {
 	char	*pfree;
+	int		r;
 
-	while (is_empty(m->parse.line))
+	r = 1;
+	while (m->parse.line[0] == '\0' && r == 1)
 	{
 		free(m->parse.line);
-		get_next_line(fd, &m->parse.line);
+		r = get_next_line(fd, &m->parse.line);
 	}
 	m->parse.map_string = ft_strjoin(m->parse.map_string, m->parse.line);
 	pfree = m->parse.map_string;
@@ -52,6 +54,7 @@ int			parse_map(int fd, t_index *m)
 	}
 	pfree = m->parse.map_string;
 	join_line(m, m->parse.line, pfree, 0);
+	(!digit(m->parse.map_string)) ? error_data(m) : 1;
 	return (1);
 }
 
@@ -91,6 +94,7 @@ int			parse_data(int fd, t_index *m)
 		free(line);
 		get_next_line(fd, &line);
 	}
+	(digit(line)) ? error_data(m) : 1;
 	m->parse.data = ft_strjoin(m->parse.data, line);
 	save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, "\n");

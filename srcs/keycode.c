@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:19:51 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:52:06 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/04 10:00:42 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ int		keys_up_down(t_index *m, int keycode)
 	}
 	return (1);
 }
+
+/*
+**rotate the player using rotation matrix
+*/
 
 int		keys_rot1(t_index *m, int keycode)
 {

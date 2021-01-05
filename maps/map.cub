@@ -1,18 +1,21 @@
-R        1050 1050
-NO      my textures/color stone
-SO      my textures/bluestone.xpm     
-WE      my textures/greystone.xpm      
-EA      my textures/redbrick.xpm     
-S       my textures/sp.xpm
+R     1890 1080
+NO      ./textures/colorstone
+SO ./textures/bluestone.xpm
+WE ./textures/greystone.xpm      
+EA ./textures/redbrick.xpm
+S ./textures/barrel.xpm
+F    228,0,106
+C       127,8,255
 
-F       255,14,255 
-C      255,08,255
+ 
 
 
+     
+ 
 
 
- 1111111111111
- 10000000000001
+ 111111111111
+ 1000000000N001
 10000000000001111111111
 11111000000000000000001
      11111000000000011111111
@@ -43,7 +46,7 @@ C      255,08,255
 1111000000001
 1000000000001
 1000000000001
-100000S000001
+1000000000001
 1000000000001
 1000000000001
 1000000000001

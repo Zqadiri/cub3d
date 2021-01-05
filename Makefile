@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2021/01/02 16:00:55 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/01/04 14:50:51 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	cub.h
 LIBFT 			= 	libft
 MINILIBX 		= 	miniLibx
-CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast 
+CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast  -fsanitize=address
 
 RM				= 	rm -f
 MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit 
