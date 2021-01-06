@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2021/01/04 14:50:51 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/01/06 12:43:38 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS 			=	./srcs/main.c\
 					./srcs/sprite_raycasting.c\
 					./srcs/sprite_raycasting2.c\
 					./srcs/error_funcs2.c\
+					./srcs/error_funcs3.c\
 					./srcs/raycasting.c\
 					./srcs/raycasting2.c
 					
@@ -42,7 +43,7 @@ OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	cub.h
 LIBFT 			= 	libft
 MINILIBX 		= 	miniLibx
-CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast  -fsanitize=address
+CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast  
 
 RM				= 	rm -f
 MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit 

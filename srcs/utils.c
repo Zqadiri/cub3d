@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:08:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/04 14:54:36 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/06 09:32:46 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		exit_all(t_index *m)
 
 int		exit_prg(t_index *m)
 {
+	
 	free_elem(m);
 	free_win(m);
 	exit(0);

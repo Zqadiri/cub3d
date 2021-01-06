@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/05 18:15:29 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/06 12:54:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*create_new_line(char *str, int diff)
 	}
 	while (diff > 0)
 	{
-		new[i] = '1';
+		new[i] = ' ';
 		i++;
 		diff--;
 	}
@@ -44,11 +44,10 @@ int		create_good_size_map(t_index *m)
 
 	i = 0;
 	len = new_strlen(m->parse.map[i]);
-	while (m->parse.map[i] != NULL)
+	while (m->parse.map[++i] != NULL)
 	{
 		if (new_strlen(m->parse.map[i]) > len)
 			len = new_strlen(m->parse.map[i]);
-		i++;
 	}
 	i = -1;
 	while (m->parse.map[++i] != NULL)
@@ -61,7 +60,6 @@ int		create_good_size_map(t_index *m)
 				return (-1);
 			free(new);
 		}
-		// printf("%s\n", m->parse.map[i]);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:13:22 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/04 17:12:57 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/06 12:52:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,5 @@ int		error_data(t_index *m)
 	write(1, "Error\n", 6);
 	write(1, "*.cub is missing something\n", 26);
 	exit_prg(m);
-	return (-1);
-}
-
-int		write_error_end_ceilling(t_index *m, int i)
-{
-	if (m->el.elem[m->el.c_l][i] != ' ')
-	{
-		write(1, "Error\n", 6);
-		write(1, "Wrong ceilling arguments\n", 25);
-		exit_all(m);
-	}
 	return (-1);
 }

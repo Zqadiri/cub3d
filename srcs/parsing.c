@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/05 19:23:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/06 12:52:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			parse_map(int fd, t_index *m)
 	int		r;
 
 	r = 1;
-	while (m->parse.line[0] == '\0' && r == 1)
+	while (is_empty(m->parse.line) && r != 0)
 	{
 		free(m->parse.line);
 		r = get_next_line(fd, &m->parse.line);
@@ -43,7 +43,7 @@ int			parse_map(int fd, t_index *m)
 	clear(pfree, m->parse.line);
 	while (get_next_line(fd, &m->parse.line))
 	{
-		(!is_empty(m->parse.line) && m->parse.end) ? write_error_one(m) : 1;
+		(is_empty(m->parse.line) && m->parse.end) ? write_error_one(m) : 1;
 		if (is_empty(m->parse.line))
 		{
 			m->parse.end = 1;
@@ -100,14 +100,13 @@ int			parse_data(int fd, t_index *m)
 	m->parse.data = ft_strjoin(m->parse.data, "\n");
 	clear(save, line);
 	while (get_next_line(fd, &line) && m->parse.i < 7)
-	{
 		parse_data_helper(m, fd, line);
-	}
 	save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, line);
 	free(save);
 	save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, "\0");
+	(m->parse.i < 7) ? error_data(m) : 1;
 	clear(save, line);
 	return (1);
 }
@@ -130,13 +129,13 @@ int			parse_cub(t_index *m, char *filename)
 		return (-1);
 	if (create_good_size_map(m) < 0)
 		return (-1);
+	if (check_map_errors(m) < 0)
+		return (-1);
 	if (get_sprites(m) < 0)
 		return (-1);
 	if (get_elements(m) < 0)
 		return (-1);
 	if (check_elements_errors(m) < 0)
-		return (-1);
-	if (check_map_errors(m) < 0)
 		return (-1);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:03:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:51:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/06 12:39:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		check_spaces_algo(t_index *m)
 	int i;
 	int j;
 
-	i = 1;
+	i = 0;
 	while (i < (m->parse.line_nbr - 1))
 	{
 		j = 1;

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 16:29:07 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/02 10:10:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/06 12:43:11 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,5 @@ int		return_error(t_index *m)
 {
 	write(1, "Error\n", 6);
 	write(1, "Multiple initial positions\n", 27);
-	return (exit_all(m));
-}
-
-int		write_error_one(t_index *m)
-{
-	write(1, "Error\n", 6);
-	write(1, "Error in parsing\n", 17);
 	return (exit_all(m));
 }

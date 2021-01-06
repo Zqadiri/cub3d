@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:14:37 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/02 15:12:31 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/06 10:32:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		is_empty(char *s)
 		return (1);
 	while (s[i] != '\0')
 	{
-		if (s[i] != ' ')
+		if (!is_white_space(s[i]))
 			return (0);
 		i++;
 	}

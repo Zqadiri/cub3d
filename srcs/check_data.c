@@ -6,13 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:22:00 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/05 19:09:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/06 12:42:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int	check_resolution(t_index *m)
+int		check_resolution(t_index *m)
 {
 	if (m->el.elem[m->el.resolution_line][0] != 'R')
 	{
@@ -34,7 +34,7 @@ int	check_resolution(t_index *m)
 	return (1);
 }
 
-int	check_west_and_east(t_index *m)
+int		check_west_and_east(t_index *m)
 {
 	if (m->el.elem[m->el.west_line][0] != 'W' ||
 		m->el.elem[m->el.west_line][1] != 'E')
@@ -53,7 +53,7 @@ int	check_west_and_east(t_index *m)
 	return (1);
 }
 
-int	check_north_and_south(t_index *m)
+int		check_north_and_south(t_index *m)
 {
 	if (m->el.elem[m->el.north_line][0] != 'N' ||
 		m->el.elem[m->el.north_line][1] != 'O')
@@ -72,25 +72,25 @@ int	check_north_and_south(t_index *m)
 	return (1);
 }
 
-int	check_path(char *str)	
-{	
-	int i;	
+int		check_path(char *str)
+{
+	int i;
 
-	i = 0;	
-	while (str[i] != '\0')	
-	{	
-		if (str[i] == ' ')	
-		{	
-			write(1, "Error\n", 6);	
-			write(1, "Wrong texture path\n", 19);	
-			return (-1);	
-		}	
-		i++;	
-	}	
-	return (1);	
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
+		{
+			write(1, "Error\n", 6);
+			write(1, "Wrong texture path\n", 19);
+			return (-1);
+		}
+		i++;
+	}
+	return (1);
 }
 
-int	check_elements_errors(t_index *m)
+int		check_elements_errors(t_index *m)
 {
 	if (check_resolution(m) < 0)
 		return (-1);
