@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:14:37 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/06 10:32:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/09 19:10:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,9 @@ int		new_strlen(char *s)
 	return (i);
 }
 
-int is_white_space(char c)
+int		is_white_space(char c)
 {
-    return (c == ' ' || c == '\t' || c == '\n');
-}
-int		calcul_digit(t_index *m, int i)
-{
-	unsigned long int digit;
-
-	digit = 0;
-	while (m->el.elem[m->el.resolution_line][i] == ' ')
-		i++;
-	while (m->el.elem[m->el.resolution_line][i] >= '0' &&
-		m->el.elem[m->el.resolution_line][i] <= '9')
-	{
-		digit = (digit * 10) + m->el.elem[m->el.resolution_line][i] - '0';
-		i++;
-	}
-	m->el.res_x = (int)digit;
-	return (i);
+	return (c == ' ' || c == '\t' || c == '\n');
 }
 
 void	init(t_index *m)
@@ -72,7 +56,7 @@ int		is_empty(char *s)
 		return (1);
 	while (s[i] != '\0')
 	{
-		if (!is_white_space(s[i]))
+		if (s[i] != ' ')
 			return (0);
 		i++;
 	}

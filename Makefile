@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2021/01/06 12:43:38 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/01/08 09:39:19 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS 			=	./srcs/main.c\
 					./srcs/parsing2.c\
 					./srcs/sprites_data.c\
 					./srcs/utils2.c\
+					./srcs/utils3.c\
 					./srcs/utils.c\
 					./srcs/bmp.c\
 					./srcs/sprite_raycasting.c\
@@ -58,9 +59,9 @@ LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c
 all:			libft_all ${NAME}
 $(NAME):		${OBJS} 
 				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a  -I  ./ $(OBJS) -o $@ 
-clean:			libft_clean minilibx_clean
+clean:			libft_clean
 				@${RM} ${OBJS}
-fclean:			libft_fclean minilibx_fclean clean
+fclean:			libft_fclean clean
 				@${RM} ${NAME}
 re:				fclean all
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:13:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/06 12:53:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/08 08:27:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_1(t_index *m)
 	m->parse.i = 0;
 	m->parse.end = 0;
 	m->parse.line = NULL;
-	m->parse.no_data = 0;
+	m->parse.ret = 1;
 }
 
 void	init_2(t_index *m)

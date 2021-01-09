@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:08:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/06 09:32:46 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/08 08:57:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		exit_all(t_index *m)
 
 int		exit_prg(t_index *m)
 {
-	
 	free_elem(m);
 	free_win(m);
 	exit(0);
@@ -56,19 +55,4 @@ void	create_hex_color(t_index *m)
 		m->el.c_g, m->el.c_b);
 	m->el.f_color_hex = transform_to_hex(m->el.f_r,
 		m->el.f_g, m->el.f_b);
-}
-
-int		check_file_cub(char *filename)
-{
-	int	i;
-
-	i = ft_strlen(filename) - 1;
-	if (filename[i] != 'b' || filename[i - 1] != 'u' ||
-		filename[i - 2] != 'c' || filename[i - 3] != '.')
-	{
-		write(1, "Error\n", 6);
-		write(1, "wrong file name\n", 16);
-		exit(0);
-	}
-	return (1);
 }

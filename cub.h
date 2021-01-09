@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/04 17:14:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/08 18:35:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdarg.h>
 # include <math.h>
 # include <fcntl.h>
+# include <mlx.h>
 # include "./libft/libft.h"
 # include "./minilibx/mlx.h"
 
@@ -122,7 +123,7 @@ typedef struct			s_parse
 	int					i;
 	int					end;
 	char				*line;
-	int					no_data;
+	int					ret;
 }						t_parse;
 
 typedef struct			s_spr_xy

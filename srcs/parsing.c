@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/06 12:52:00 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/09 19:35:26 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,61 @@ int			join_line(t_index *m, char *line, char *pfree, int last)
 	return (1);
 }
 
+
+int     check_line(char *s)
+{
+    int i;
+    int no_digit;
+
+    i = 0;
+    no_digit = 0;
+    if (digit(s))
+        no_digit = 1;
+    while (s[i])
+    {
+        if (is_white_space(s[i]) && !no_digit)
+            return (-1);
+        else
+            i++;
+    }
+    return (1);
+}
+
 int			parse_map(int fd, t_index *m)
 {
-	char	*pfree;
-	int		r;
+	char *pfree;
+	int	not_empty;
+	int	last;
 
-	r = 1;
-	while (is_empty(m->parse.line) && r != 0)
+	last = 0; 
+	not_empty = 0;
+	while (m->parse.ret)
 	{
-		free(m->parse.line);
-		r = get_next_line(fd, &m->parse.line);
-	}
-	m->parse.map_string = ft_strjoin(m->parse.map_string, m->parse.line);
-	pfree = m->parse.map_string;
-	m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
-	clear(pfree, m->parse.line);
-	while (get_next_line(fd, &m->parse.line))
-	{
-		(is_empty(m->parse.line) && m->parse.end) ? write_error_one(m) : 1;
-		if (is_empty(m->parse.line))
+		m->parse.ret = get_next_line(fd, &m->parse.line);
+		if (last && is_empty(m->parse.line))
+			error_data(m);
+		if ((not_empty && m->parse.line[0] != '\n'))
+			error_data(m);
+		if (check_line(m->parse.line) < 0)
+			not_empty = 1;
+		if (is_empty(m->parse.line) && digit(m->parse.map_string))
+			last = 1;
+		else
 		{
-			m->parse.end = 1;
-			free(m->parse.line);
-			continue;
+			m->parse.map_string = ft_strjoin(m->parse.map_string, m->parse.line);
+			pfree = m->parse.map_string;
+			m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
+			free(pfree);	
 		}
-		join_line(m, m->parse.line, pfree, 1);
+		free(m->parse.line);
+		// m->parse.line = 0;
 	}
 	pfree = m->parse.map_string;
-	join_line(m, m->parse.line, pfree, 0);
-	(!digit(m->parse.map_string)) ? error_data(m) : 1;
+	m->parse.map_string = ft_strjoin(m->parse.map_string, m->parse.line);
+	free(pfree);
+	pfree = m->parse.map_string;
+	m->parse.map_string = ft_strjoin(m->parse.map_string, "\0");
+	free(pfree);
 	return (1);
 }
 
@@ -115,13 +141,12 @@ int			parse_cub(t_index *m, char *filename)
 {
 	int		fd;
 
-	if (check_file_cub(filename) < 0)
-		return (-1);
 	fd = open(filename, O_RDONLY);
 	if (parse_data(fd, m) < 0)
 		return (-1);
 	if (parse_map(fd, m) < 0)
 		return (-1);
+	(!digit(m->parse.map_string)) ? error_data(m) : 1;
 	if (check_elem_nbr(m) < 0)
 		return (-1);
 	close(fd);

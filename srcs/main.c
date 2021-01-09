@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:12:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/29 16:05:12 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/08 08:51:42 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	draw(t_index *m)
 int		launch_program(t_index *m, char *av)
 {
 	init(m);
+	if (check_file_cub(av) < 0)
+		return (-1);
 	if (parse_cub(m, av) < 0)
 		return (-1);
 	if (!(m->win.mlx_ptr = mlx_init()))
