@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:45:33 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/02 16:01:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/10 19:13:26 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		add_data(t_index *m)
 	m->text.tex_height = 64;
 	m->spr.spr_width = 0;
 	m->spr.spr_height = 0;
-	m->data.move_speed = 0.2;
+	m->data.move_speed = 0.5;
 	m->data.rot_speed = 0.06;
 	if (!(m->spr.spr_buffer = (double *)
 		malloc(sizeof(double) * m->el.res_x + 1)))

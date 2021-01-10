@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:13:12 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/08 08:27:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/10 16:54:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_1(t_index *m)
 	m->parse.end = 0;
 	m->parse.line = NULL;
 	m->parse.ret = 1;
+	m->parse.not_empty = 0;
 }
 
 void	init_2(t_index *m)
@@ -88,7 +89,6 @@ void	init_3(t_index *m)
 void	init_4(t_index *m)
 {
 	m->parse.data = NULL;
-	m->parse.map_string = "";
 	m->parse.map = NULL;
 	m->parse.line_nbr = 0;
 	m->parse.column_nbr = 0;

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/08 18:35:27 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/10 14:58:42 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct			s_parse
 	int					end;
 	char				*line;
 	int					ret;
+	int					not_empty;
 }						t_parse;
 
 typedef struct			s_spr_xy
@@ -284,5 +285,6 @@ void					clear(char *save, char *line);
 int						is_white_space(char c);
 int						error_data(t_index *m);
 int						exit_prg(t_index *m);
+int						check_line(char *s);
 
 #endif

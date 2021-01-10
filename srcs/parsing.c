@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/09 19:35:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/10 19:03:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,6 @@ int			join_line(t_index *m, char *line, char *pfree, int last)
 	return (1);
 }
 
-
-int     check_line(char *s)
-{
-    int i;
-    int no_digit;
-
-    i = 0;
-    no_digit = 0;
-    if (digit(s))
-        no_digit = 1;
-    while (s[i])
-    {
-        if (is_white_space(s[i]) && !no_digit)
-            return (-1);
-        else
-            i++;
-    }
-    return (1);
-}
-
 int			parse_map(int fd, t_index *m)
 {
 	char *pfree;
@@ -54,6 +34,7 @@ int			parse_map(int fd, t_index *m)
 
 	last = 0; 
 	not_empty = 0;
+	m->parse.map_string = ft_strdup("");
 	while (m->parse.ret)
 	{
 		m->parse.ret = get_next_line(fd, &m->parse.line);
@@ -67,20 +48,16 @@ int			parse_map(int fd, t_index *m)
 			last = 1;
 		else
 		{
+			pfree = m->parse.map_string;
 			m->parse.map_string = ft_strjoin(m->parse.map_string, m->parse.line);
+			free(pfree);
 			pfree = m->parse.map_string;
 			m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
 			free(pfree);	
 		}
 		free(m->parse.line);
-		// m->parse.line = 0;
 	}
-	pfree = m->parse.map_string;
-	m->parse.map_string = ft_strjoin(m->parse.map_string, m->parse.line);
-	free(pfree);
-	pfree = m->parse.map_string;
-	m->parse.map_string = ft_strjoin(m->parse.map_string, "\0");
-	free(pfree);
+	printf("%s\n", m->parse.map_string);
 	return (1);
 }
 

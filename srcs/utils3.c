@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 08:45:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/08 08:58:35 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/10 14:55:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,23 @@ int		calcul_digit(t_index *m, int i)
 	}
 	m->el.res_x = (int)digit;
 	return (i);
+}
+
+int		check_line(char *s)
+{
+	int i;
+	int no_digit;
+
+	i = 0;
+	no_digit = 0;
+	if (digit(s))
+		no_digit = 1;
+	while (s[i])
+	{
+		if (is_white_space(s[i]) && !no_digit)
+			return (-1);
+		else
+			i++;
+	}
+	return (1);
 }
