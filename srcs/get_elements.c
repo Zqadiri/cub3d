@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/29 16:15:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 12:25:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		get_resolution(t_index *m)
 		i++;
 	if (m->el.elem[m->el.resolution_line][i] == '\0' ||
 			!ft_isdigit(m->el.elem[m->el.resolution_line][i]))
-		write_error_res(m);
+		write_el_error(m, 1);
 	while (m->el.elem[m->el.resolution_line][i] >= '0' &&
 			m->el.elem[m->el.resolution_line][i] <= '9')
 	{
@@ -55,7 +55,7 @@ int		get_resolution(t_index *m)
 	while (m->el.elem[m->el.resolution_line][i] != '\0')
 	{
 		if (m->el.elem[m->el.resolution_line][i] != ' ')
-			write_error_res(m);
+			write_el_error(m, 1);
 		i++;
 	}
 	return (1);

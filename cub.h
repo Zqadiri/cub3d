@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/10 14:58:42 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 12:44:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct			s_data
 typedef struct			s_parse
 {
 	char				*data;
-	char				*map_string;
+	char				*map_str;
 	char				**map;
 	int					line_nbr;
 	int					column_nbr;
@@ -183,23 +183,44 @@ typedef struct			s_index
 	t_text				text;
 	t_spr_xy			*s_xy;
 }						t_index;
-
-int						check_file_cub(char *filename);
-int						ft_key(int keycode, t_index *m);
-int						check_valid_color(t_index *m);
-int						keys_right_left(t_index *m, int keycode);
-int						keys_rot2(t_index *m, int keycode);
-int						keys_rot1(t_index *m, int keycode);
-int						keys_up_down(t_index *m, int keycode);
+/*
+** Error functions:
+*/
+int						exit_all(t_index *m);
+int						ft_errors(int ac, char **av);
+int						return_error_exit(t_index *m);
+int						write_error_one(t_index *m);
+int						return_error(t_index *m, int i);
+int						write_el_error(t_index *m, int i);
+int						write_error_end_floor(t_index *m, int i);
+int						write_error_floor(t_index *m, int i);
+int						write_error_end_ceilling(t_index *m, int i);
+int						write_error_ceilling(t_index *m, int i);
+int						check_north_and_south(t_index *m);
+int						check_west_and_east(t_index *m);
+int						check_elements_errors(t_index *m);
+/*
+** Init functions:
+*/
 void					init(t_index *m);
 void					init_1(t_index *m);
 void					init_2(t_index *m);
 void					init_3(t_index *m);
 void					init_4(t_index *m);
 void					init_5(t_index *m);
-void					free_text(t_index *m);
-void					cast_ray(int hit, float angle, t_index *m);
-void					cast_all_rays(t_index *m);
+/*
+** Key rotation functions:
+*/
+int						ft_key(int keycode, t_index *m);
+int						keys_right_left(t_index *m, int keycode);
+int						keys_rot2(t_index *m, int keycode);
+int						keys_rot1(t_index *m, int keycode);
+int						keys_up_down(t_index *m, int keycode);
+/*
+**
+*/
+int						check_valid_color(t_index *m);
+int						check_file_cub(char *filename);
 int						launch_program(t_index *m, char *av);
 int						parse_cub(t_index *m, char *filename);
 int						parse_data(int fd, t_index *m);
@@ -213,7 +234,7 @@ void					free_map(t_index *m);
 void					free_elem(t_index *m);
 void					free_paths(t_index *m);
 int						check_map_errors(t_index *m);
-int						check_spaces_algo(t_index *m);
+int						check_spaces(t_index *m);
 int						check_around(int i, int j, t_index *m);
 int						check_dir_letter(t_index *m);
 int						check_map_characters(t_index *m);
@@ -221,20 +242,6 @@ int						new_strlen(char *s);
 void					create_hex_color(t_index *m);
 int						transform_to_hex(int r, int g, int b);
 int						calcul_digit(t_index *m, int i);
-int						exit_all(t_index *m);
-int						ft_errors(int ac, char **av);
-int						return_error_exit(t_index *m);
-int						write_error_one(t_index *m);
-int						return_error(t_index *m);
-int						write_el_error(t_index *m);
-int						write_error_res(t_index *m);
-int						write_error_end_floor(t_index *m, int i);
-int						write_error_floor(t_index *m, int i);
-int						write_error_end_ceilling(t_index *m, int i);
-int						write_error_ceilling(t_index *m, int i);
-int						check_north_and_south(t_index *m);
-int						check_west_and_east(t_index *m);
-int						check_elements_errors(t_index *m);
 int						trim_path(t_index *m);
 int						trim_path_helper(t_index *m);
 int						check_resolution(t_index *m);

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/06 12:54:22 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 12:26:26 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,30 +88,30 @@ int		check_elem_nbr(t_index *m)
 		if (m->parse.data[i] == 'C')
 			m->parse.el_nbr++;
 	}
-	(m->parse.el_nbr != 8) ? write_el_error(m) : 1;
+	(m->parse.el_nbr != 8) ? write_el_error(m, 1) : 1;
 	return (1);
 }
 
 int		check_valid_color(t_index *m)
 {
 	if (m->el.c_r < 0 || m->el.c_r > 255)
-		write_error_res(m);
+		write_el_error(m, 1);
 	if (m->el.c_g < 0 || m->el.c_g > 255)
-		write_error_res(m);
+		write_el_error(m, 1);
 	if (m->el.c_b < 0 || m->el.c_b > 255)
-		write_error_res(m);
+		write_el_error(m, 1);
 	if (m->el.f_r < 0 || m->el.f_r > 255)
-		write_error_res(m);
+		write_el_error(m, 1);
 	if (m->el.f_g < 0 || m->el.f_g > 255)
-		write_error_res(m);
+		write_el_error(m, 1);
 	if (m->el.f_b < 0 || m->el.f_b > 255)
-		write_error_res(m);
+		write_el_error(m, 1);
 	return (1);
 }
 
 int		create_map(t_index *m)
 {
-	if (!(m->parse.map = ft_split(m->parse.map_string, '\n')))
+	if (!(m->parse.map = ft_split(m->parse.map_str, '\n')))
 		return (-1);
 	if (get_position(m) < 0)
 		return (-1);

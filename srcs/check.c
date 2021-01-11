@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:43:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/03 10:51:08 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 12:17:35 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		get_position2(t_index *m, int i, int j)
 		if (m->parse.dir == 0)
 			m->parse.dir = m->parse.map[i][j];
 		else
-			return (return_error(m));
+			return (return_error(m, 1));
 		m->parse.map[i][j] = '0';
 	}
 	if (m->parse.map[i][j] == '2')

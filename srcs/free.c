@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:58:47 by zqadiri           #+#    #+#             */
-/*   Updated: 2020/12/28 15:46:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 12:11:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	free_map(t_index *m)
 		free(m->parse.map);
 		m->parse.map = 0;
 	}
-	if (m->parse.map_string)
+	if (m->parse.map_str)
 	{
-		free(m->parse.map_string);
-		m->parse.map_string = 0;
+		free(m->parse.map_str);
+		m->parse.map_str = 0;
 	}
 }
 
