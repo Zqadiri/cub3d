@@ -6,11 +6,15 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:19:51 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/04 10:00:42 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 14:50:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
+
+/*
+** 
+*/
 
 int		keys_up_down(t_index *m, int keycode)
 {
@@ -35,8 +39,31 @@ int		keys_up_down(t_index *m, int keycode)
 	return (1);
 }
 
+int		keys_right_left(t_index *m, int keycode)
+{
+	if (keycode == MLXK_A)
+	{
+		if (m->parse.map[(int)(m->data.pos_y - m->data.dir_x *
+		(m->data.move_speed + 0.1))][(int)m->data.pos_x] != '1')
+			m->data.pos_y -= m->data.dir_x * m->data.move_speed;
+		if (m->parse.map[(int)m->data.pos_y][(int)(m->data.pos_x +
+		m->data.dir_y * (m->data.move_speed + 0.1))] != '1')
+			m->data.pos_x += m->data.dir_y * m->data.move_speed;
+	}
+	if (keycode == MLXK_D)
+	{
+		if (m->parse.map[(int)(m->data.pos_y + m->data.dir_x *
+		(m->data.move_speed + 0.1))][(int)m->data.pos_x] != '1')
+			m->data.pos_y += m->data.dir_x * m->data.move_speed;
+		if (m->parse.map[(int)m->data.pos_y][(int)(m->data.pos_x -
+		m->data.dir_y * (m->data.move_speed + 0.1))] != '1')
+			m->data.pos_x -= m->data.dir_y * m->data.move_speed;
+	}
+	return (1);
+}
+
 /*
-**rotate the player using rotation matrix
+** rotate the player using rotation matrix
 */
 
 int		keys_rot1(t_index *m, int keycode)
@@ -71,29 +98,6 @@ int		keys_rot2(t_index *m, int keycode)
 			m->data.plane_y * sin(-m->data.rot_speed);
 		m->data.plane_y = m->data.old_plane_x * sin(-m->data.rot_speed) +
 			m->data.plane_y * cos(-m->data.rot_speed);
-	}
-	return (1);
-}
-
-int		keys_right_left(t_index *m, int keycode)
-{
-	if (keycode == MLXK_A)
-	{
-		if (m->parse.map[(int)(m->data.pos_y - m->data.dir_x *
-		(m->data.move_speed + 0.1))][(int)m->data.pos_x] != '1')
-			m->data.pos_y -= m->data.dir_x * m->data.move_speed;
-		if (m->parse.map[(int)m->data.pos_y][(int)(m->data.pos_x +
-		m->data.dir_y * (m->data.move_speed + 0.1))] != '1')
-			m->data.pos_x += m->data.dir_y * m->data.move_speed;
-	}
-	if (keycode == MLXK_D)
-	{
-		if (m->parse.map[(int)(m->data.pos_y + m->data.dir_x *
-		(m->data.move_speed + 0.1))][(int)m->data.pos_x] != '1')
-			m->data.pos_y += m->data.dir_x * m->data.move_speed;
-		if (m->parse.map[(int)m->data.pos_y][(int)(m->data.pos_x -
-		m->data.dir_y * (m->data.move_speed + 0.1))] != '1')
-			m->data.pos_x -= m->data.dir_y * m->data.move_speed;
 	}
 	return (1);
 }

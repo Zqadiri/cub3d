@@ -5,7 +5,7 @@ SO      ./textures/bluestone.xpm
 WE      ./textures/greystone.xpm      
 EA      ./textures/redbrick.xpm
 S       ./textures/barrel.xpm
-F       228,0,106
+F       90,15,100
 C       127,8,255
 
 

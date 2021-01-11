@@ -6,16 +6,14 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 12:34:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 14:47:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int			parse_map(int fd, t_index *m)
+int			parse_map(int fd, t_index *m, char *pfree)
 {
-	char *pfree;
-
 	while (m->parse.ret)
 	{
 		m->parse.ret = get_next_line(fd, &m->parse.line);
@@ -97,11 +95,13 @@ int			parse_data(int fd, t_index *m)
 int			parse_cub(t_index *m, char *filename)
 {
 	int		fd;
+	char	*pfree;
 
+	pfree = NULL;
 	fd = open(filename, O_RDONLY);
 	if (parse_data(fd, m) < 0)
 		return (-1);
-	if (parse_map(fd, m) < 0)
+	if (parse_map(fd, m, pfree) < 0)
 		return (-1);
 	(!digit(m->parse.map_str)) ? error_data(m) : 1;
 	if (check_map_characters(m) < 0)
@@ -110,8 +110,6 @@ int			parse_cub(t_index *m, char *filename)
 		return (-1);
 	close(fd);
 	if (create_map(m) < 0)
-		return (-1);
-	if (create_good_size_map(m) < 0)
 		return (-1);
 	if (check_map_errors(m) < 0)
 		return (-1);

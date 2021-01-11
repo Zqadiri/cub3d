@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 12:44:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 14:44:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,22 +217,31 @@ int						keys_rot2(t_index *m, int keycode);
 int						keys_rot1(t_index *m, int keycode);
 int						keys_up_down(t_index *m, int keycode);
 /*
-**
+** free:
 */
+void					free_win(t_index *m);
+void					free_map(t_index *m);
+void					free_elem(t_index *m);
+void					free_paths(t_index *m);
+/*
+** parsing functions:
+*/
+char					*get_north_texture(t_index *m);
+char					*get_sprite_texture(t_index *m);
+char					*get_south_texture(t_index *m);
+char					*get_west_texture(t_index *m);
+char					*get_east_texture(t_index *m);
+int						get_sprites(t_index *m);
 int						check_valid_color(t_index *m);
 int						check_file_cub(char *filename);
 int						launch_program(t_index *m, char *av);
 int						parse_cub(t_index *m, char *filename);
 int						parse_data(int fd, t_index *m);
-int						parse_map(int fd, t_index *m);
+int						parse_map(int fd, t_index *m, char *pfree);
 int						check_elem_nbr(t_index *m);
 int						create_map(t_index *m);
 int						create_good_size_map(t_index *m);
 char					*create_new_line(char *str, int diff);
-void					free_win(t_index *m);
-void					free_map(t_index *m);
-void					free_elem(t_index *m);
-void					free_paths(t_index *m);
 int						check_map_errors(t_index *m);
 int						check_spaces(t_index *m);
 int						check_around(int i, int j, t_index *m);
@@ -245,12 +254,6 @@ int						calcul_digit(t_index *m, int i);
 int						trim_path(t_index *m);
 int						trim_path_helper(t_index *m);
 int						check_resolution(t_index *m);
-char					*get_north_texture(t_index *m);
-char					*get_sprite_texture(t_index *m);
-char					*get_south_texture(t_index *m);
-char					*get_west_texture(t_index *m);
-char					*get_east_texture(t_index *m);
-int						get_sprites(t_index *m);
 void					parse_sprites(t_index *m);
 int						malloc_size_sprite(t_index *m);
 int						get_ceilling_color(t_index *m);
@@ -267,6 +270,16 @@ int						add_textures(t_index *m);
 int						create_images(t_index *m);
 int						create_images2(t_index *m);
 int						create_elements_lines(t_index *m);
+/*
+** raycasting:
+*/
+void					sprite_raycasting(t_index *m);
+void					sort_sprites(t_index *m);
+void					order(t_index *m);
+void					update(t_index *m, int i);
+void					calculate_start_end(t_index *m);
+void					draw_sprite(t_index *m);
+void					verline(int i, t_index *m);
 void					draw(t_index *m);
 void					calculate_dist(t_index *m);
 void					calculate_wall_height(t_index *m);
@@ -275,16 +288,9 @@ void					calculate_step_sidedist(t_index *m);
 void					calculate_ray_pos_dir(int i, t_index *m);
 void					calculate_textures(t_index *m);
 void					calculate_colors(t_index *m);
-void					verline(int i, t_index *m);
-int						screen_shot(t_index *m);
-int						write_info(t_index *m, int fd);
-int						bit_map_file_headers(t_index *m, int fd, int file_size);
-void					sprite_raycasting(t_index *m);
-void					sort_sprites(t_index *m);
-void					order(t_index *m);
-void					update(t_index *m, int i);
-void					calculate_start_end(t_index *m);
-void					draw_sprite(t_index *m);
+/*
+**	utils:
+*/
 int						digit(char *c);
 int						is_empty(char *s);
 int						check_elem_nbr2(t_index *m, int i, int cpt);
@@ -293,5 +299,11 @@ int						is_white_space(char c);
 int						error_data(t_index *m);
 int						exit_prg(t_index *m);
 int						check_line(char *s);
+/*
+** bmp file:
+*/
+int						screen_shot(t_index *m);
+int						write_info(t_index *m, int fd);
+int						bit_map_file_headers(t_index *m, int fd, int file_size);
 
 #endif
