@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 14:45:31 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 16:27:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ int		create_map(t_index *m)
 	if (check_borders_columns(m) < 0)
 		return (-1);
 	if (create_good_size_map(m) < 0)
+		return (-1);
+	if (check_map_errors(m) < 0)
 		return (-1);
 	return (1);
 }

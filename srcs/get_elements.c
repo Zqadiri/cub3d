@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 12:25:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/13 11:05:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,11 @@ int		get_elements(t_index *m)
 	m->el.elem = ft_split(m->parse.data, '\n');
 	if (create_elements_lines(m) < 0)
 		return (-1);
-	if (get_resolution(m) < 0)
-		return (-1);
 	if (get_floor_color(m) < 0)
 		return (-1);
 	if (get_ceilling_color(m) < 0)
+		return (-1);
+	if (get_resolution(m) < 0)
 		return (-1);
 	if (check_valid_color(m) < 0)
 		return (-1);

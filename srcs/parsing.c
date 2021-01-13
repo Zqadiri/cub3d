@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 14:47:52 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 16:26:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int			parse_map(int fd, t_index *m, char *pfree)
 	{
 		m->parse.ret = get_next_line(fd, &m->parse.line);
 		if (m->parse.end && is_empty(m->parse.line))
-			error_data(m);
+			error_data(m, 3);
 		if ((m->parse.not_empty && m->parse.line[0] != '\n'))
-			error_data(m);
+			error_data(m, 2);
 		if (check_line(m->parse.line) < 0)
 			m->parse.not_empty = 1;
 		if (is_empty(m->parse.line) && digit(m->parse.map_str))
@@ -75,7 +75,7 @@ int			parse_data(int fd, t_index *m)
 		free(line);
 		get_next_line(fd, &line);
 	}
-	(digit(line)) ? error_data(m) : 1;
+	(digit(line)) ? error_data(m, 2) : 1;
 	m->parse.data = ft_strjoin(m->parse.data, line);
 	save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, "\n");
@@ -87,7 +87,7 @@ int			parse_data(int fd, t_index *m)
 	free(save);
 	save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, "\0");
-	(m->parse.i < 7) ? error_data(m) : 1;
+	(m->parse.i < 7) ? error_data(m, 1) : 1;
 	clear(save, line);
 	return (1);
 }
@@ -103,15 +103,13 @@ int			parse_cub(t_index *m, char *filename)
 		return (-1);
 	if (parse_map(fd, m, pfree) < 0)
 		return (-1);
-	(!digit(m->parse.map_str)) ? error_data(m) : 1;
+	(!digit(m->parse.map_str)) ? error_data(m, 1) : 1;
 	if (check_map_characters(m) < 0)
 		return (-1);
 	if (check_elem_nbr(m) < 0)
 		return (-1);
 	close(fd);
 	if (create_map(m) < 0)
-		return (-1);
-	if (check_map_errors(m) < 0)
 		return (-1);
 	if (get_sprites(m) < 0)
 		return (-1);

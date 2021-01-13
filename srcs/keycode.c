@@ -6,14 +6,14 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:19:51 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 14:50:16 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/11 14:52:35 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
 /*
-** 
+** move the player using vector addition
 */
 
 int		keys_up_down(t_index *m, int keycode)

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 14:44:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/13 11:52:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include "./libft/libft.h"
-# include "./minilibx/mlx.h"
 
 # define WINDOW_TITLE "cub3D"
 # define MLXK_ESC 53
@@ -296,7 +295,7 @@ int						is_empty(char *s);
 int						check_elem_nbr2(t_index *m, int i, int cpt);
 void					clear(char *save, char *line);
 int						is_white_space(char c);
-int						error_data(t_index *m);
+int						error_data(t_index *m, int i);
 int						exit_prg(t_index *m);
 int						check_line(char *s);
 /*

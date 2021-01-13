@@ -6,12 +6,11 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2021/01/11 11:08:05 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/01/13 11:51:48 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 			=	 cub3D 
-MINILIBX_PATH 	= 	./minilibx
 LIBFT_PATH 		= 	./libft
 
 SRCS 			=	./srcs/main.c\
@@ -43,22 +42,21 @@ SRCS 			=	./srcs/main.c\
 OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	cub.h
 LIBFT 			= 	libft
-MINILIBX 		= 	miniLibx
-CC				= 	gcc -g -Wall -Wextra -Werror  -Ofast
-
+CC				= 	gcc  -Wall -Wextra -Werror -Ofast
 RM				= 	rm -f
-MLXFLAGS 		=   -lmlx -framework OpenGL -framework AppKit 
+MLXFLAGS 		=   /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
 
 # -I Add the directory dir to the list of directories to be searched for header files
 # -L Searches the library when linking
 # $@ is the name of the target being generated
 # @	Don’t print command
-# -I /usr/local/include -L /usr/local/bin -lmlx -framework OpenGl -framework AppKit libmlx.dylib 
 
-all:			libft_all ${NAME}
+all:			 ${NAME} libft_all
+
 $(NAME):		${OBJS} 
-				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a  -I  ./ $(OBJS) -o $@ 
+				$(CC) -o $(NAME)  $(SRCS) $(LIBFLAGS) -L $(MLXFLAGS) 
+
 clean:			libft_clean
 				@${RM} ${OBJS}
 fclean:			libft_fclean clean
@@ -78,18 +76,5 @@ libft_clean:
 libft_fclean:
 				make -C $(LIBFT_PATH) fclean
 				$(RM) libft.a
-
-minilibx_all:
-				make -C $(MINILIBX_PATH) all
-				cp ./minilibX/libmlx.a libmlx.a
-
-minilibx_clean:
-				make -C $(MINILIBX_PATH) clean
-
-minilibx_fclean:
-				make -C $(MINILIBX_PATH) clean
-				$(RM) libmlx.a
 				
 .PHONY: 		all fclean clean re
-
-# check file with just map
