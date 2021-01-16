@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/15 14:45:27 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/16 12:14:41 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void		get_floor_color(t_index *m)
 	i = 0;
 	while (m->el.elem[m->el.f_l][++i] == ' ')
 		i++;
-	// while (!ft_isdigit(m->el.elem[m->el.f_l][++i]))
-	// 	write_error_floor(m);
 	while (m->el.elem[m->el.f_l][i] >= '0' && m->el.elem[m->el.f_l][i] <= '9')
 		m->el.f_r = (m->el.f_r * 10) + m->el.elem[m->el.f_l][i++] - '0';
 	i = i - 1;
@@ -98,17 +96,13 @@ void		get_ceilling_color(t_index *m)
 	i = 0;
 	while (m->el.elem[m->el.c_l][++i] == ' ')
 		i++;
-	// printf ("1.%c\n", m->el.elem[m->el.c_l][i]);
 	while (m->el.elem[m->el.c_l][i] >= '0' && m->el.elem[m->el.c_l][i] <= '9')
 		m->el.c_r = (m->el.c_r * 10) + m->el.elem[m->el.c_l][i++] - '0';
 	i = i - 1;
-	// printf ("2.%c\n", m->el.elem[m->el.c_l][i]);
 	while (m->el.elem[m->el.c_l][++i] != ',')
 		write_error_ceilling(m);
-	// printf ("3.%c\n", m->el.elem[m->el.c_l][i]);
 	while (!ft_isdigit(m->el.elem[m->el.c_l][++i]))
 		write_error_ceilling(m);
-	// printf ("4.%c\n", m->el.elem[m->el.c_l][i]);
 	while (m->el.elem[m->el.c_l][i] >= '0' && m->el.elem[m->el.c_l][i] <= '9')
 		m->el.c_g = (m->el.c_g * 10) + m->el.elem[m->el.c_l][i++] - '0';
 	i = i - 1;

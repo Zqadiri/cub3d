@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/15 18:33:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/16 12:29:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ int			parse_map(int fd, t_index *m)
 	{
 		m->parse.ret = get_next_line(fd, &m->parse.line);
 		if (last == 1)
-			error_data(m, 2);
+			error_data(m, 3);
 		if (!digit(m->parse.line) && digit(m->parse.map_str))
 			last = 1;
-		if (check_line(m->parse.line) < 0)
-			not_empty = 1;
 		else
 		{
 			pfree = m->parse.map_str;
@@ -77,6 +75,7 @@ int			parse_data(int fd, t_index *m)
 	line = NULL;
 	while (is_empty(line))
 	{
+		
 		free(line);
 		get_next_line(fd, &line);
 	}
