@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2021/01/13 11:51:48 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/01/15 14:59:39 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,8 @@ SRCS 			=	./srcs/main.c\
 					
 OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	cub.h
-LIBFT 			= 	libft
-CC				= 	gcc  -Wall -Wextra -Werror -Ofast
+LIBFT 			= 	libft 
+CC				= 	gcc  -Wall -Wextra -Werror -Ofast -g
 RM				= 	rm -f
 MLXFLAGS 		=   /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 

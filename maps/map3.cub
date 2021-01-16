@@ -1,42 +1,15 @@
-
-
-
-
 R     1920 1000
-
-        
-
-
 NO      ./textures/colorstone
-
 SO ./textures/bluestone.xpm
-
-
-
-
-
-
 WE ./textures/greystone.xpm
 EA ./textures/redbrick.xpm
-
-
-
-
 S ./textures/barrel.xpm
-
-
-
 F    228,0,106
-
-
 C       127,0,255
-
-
-
-
 
         1111111111111111111111111
         1000000000000000000000001
+
         101100000020000001000000111
         1001000000000000000000001
 111111111011000000000000000010001

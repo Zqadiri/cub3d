@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/13 11:05:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/15 14:45:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,62 +61,66 @@ int		get_resolution(t_index *m)
 	return (1);
 }
 
-int		get_floor_color(t_index *m)
+void		get_floor_color(t_index *m)
 {
 	int i;
 
 	i = 0;
 	while (m->el.elem[m->el.f_l][++i] == ' ')
 		i++;
+	// while (!ft_isdigit(m->el.elem[m->el.f_l][++i]))
+	// 	write_error_floor(m);
 	while (m->el.elem[m->el.f_l][i] >= '0' && m->el.elem[m->el.f_l][i] <= '9')
 		m->el.f_r = (m->el.f_r * 10) + m->el.elem[m->el.f_l][i++] - '0';
 	i = i - 1;
 	while (m->el.elem[m->el.f_l][++i] != ',')
-		write_error_floor(m, i);
+		write_error_floor(m);
 	while (!ft_isdigit(m->el.elem[m->el.f_l][++i]))
-		write_error_floor(m, i);
+		write_error_floor(m);
 	while (m->el.elem[m->el.f_l][i] >= '0' && m->el.elem[m->el.f_l][i] <= '9')
 		m->el.f_g = (m->el.f_g * 10) + m->el.elem[m->el.f_l][i++] - '0';
 	i = i - 1;
 	while (m->el.elem[m->el.f_l][++i] != ',')
-		write_error_floor(m, i);
+		write_error_floor(m);
 	while (!ft_isdigit(m->el.elem[m->el.f_l][++i]))
-		write_error_floor(m, i);
+		write_error_floor(m);
 	while (m->el.elem[m->el.f_l][i] >= '0' && m->el.elem[m->el.f_l][i] <= '9')
 		m->el.f_b = (m->el.f_b * 10) + m->el.elem[m->el.f_l][i++] - '0';
 	i = i - 1;
 	while (m->el.elem[m->el.f_l][++i] != '\0')
 		write_error_end_floor(m, i);
-	return (0);
 }
 
-int		get_ceilling_color(t_index *m)
+void		get_ceilling_color(t_index *m)
 {
 	int i;
 
 	i = 0;
 	while (m->el.elem[m->el.c_l][++i] == ' ')
 		i++;
+	// printf ("1.%c\n", m->el.elem[m->el.c_l][i]);
 	while (m->el.elem[m->el.c_l][i] >= '0' && m->el.elem[m->el.c_l][i] <= '9')
 		m->el.c_r = (m->el.c_r * 10) + m->el.elem[m->el.c_l][i++] - '0';
 	i = i - 1;
+	// printf ("2.%c\n", m->el.elem[m->el.c_l][i]);
 	while (m->el.elem[m->el.c_l][++i] != ',')
-		write_error_ceilling(m, i);
+		write_error_ceilling(m);
+	// printf ("3.%c\n", m->el.elem[m->el.c_l][i]);
 	while (!ft_isdigit(m->el.elem[m->el.c_l][++i]))
-		write_error_ceilling(m, i);
+		write_error_ceilling(m);
+	// printf ("4.%c\n", m->el.elem[m->el.c_l][i]);
 	while (m->el.elem[m->el.c_l][i] >= '0' && m->el.elem[m->el.c_l][i] <= '9')
 		m->el.c_g = (m->el.c_g * 10) + m->el.elem[m->el.c_l][i++] - '0';
 	i = i - 1;
 	while (m->el.elem[m->el.c_l][++i] != ',')
-		write_error_ceilling(m, i);
+		write_error_ceilling(m);
 	while (!ft_isdigit(m->el.elem[m->el.c_l][++i]))
-		write_error_ceilling(m, i);
+		write_error_ceilling(m);
 	while (m->el.elem[m->el.c_l][i] >= '0' && m->el.elem[m->el.c_l][i] <= '9')
 		m->el.c_b = (m->el.c_b * 10) + m->el.elem[m->el.c_l][i++] - '0';
 	i = i - 1;
 	while (m->el.elem[m->el.c_l][++i] != '\0')
 		write_error_end_ceilling(m, i);
-	return (0);
 }
 
 int		get_elements(t_index *m)
@@ -124,13 +128,11 @@ int		get_elements(t_index *m)
 	m->el.elem = ft_split(m->parse.data, '\n');
 	if (create_elements_lines(m) < 0)
 		return (-1);
-	if (get_floor_color(m) < 0)
-		return (-1);
-	if (get_ceilling_color(m) < 0)
+	get_floor_color(m);
+	get_ceilling_color(m);
+	if (check_valid_color(m) < 0)
 		return (-1);
 	if (get_resolution(m) < 0)
-		return (-1);
-	if (check_valid_color(m) < 0)
 		return (-1);
 	create_hex_color(m);
 	if (!get_sprite_texture(m))

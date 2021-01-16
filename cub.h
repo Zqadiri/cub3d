@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/13 11:52:57 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/15 11:05:02 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,9 +192,9 @@ int						write_error_one(t_index *m);
 int						return_error(t_index *m, int i);
 int						write_el_error(t_index *m, int i);
 int						write_error_end_floor(t_index *m, int i);
-int						write_error_floor(t_index *m, int i);
+int						write_error_floor(t_index *m);
 int						write_error_end_ceilling(t_index *m, int i);
-int						write_error_ceilling(t_index *m, int i);
+int						write_error_ceilling(t_index *m);
 int						check_north_and_south(t_index *m);
 int						check_west_and_east(t_index *m);
 int						check_elements_errors(t_index *m);
@@ -236,7 +236,7 @@ int						check_file_cub(char *filename);
 int						launch_program(t_index *m, char *av);
 int						parse_cub(t_index *m, char *filename);
 int						parse_data(int fd, t_index *m);
-int						parse_map(int fd, t_index *m, char *pfree);
+int						parse_map(int fd, t_index *m);
 int						check_elem_nbr(t_index *m);
 int						create_map(t_index *m);
 int						create_good_size_map(t_index *m);
@@ -255,8 +255,8 @@ int						trim_path_helper(t_index *m);
 int						check_resolution(t_index *m);
 void					parse_sprites(t_index *m);
 int						malloc_size_sprite(t_index *m);
-int						get_ceilling_color(t_index *m);
-int						get_floor_color(t_index *m);
+void					get_ceilling_color(t_index *m);
+void					get_floor_color(t_index *m);
 int						get_resolution(t_index *m);
 int						get_elements(t_index *m);
 int						get_position(t_index *m);

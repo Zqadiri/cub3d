@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:08:16 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 12:45:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/14 16:49:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		digit(char *c)
 
 int		transform_to_hex(int r, int g, int b)
 {
-	return (r << 16 | g << 8 | b);
+	return ((r << 16) | (g << 8) | b);
 }
 
 void	create_hex_color(t_index *m)

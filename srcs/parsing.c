@@ -6,25 +6,30 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 16:26:52 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/15 18:33:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int			parse_map(int fd, t_index *m, char *pfree)
+int			parse_map(int fd, t_index *m)
 {
+	char *pfree;
+	int	not_empty;
+	int	last;
+
+	last = 0; 
+	not_empty = 0;
+	m->parse.map_str = ft_strdup("");
 	while (m->parse.ret)
 	{
 		m->parse.ret = get_next_line(fd, &m->parse.line);
-		if (m->parse.end && is_empty(m->parse.line))
-			error_data(m, 3);
-		if ((m->parse.not_empty && m->parse.line[0] != '\n'))
+		if (last == 1)
 			error_data(m, 2);
+		if (!digit(m->parse.line) && digit(m->parse.map_str))
+			last = 1;
 		if (check_line(m->parse.line) < 0)
-			m->parse.not_empty = 1;
-		if (is_empty(m->parse.line) && digit(m->parse.map_str))
-			m->parse.end = 1;
+			not_empty = 1;
 		else
 		{
 			pfree = m->parse.map_str;
@@ -32,9 +37,9 @@ int			parse_map(int fd, t_index *m, char *pfree)
 			free(pfree);
 			pfree = m->parse.map_str;
 			m->parse.map_str = ft_strjoin(m->parse.map_str, "\n");
-			free(pfree);
+			free(pfree);	
 		}
-		free(m->parse.line);
+		free(m->parse.line);	
 	}
 	return (1);
 }
@@ -101,7 +106,7 @@ int			parse_cub(t_index *m, char *filename)
 	fd = open(filename, O_RDONLY);
 	if (parse_data(fd, m) < 0)
 		return (-1);
-	if (parse_map(fd, m, pfree) < 0)
+	if (parse_map(fd, m) < 0)
 		return (-1);
 	(!digit(m->parse.map_str)) ? error_data(m, 1) : 1;
 	if (check_map_characters(m) < 0)

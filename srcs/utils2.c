@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:14:37 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/09 19:10:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/15 18:15:04 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int		is_empty(char *s)
 {
 	int i;
 
+	i = 0;
 	if (!s)
 		return (1);
-	i = 0;
 	if (s[0] == '\0')
 		return (1);
 	while (s[i] != '\0')
@@ -60,5 +60,5 @@ int		is_empty(char *s)
 			return (0);
 		i++;
 	}
-	return (1);
+	return (0);
 }

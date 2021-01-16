@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:13:22 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/13 09:23:23 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/15 11:04:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,11 @@ int		return_error_exit(t_index *m)
 	return (-1);
 }
 
-int		write_error_floor(t_index *m, int i)
+int		write_error_floor(t_index *m)
 {
-	if (m->el.elem[m->el.f_l][i] == '\0' ||
-		m->el.elem[m->el.f_l][i] == ' ' ||
-		m->el.elem[m->el.f_l][i] == '-' ||
-		!ft_isdigit(m->el.elem[m->el.f_l][++i]))
-	{
-		write(1, "Error\n", 6);
-		write(1, "Wrong floor arguments\n", 22);
-		exit_all(m);
-	}
+	write(1, "Error\n", 6);
+	write(1, "Wrong floor arguments\n", 22);
+	exit_all(m);
 	return (-1);
 }
 
@@ -45,17 +39,11 @@ int		write_error_end_floor(t_index *m, int i)
 	return (-1);
 }
 
-int		write_error_ceilling(t_index *m, int i)
+int		write_error_ceilling(t_index *m)
 {
-	if (m->el.elem[m->el.c_l][i] == '\0' ||
-		m->el.elem[m->el.c_l][i] == ' ' ||
-		m->el.elem[m->el.c_l][i] == '-' ||
-		!ft_isdigit(m->el.elem[m->el.f_l][++i]))
-	{
-		write(1, "Error\n", 6);
-		write(1, "Wrong ceilling arguments\n", 25);
-		exit_all(m);
-	}
+	write(1, "Error\n", 6);
+	write(1, "Wrong ceilling arguments\n", 25);
+	exit_all(m);
 	return (-1);
 }
 

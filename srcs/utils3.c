@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 08:45:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/10 14:55:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/15 15:26:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ int		check_line(char *s)
 	i = 0;
 	no_digit = 0;
 	if (digit(s))
-		no_digit = 1;
-	while (s[i])
+		return (1);
+	if (s[0] == '\0')
+		return (1);
+	while (s[i] != '\0')
 	{
-		if (is_white_space(s[i]) && !no_digit)
+		if (is_white_space(s[i]))
 			return (-1);
 		else
 			i++;

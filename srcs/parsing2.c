@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 16:27:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/15 14:48:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,24 @@ int		check_elem_nbr(t_index *m)
 
 int		check_valid_color(t_index *m)
 {
+	// printf("%d\n", m->el.f_r);
+	// printf("%d\n", m->el.f_g);
+	// printf("%d\n", m->el.f_b);
+	// printf("%d\n", m->el.c_r);
+	// printf("%d\n", m->el.c_g);
+	// printf("%d\n", m->el.c_b);
 	if (m->el.c_r < 0 || m->el.c_r > 255)
-		write_el_error(m, 1);
+		write_el_error(m, 2);
 	if (m->el.c_g < 0 || m->el.c_g > 255)
-		write_el_error(m, 1);
+		write_el_error(m, 2);
 	if (m->el.c_b < 0 || m->el.c_b > 255)
-		write_el_error(m, 1);
+		write_el_error(m, 2);
 	if (m->el.f_r < 0 || m->el.f_r > 255)
-		write_el_error(m, 1);
+		write_el_error(m, 2);
 	if (m->el.f_g < 0 || m->el.f_g > 255)
-		write_el_error(m, 1);
+		write_el_error(m, 2);
 	if (m->el.f_b < 0 || m->el.f_b > 255)
-		write_el_error(m, 1);
+		write_el_error(m, 2);
 	return (1);
 }
 
