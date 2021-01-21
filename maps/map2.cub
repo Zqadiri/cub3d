@@ -1,12 +1,15 @@
-R    1000 1400
+R  555 555
 
 
 
-
-NO      ./textures/colorstone
+NO            ./textures/colorstone
 
 SO ./textures/bluestone.xpm
+
 WE ./textures/greystone.xpm
+
+
+
 EA ./textures/redbrick.xpm
 
 
@@ -18,8 +21,7 @@ S ./textures/barrel.xpm
 F    228,0,106
 
 
-C       255,255,255
-
+C       255,255,28
 
 
 

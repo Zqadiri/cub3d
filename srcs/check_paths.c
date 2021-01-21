@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:31:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/06 12:46:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:39:31 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	trim_path(t_index *m)
 	int		len;
 	char	*pfree;
 
-	len = ft_strlen(m->el.east_path);
+	len = ft_strlen(m->el.north_path);
 	i = len - 1;
 	while (is_white_space(m->el.north_path[i]))
 		i--;

@@ -6,13 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/16 12:14:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/20 18:05:35 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int		create_elements_lines(t_index *m)
+int			create_elements_lines(t_index *m)
 {
 	int i;
 	int j;
@@ -32,7 +32,7 @@ int		create_elements_lines(t_index *m)
 	return (1);
 }
 
-int		get_resolution(t_index *m)
+int			get_resolution(t_index *m)
 {
 	int					i;
 	unsigned long int	digit;
@@ -43,7 +43,7 @@ int		get_resolution(t_index *m)
 	while (m->el.elem[m->el.resolution_line][i] == ' ')
 		i++;
 	if (m->el.elem[m->el.resolution_line][i] == '\0' ||
-			!ft_isdigit(m->el.elem[m->el.resolution_line][i]))
+		!ft_isdigit(m->el.elem[m->el.resolution_line][i]))
 		write_el_error(m, 1);
 	while (m->el.elem[m->el.resolution_line][i] >= '0' &&
 			m->el.elem[m->el.resolution_line][i] <= '9')
@@ -65,9 +65,11 @@ void		get_floor_color(t_index *m)
 {
 	int i;
 
-	i = 0;
-	while (m->el.elem[m->el.f_l][++i] == ' ')
+	i = 1;
+	while (m->el.elem[m->el.f_l][i] == ' ')
 		i++;
+	if (!ft_isdigit(m->el.elem[m->el.f_l][i]))
+		write_error_floor(m);
 	while (m->el.elem[m->el.f_l][i] >= '0' && m->el.elem[m->el.f_l][i] <= '9')
 		m->el.f_r = (m->el.f_r * 10) + m->el.elem[m->el.f_l][i++] - '0';
 	i = i - 1;
@@ -93,9 +95,11 @@ void		get_ceilling_color(t_index *m)
 {
 	int i;
 
-	i = 0;
-	while (m->el.elem[m->el.c_l][++i] == ' ')
+	i = 1;
+	while (m->el.elem[m->el.c_l][i] == ' ')
 		i++;
+	if (!(ft_isdigit(m->el.elem[m->el.c_l][i])))
+		write_error_ceilling(m);
 	while (m->el.elem[m->el.c_l][i] >= '0' && m->el.elem[m->el.c_l][i] <= '9')
 		m->el.c_r = (m->el.c_r * 10) + m->el.elem[m->el.c_l][i++] - '0';
 	i = i - 1;
@@ -117,9 +121,11 @@ void		get_ceilling_color(t_index *m)
 		write_error_end_ceilling(m, i);
 }
 
-int		get_elements(t_index *m)
+int			get_elements(t_index *m)
 {
 	m->el.elem = ft_split(m->parse.data, '\n');
+	if (!check_empty_line(m->el.elem))
+		error_data(m, 2);
 	if (create_elements_lines(m) < 0)
 		return (-1);
 	get_floor_color(m);

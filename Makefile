@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:41:21 by zqadiri           #+#    #+#              #
-#    Updated: 2021/01/15 14:59:39 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/01/19 11:51:57 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ OBJS			= 	${SRCS:.c=.o}
 INCLUDE 		= 	cub.h
 LIBFT 			= 	libft 
 CC				= 	gcc  -Wall -Wextra -Werror -Ofast -g
+
 RM				= 	rm -f
 MLXFLAGS 		=   /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 LIBFLAGS 		= 	-I ./libft -L ./libft -L . ./libft/*.c 
@@ -78,3 +79,6 @@ libft_fclean:
 				$(RM) libft.a
 				
 .PHONY: 		all fclean clean re
+
+# fix rgb color error "F F"
+# check resolution

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 08:45:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/15 15:26:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/18 16:36:25 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		calcul_digit(t_index *m, int i)
 		digit = (digit * 10) + m->el.elem[m->el.resolution_line][i] - '0';
 		i++;
 	}
-	m->el.res_x = (int)digit;
+	m->el.res_x = digit;
 	return (i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 16:29:07 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/11 17:01:49 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/19 14:33:15 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int		write_el_error(t_index *m, int i)
 {
 	if (i == 1)
 	{
-		write(1, "Error\n", 6);
-		write(1, "Wrong resolution\n", 17);
+		ft_putstr_fd("Error\n", 1);
+		ft_putstr_fd("Wrong resolution\n", 1);
 		return (exit_all(m));
 	}
 	if (i == 2)
 	{
-		write(1, "Error\n", 6);
-		write(1, "Wrong elements\n", 16);
+		ft_putstr_fd("Error\n", 1);
+		ft_putstr_fd("Wrong elements\n", 1);
 		return (exit_all(m));
 	}
 	return (1);
@@ -35,17 +35,17 @@ int		ft_errors(int ac, char **av)
 
 	if (ac == 1 || ac > 3)
 	{
-		write(1, "Error\nInvalid arguments\n", 24);
+		ft_putstr_fd("Error\nInvalid arguments\n", 1);
 		return (-1);
 	}
 	else if (ac == 3 && (ft_strncmp(av[2], "--save", 6)))
 	{
-		write(1, "Error\nInvalid option\n", 21);
+		ft_putstr_fd("Error\nInvalid option\n", 1);
 		return (-1);
 	}
 	else if ((fd = open(av[1], O_RDONLY)) <= 0)
 	{
-		write(1, "Error\nNo such file or directory\n", 32);
+		ft_putstr_fd("Error\nNo such file or directory\n", 1);
 		return (-1);
 	}
 	return (1);
@@ -55,14 +55,14 @@ int		return_error(t_index *m, int i)
 {
 	if (i == 1)
 	{
-		write(1, "Error\n", 6);
-		write(1, "Multiple initial positions\n", 27);
+		ft_putstr_fd("Error\n", 1);
+		ft_putstr_fd("Multiple initial positions\n", 1);
 		return (exit_all(m));
 	}
 	if (i == 2)
 	{
-		write(1, "Error\n", 6);
-		write(1, "No player found (N,S,W,E)\n", 27);
+		ft_putstr_fd("Error\n", 1);
+		ft_putstr_fd("No player found (N,S,W,E)\n", 1);
 		return (exit_all(m));
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:14:37 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/15 18:15:04 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/19 08:47:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int		new_strlen(char *s)
 
 int		is_white_space(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n');
+	if (c == ' ' || c == '\t' || c == '\n')
+		return (1);
+	return (0);
 }
 
 void	init(t_index *m)

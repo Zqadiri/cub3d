@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/15 11:05:02 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:42:53 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ typedef struct			s_elements
 	int					sprite_line;
 	int					f_l;
 	int					c_l;
-	int					c_r;
-	int					c_g;
-	int					c_b;
-	int					f_r;
-	int					f_g;
-	int					f_b;
+	long long			c_r;
+	long long			c_g;
+	long long			c_b;
+	long long			f_r;
+	long long			f_g;
+	long long			f_b;
 	int					c_color_hex;
 	int					f_color_hex;
 	char				*north_path;
@@ -237,7 +237,7 @@ int						launch_program(t_index *m, char *av);
 int						parse_cub(t_index *m, char *filename);
 int						parse_data(int fd, t_index *m);
 int						parse_map(int fd, t_index *m);
-int						check_elem_nbr(t_index *m);
+void					check_elem_nbr(t_index *m);
 int						create_map(t_index *m);
 int						create_good_size_map(t_index *m);
 char					*create_new_line(char *str, int diff);
@@ -269,6 +269,8 @@ int						add_textures(t_index *m);
 int						create_images(t_index *m);
 int						create_images2(t_index *m);
 int						create_elements_lines(t_index *m);
+int						check_empty_line(char **el);
+
 /*
 ** raycasting:
 */

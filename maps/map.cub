@@ -1,15 +1,18 @@
 
-R    2000 1500
+R    15 15
+NO      ./textures/colorstone     
 
-NO      ./textures/colorstone
-SO      ./textures/bluestone.xpm
+SO      ./textures/bluestone.XPM   
 
-WE      ./textures/greystone.xpm      
+WE      ./textures/greystone.xpm     
 EA      ./textures/redbrick.xpm
+
 S       ./textures/sp.xpm
-    
-F      0,0,0 
-C          255,255,255
+
+F 255,0,0
+
+C  255,255,255
+
 
 
 

@@ -6,13 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/15 14:48:27 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/20 18:02:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-char	*create_new_line(char *str, int diff)
+char		*create_new_line(char *str, int diff)
 {
 	int		i;
 	char	*new;
@@ -35,7 +35,7 @@ char	*create_new_line(char *str, int diff)
 	return (new);
 }
 
-int		create_good_size_map(t_index *m)
+int			create_good_size_map(t_index *m)
 {
 	int		i;
 	int		len;
@@ -64,42 +64,37 @@ int		create_good_size_map(t_index *m)
 	return (1);
 }
 
-int		check_elem_nbr(t_index *m)
+void		check_elem_nbr(t_index *m)
 {
 	int i;
 
 	i = -1;
-	while (m->parse.data[++i] != '\0')
+	while (m->el.elem[++i] != '\0')
 	{
-		if (m->parse.data[i] == 'R')
+		if (m->el.elem[i][0] == 'R' && m->el.elem[i][1] == ' ')
 			m->parse.el_nbr++;
-		if (m->parse.data[i] == 'N' && m->parse.data[i + 1] == 'O')
+		else if (m->el.elem[i][0] == 'N' && m->el.elem[i][1] == 'O')
 			m->parse.el_nbr++;
-		if (m->parse.data[i] == 'S' && m->parse.data[i + 1] == 'O')
+		else if (m->el.elem[i][0] == 'S' && m->el.elem[i][1] == 'O')
 			m->parse.el_nbr++;
-		if (m->parse.data[i] == 'S' && m->parse.data[i + 1] == ' ')
+		else if (m->el.elem[i][0] == 'S' && m->el.elem[i][1] == ' ')
 			m->parse.el_nbr++;
-		if (m->parse.data[i] == 'W' && m->parse.data[i + 1] == 'E')
+		else if (m->el.elem[i][0] == 'W' && m->el.elem[i][1] == 'E')
 			m->parse.el_nbr++;
-		if (m->parse.data[i] == 'E' && m->parse.data[i + 1] == 'A')
+		else if (m->el.elem[i][0] == 'E' && m->el.elem[i][1] == 'A')
 			m->parse.el_nbr++;
-		if (m->parse.data[i] == 'F')
+		else if (m->el.elem[i][0] == 'F' && m->el.elem[i][1] == ' ')
 			m->parse.el_nbr++;
-		if (m->parse.data[i] == 'C')
+		else if (m->el.elem[i][0] == 'C' && m->el.elem[i][1] == ' ')
 			m->parse.el_nbr++;
+		else
+			write_el_error(m, 2);
 	}
-	(m->parse.el_nbr != 8) ? write_el_error(m, 1) : 1;
-	return (1);
+	(m->parse.el_nbr != 8) ? write_el_error(m, 2) : 1;
 }
 
-int		check_valid_color(t_index *m)
+int			check_valid_color(t_index *m)
 {
-	// printf("%d\n", m->el.f_r);
-	// printf("%d\n", m->el.f_g);
-	// printf("%d\n", m->el.f_b);
-	// printf("%d\n", m->el.c_r);
-	// printf("%d\n", m->el.c_g);
-	// printf("%d\n", m->el.c_b);
 	if (m->el.c_r < 0 || m->el.c_r > 255)
 		write_el_error(m, 2);
 	if (m->el.c_g < 0 || m->el.c_g > 255)
@@ -115,10 +110,12 @@ int		check_valid_color(t_index *m)
 	return (1);
 }
 
-int		create_map(t_index *m)
+int			create_map(t_index *m)
 {
 	if (!(m->parse.map = ft_split(m->parse.map_str, '\n')))
 		return (-1);
+	if (!check_empty_line(m->parse.map))
+		error_data(m, 2);
 	if (get_position(m) < 0)
 		return (-1);
 	if (check_borders_lines(m) < 0)

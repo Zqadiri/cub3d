@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/16 12:29:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:53:41 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 int			parse_map(int fd, t_index *m)
 {
-	char *pfree;
-	int	not_empty;
-	int	last;
+	char	*pfree;
+	int		last;
 
-	last = 0; 
-	not_empty = 0;
+	last = 0;
 	m->parse.map_str = ft_strdup("");
 	while (m->parse.ret)
 	{
 		m->parse.ret = get_next_line(fd, &m->parse.line);
 		if (last == 1)
 			error_data(m, 3);
-		if (!digit(m->parse.line) && digit(m->parse.map_str))
+		if (m->parse.line[0] == '\0' && digit(m->parse.map_str))
 			last = 1;
 		else
 		{
@@ -35,9 +33,9 @@ int			parse_map(int fd, t_index *m)
 			free(pfree);
 			pfree = m->parse.map_str;
 			m->parse.map_str = ft_strjoin(m->parse.map_str, "\n");
-			free(pfree);	
+			free(pfree);
 		}
-		free(m->parse.line);	
+		free(m->parse.line);
 	}
 	return (1);
 }
@@ -66,6 +64,24 @@ int			parse_data_helper(t_index *m, int fd, char *line)
 	return (1);
 }
 
+int			check_empty_line(char **el)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (el[i])
+	{
+		j = 0;
+		while (el[i][j] == 32)
+			j++;
+		if (el[i][j] == '\0')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int			parse_data(int fd, t_index *m)
 {
 	char	*line;
@@ -75,7 +91,6 @@ int			parse_data(int fd, t_index *m)
 	line = NULL;
 	while (is_empty(line))
 	{
-		
 		free(line);
 		get_next_line(fd, &line);
 	}
@@ -99,9 +114,7 @@ int			parse_data(int fd, t_index *m)
 int			parse_cub(t_index *m, char *filename)
 {
 	int		fd;
-	char	*pfree;
 
-	pfree = NULL;
 	fd = open(filename, O_RDONLY);
 	if (parse_data(fd, m) < 0)
 		return (-1);
@@ -110,8 +123,6 @@ int			parse_cub(t_index *m, char *filename)
 	(!digit(m->parse.map_str)) ? error_data(m, 1) : 1;
 	if (check_map_characters(m) < 0)
 		return (-1);
-	if (check_elem_nbr(m) < 0)
-		return (-1);
 	close(fd);
 	if (create_map(m) < 0)
 		return (-1);
@@ -119,6 +130,7 @@ int			parse_cub(t_index *m, char *filename)
 		return (-1);
 	if (get_elements(m) < 0)
 		return (-1);
+	check_elem_nbr(m);
 	if (check_elements_errors(m) < 0)
 		return (-1);
 	return (1);

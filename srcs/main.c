@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 11:12:32 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/15 18:22:40 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:34:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int		main(int ac, char **av)
 			return (exit_all(&m));
 	}
 	else
-	exit_all(&m);
-
+		exit_all(&m);
 	return (0);
 }
