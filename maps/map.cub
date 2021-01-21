@@ -9,9 +9,9 @@ EA      ./textures/redbrick.xpm
 
 S       ./textures/sp.xpm
 
-F 255,0,0
+F   C 255,0,0
 
-C  255,255,255
+C   ,255,255,255
 
 
 

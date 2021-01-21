@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:55:23 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/20 18:05:35 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/21 15:21:06 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void		get_floor_color(t_index *m)
 	i = 1;
 	while (m->el.elem[m->el.f_l][i] == ' ')
 		i++;
-	if (!ft_isdigit(m->el.elem[m->el.f_l][i]))
-		write_error_floor(m);
+	(!ft_isdigit(m->el.elem[m->el.f_l][i])) ? write_error_floor(m) : 1;
 	while (m->el.elem[m->el.f_l][i] >= '0' && m->el.elem[m->el.f_l][i] <= '9')
 		m->el.f_r = (m->el.f_r * 10) + m->el.elem[m->el.f_l][i++] - '0';
 	i = i - 1;
@@ -98,8 +97,7 @@ void		get_ceilling_color(t_index *m)
 	i = 1;
 	while (m->el.elem[m->el.c_l][i] == ' ')
 		i++;
-	if (!(ft_isdigit(m->el.elem[m->el.c_l][i])))
-		write_error_ceilling(m);
+	(!(ft_isdigit(m->el.elem[m->el.c_l][i]))) ? write_error_ceilling(m) : 1;
 	while (m->el.elem[m->el.c_l][i] >= '0' && m->el.elem[m->el.c_l][i] <= '9')
 		m->el.c_r = (m->el.c_r * 10) + m->el.elem[m->el.c_l][i++] - '0';
 	i = i - 1;
