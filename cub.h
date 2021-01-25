@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:50:34 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/20 17:42:53 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/25 15:20:51 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,7 @@ int						create_images(t_index *m);
 int						create_images2(t_index *m);
 int						create_elements_lines(t_index *m);
 int						check_empty_line(char **el);
-
+void					treat_map(t_index *m, char *str);
 /*
 ** raycasting:
 */

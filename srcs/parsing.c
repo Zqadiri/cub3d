@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:52:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/20 17:53:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/25 19:16:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,17 @@
 int			parse_map(int fd, t_index *m)
 {
 	char	*pfree;
-	int		last;
 
-	last = 0;
 	m->parse.map_str = ft_strdup("");
 	while (m->parse.ret)
 	{
 		m->parse.ret = get_next_line(fd, &m->parse.line);
-		if (last == 1)
-			error_data(m, 3);
-		if (m->parse.line[0] == '\0' && digit(m->parse.map_str))
-			last = 1;
-		else
-		{
-			pfree = m->parse.map_str;
-			m->parse.map_str = ft_strjoin(m->parse.map_str, m->parse.line);
-			free(pfree);
-			pfree = m->parse.map_str;
-			m->parse.map_str = ft_strjoin(m->parse.map_str, "\n");
-			free(pfree);
-		}
+		pfree = m->parse.map_str;
+		m->parse.map_str = ft_strjoin(m->parse.map_str, m->parse.line);
+		free(pfree);
+		pfree = m->parse.map_str;
+		m->parse.map_str = ft_strjoin(m->parse.map_str, "\n");
+		free(pfree);
 		free(m->parse.line);
 	}
 	return (1);
@@ -50,7 +41,7 @@ int			parse_data_helper(t_index *m, int fd, char *line)
 		get_next_line(fd, &line);
 	}
 	if (digit(line))
-		write_el_error(m, 2);
+		error_data(m, 1);
 	if (!digit(line))
 	{
 		save = m->parse.data;
@@ -89,12 +80,12 @@ int			parse_data(int fd, t_index *m)
 
 	m->parse.data = "";
 	line = NULL;
-	while (is_empty(line))
+	while (is_empty(line) && m->parse.ret)
 	{
 		free(line);
-		get_next_line(fd, &line);
+		m->parse.ret = get_next_line(fd, &line);
 	}
-	(digit(line)) ? error_data(m, 2) : 1;
+	(digit(line)) ? error_data(m, 1) : 1;
 	m->parse.data = ft_strjoin(m->parse.data, line);
 	save = m->parse.data;
 	m->parse.data = ft_strjoin(m->parse.data, "\n");

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 08:45:18 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/18 16:36:25 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/25 19:18:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,29 @@ int		check_line(char *s)
 			i++;
 	}
 	return (1);
+}
+
+void	treat_map(t_index *m, char *str)
+{
+	int i;
+	int start;
+
+	i = 0;
+	start = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			i++;
+		else
+		{
+			start = 1;
+			break ;
+		}
+	}
+	while (str[i])
+	{
+		if (str[i] == '\n' && str[i + 1] == '\n' && start)
+			error_data(m, 4);
+		i++;
+	}
 }

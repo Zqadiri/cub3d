@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:13:22 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/19 12:30:25 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/25 19:18:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int		error_data(t_index *m, int i)
 		exit_prg(m);
 		return (-1);
 	}
-	if (i == 3)
+	if (i == 4)
 	{
-		ft_putstr_fd("the map content has to be the last\n", 1);
-		exit_prg(m);
+		ft_putstr_fd("invalid map\n", 1);
+		exit_all(m);
 		return (-1);
 	}
 	return (1);

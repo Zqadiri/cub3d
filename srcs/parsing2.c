@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:33:29 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/20 18:02:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/25 19:14:56 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,9 @@ int			check_valid_color(t_index *m)
 
 int			create_map(t_index *m)
 {
+	treat_map(m, m->parse.map_str);
 	if (!(m->parse.map = ft_split(m->parse.map_str, '\n')))
 		return (-1);
-	if (!check_empty_line(m->parse.map))
-		error_data(m, 2);
 	if (get_position(m) < 0)
 		return (-1);
 	if (check_borders_lines(m) < 0)
