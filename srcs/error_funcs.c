@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:13:22 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/01/25 19:18:16 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/01/26 12:21:26 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		return_error_exit(t_index *m)
 {
 	ft_putstr_fd("Error\n", 1);
-	ft_putstr_fd("Map not surrounded by 1\n", 1);
+	ft_putstr_fd("Invalid arguments\n", 1);
 	exit_all(m);
 	return (-1);
 }
@@ -52,7 +52,7 @@ int		error_data(t_index *m, int i)
 	ft_putstr_fd("Error\n", 1);
 	if (i == 1)
 	{
-		ft_putstr_fd("*.cub is missing something\n", 1);
+		ft_putstr_fd("invalid config file\n", 1);
 		exit_prg(m);
 		return (-1);
 	}
